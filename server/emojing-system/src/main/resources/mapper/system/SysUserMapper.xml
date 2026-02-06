@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.system.provider.dal.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.china.soft.system.provider.dal.entity.SysUser">
+    <!--@mbg.generated-->
+    <!--@Table sys_user-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, nickname, avatar, `state`, is_deleted
+  </sql>
+
+  <select id="selectByUser" resultType="com.china.soft.commons.base.LoginUser">
+      SELECT
+          a.user_id AS userId,
+          a.identifier AS username,
+          a.credential AS `password`,
+          a.verified,
+          b.nickname,
+          b.state,
+          b.avatar
+      FROM
+        sys_authorization a LEFT JOIN sys_user b ON a.user_id = b.id
+      WHERE
+          a.verified = 1
+          AND a.identifier = #{param1}
+          AND a.identity_type = #{param2}
+      LIMIT 1
+  </select>
+
+  <update id="updateLoginAuthInfo">
+     UPDATE
+        sys_authorization
+     SET
+        time_last_login = NOW(),
+        time_last_addr = #{timeLastAddr}
+     WHERE
+        verified = 1
+        AND identity_type = #{identityType}
+        AND identifier = #{identifier}
+  </update>
+</mapper>

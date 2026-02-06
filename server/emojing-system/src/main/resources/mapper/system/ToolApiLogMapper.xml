@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.system.provider.dal.mapper.ToolApiLogMapper">
+  <resultMap id="BaseResultMap" type="com.china.soft.system.provider.dal.entity.ToolApiLog">
+    <!--@mbg.generated-->
+    <!--@Table online_blog_db.tool_api_log-->
+    <result column="unique_code" jdbcType="VARCHAR" property="uniqueCode" />
+    <result column="json" jdbcType="VARCHAR" property="json" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    unique_code, json, deleted, created_at, updated_at
+  </sql>
+  <insert id="insertSelective" parameterType="com.china.soft.system.provider.dal.entity.ToolApiLog">
+    <!--@mbg.generated-->
+    insert into online_blog_db.tool_api_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uniqueCode != null and uniqueCode != ''">
+        unique_code,
+      </if>
+      <if test="json != null and json != ''">
+        json,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uniqueCode != null and uniqueCode != ''">
+        #{uniqueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="json != null and json != ''">
+        #{json,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

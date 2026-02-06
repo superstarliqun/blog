@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.system.provider.dal.mapper.UserTokenInfoMapper">
+  <resultMap id="BaseResultMap" type="com.china.soft.system.provider.dal.entity.UserTokenInfo">
+    <!--@mbg.generated-->
+    <!--@Table online_blog_db.user_token_info-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="jti" jdbcType="VARCHAR" property="jti" />
+    <result column="expiration_time" jdbcType="TIMESTAMP" property="expirationTime" />
+    <result column="is_valid" jdbcType="INTEGER" property="isValid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, jti, expiration_time, is_valid, create_time
+  </sql>
+  <insert id="insertSelective" parameterType="com.china.soft.system.provider.dal.entity.UserTokenInfo">
+    <!--@mbg.generated-->
+    insert into online_blog_db.user_token_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="jti != null and jti != ''">
+        jti,
+      </if>
+      <if test="expirationTime != null">
+        expiration_time,
+      </if>
+      <if test="isValid != null">
+        is_valid,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="jti != null and jti != ''">
+        #{jti,jdbcType=VARCHAR},
+      </if>
+      <if test="expirationTime != null">
+        #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isValid != null">
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.china.soft.system.provider.dal.entity.UserTokenInfo">
+    <!--@mbg.generated-->
+    update online_blog_db.user_token_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="jti != null and jti != ''">
+        jti = #{jti,jdbcType=VARCHAR},
+      </if>
+      <if test="expirationTime != null">
+        expiration_time = #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isValid != null">
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.china.soft.system.provider.dal.entity.UserTokenInfo">
+    <!--@mbg.generated-->
+    update online_blog_db.user_token_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      jti = #{jti,jdbcType=VARCHAR},
+      expiration_time = #{expirationTime,jdbcType=TIMESTAMP},
+      is_valid = #{isValid,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getByJti" resultMap="BaseResultMap">
+    SELECT
+      a.jti,
+      a.id,
+      a.user_id,
+      a.expiration_time,
+      a.is_valid,
+      a.create_time
+    FROM
+        user_token_info a
+    WHERE
+        a.jti = #{jti}
+  </select>
+
+  <delete id="deleteByUserId">
+    DELETE FROM user_token_info a WHERE a.user_id = #{userId}
+  </delete>
+</mapper>

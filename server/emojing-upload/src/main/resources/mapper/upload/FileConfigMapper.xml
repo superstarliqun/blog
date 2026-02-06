@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.upload.provider.dal.mapper.FileConfigMapper">
+  <resultMap id="BaseResultMap" type="com.china.soft.upload.provider.dal.entity.FileConfig">
+    <!--@mbg.generated-->
+    <!--@Table blog_db.sys_file_config-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="storage_type" jdbcType="VARCHAR" property="storageType" />
+    <result column="endpoint" jdbcType="VARCHAR" property="endpoint" />
+    <result column="access_key" jdbcType="VARCHAR" property="accessKey" />
+    <result column="secret_key" jdbcType="VARCHAR" property="secretKey" />
+    <result column="bucket_name" jdbcType="VARCHAR" property="bucketName" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="is_default" jdbcType="VARCHAR" property="isDefault" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="created_at" jdbcType="VARCHAR" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="config" property="config" typeHandler="com.china.soft.upload.provider.dal.entity.FileConfig$FileClientConfigTypeHandler"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, storage_type, endpoint, access_key, secret_key, bucket_name, region, is_default, 
+    `status`, created_at, updated_at, deleted
+  </sql>
+
+  <select id="getPageList" resultMap="BaseResultMap">
+    SELECT
+      a.id,
+      a.storage_type,
+      a.endpoint,
+      a.access_key,
+      a.secret_key,
+      a.bucket_name,
+      a.region,
+      a.is_default,
+      a.`status`,
+      a.created_at,
+      a.updated_at
+    FROM
+      sys_file_config a
+    <where>
+      a.deleted = 0
+    </where>
+  </select>
+
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.china.soft.upload.provider.dal.entity.FileConfig" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into blog_db.sys_file_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="storageType != null and storageType != ''">
+        storage_type,
+      </if>
+      <if test="endpoint != null and endpoint != ''">
+        endpoint,
+      </if>
+      <if test="accessKey != null and accessKey != ''">
+        access_key,
+      </if>
+      <if test="secretKey != null and secretKey != ''">
+        secret_key,
+      </if>
+      <if test="bucketName != null and bucketName != ''">
+        bucket_name,
+      </if>
+      <if test="region != null and region != ''">
+        region,
+      </if>
+      <if test="isDefault != null and isDefault != ''">
+        is_default,
+      </if>
+      <if test="status != null and status != ''">
+        `status`,
+      </if>
+      <if test="createdAt != null and createdAt != ''">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="storageType != null and storageType != ''">
+        #{storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="endpoint != null and endpoint != ''">
+        #{endpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="accessKey != null and accessKey != ''">
+        #{accessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="secretKey != null and secretKey != ''">
+        #{secretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="bucketName != null and bucketName != ''">
+        #{bucketName,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null and region != ''">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null and isDefault != ''">
+        #{isDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null and status != ''">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null and createdAt != ''">
+        #{createdAt,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.china.soft.upload.provider.dal.entity.FileConfig">
+    <!--@mbg.generated-->
+    update blog_db.sys_file_config
+    <set>
+      <if test="storageType != null and storageType != ''">
+        storage_type = #{storageType,jdbcType=VARCHAR},
+      </if>
+      <if test="endpoint != null and endpoint != ''">
+        endpoint = #{endpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="accessKey != null and accessKey != ''">
+        access_key = #{accessKey,jdbcType=VARCHAR},
+      </if>
+      <if test="secretKey != null and secretKey != ''">
+        secret_key = #{secretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="bucketName != null and bucketName != ''">
+        bucket_name = #{bucketName,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null and region != ''">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null and isDefault != ''">
+        is_default = #{isDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null and status != ''">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null and createdAt != ''">
+        created_at = #{createdAt,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.china.soft.upload.provider.dal.entity.FileConfig">
+    <!--@mbg.generated-->
+    update blog_db.sys_file_config
+    set storage_type = #{storageType,jdbcType=VARCHAR},
+      endpoint = #{endpoint,jdbcType=VARCHAR},
+      access_key = #{accessKey,jdbcType=VARCHAR},
+      secret_key = #{secretKey,jdbcType=VARCHAR},
+      bucket_name = #{bucketName,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=VARCHAR},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByMaster" resultMap="BaseResultMap">
+    SELECT
+      a.id,
+      a.storage_type,
+      a.endpoint,
+      a.access_key,
+      a.secret_key,
+      a.bucket_name,
+      a.region,
+      a.is_default,
+      a.STATUS,
+      a.created_at,
+      a.updated_at,
+      a.deleted,
+      a.config
+    FROM
+      sys_file_config a
+    WHERE
+      a.deleted = 0
+      AND a.is_default = 1
+    LIMIT 1
+  </select>
+</mapper>

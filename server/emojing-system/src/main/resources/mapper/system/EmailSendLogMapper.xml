@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.system.provider.dal.mapper.EmailSendLogMapper">
+  <resultMap id="BaseResultMap" type="com.china.soft.system.provider.dal.entity.EmailSendLog">
+    <!--@mbg.generated-->
+    <!--@Table online_blog_db.sys_email_send_log-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="recipient_email" jdbcType="VARCHAR" property="recipientEmail" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="body" jdbcType="LONGVARCHAR" property="body" />
+    <result column="status" jdbcType="OTHER" property="status" />
+    <result column="error_message" jdbcType="LONGVARCHAR" property="errorMessage" />
+    <result column="sent_time" jdbcType="TIMESTAMP" property="sentTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, recipient_email, subject, body, `status`, error_message, sent_time
+  </sql>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.china.soft.system.provider.dal.entity.EmailSendLog" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into online_blog_db.sys_email_send_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recipientEmail != null and recipientEmail != ''">
+        recipient_email,
+      </if>
+      <if test="subject != null and subject != ''">
+        subject,
+      </if>
+      <if test="body != null and body != ''">
+        body,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        error_message,
+      </if>
+      <if test="sentTime != null">
+        sent_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recipientEmail != null and recipientEmail != ''">
+        #{recipientEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null and subject != ''">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null and body != ''">
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=OTHER},
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sentTime != null">
+        #{sentTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.china.soft.system.provider.dal.entity.EmailSendLog">
+    <!--@mbg.generated-->
+    update online_blog_db.sys_email_send_log
+    <set>
+      <if test="recipientEmail != null and recipientEmail != ''">
+        recipient_email = #{recipientEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null and subject != ''">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null and body != ''">
+        body = #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=OTHER},
+      </if>
+      <if test="errorMessage != null and errorMessage != ''">
+        error_message = #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sentTime != null">
+        sent_time = #{sentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.china.soft.system.provider.dal.entity.EmailSendLog">
+    <!--@mbg.generated-->
+    update online_blog_db.sys_email_send_log
+    set recipient_email = #{recipientEmail,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      body = #{body,jdbcType=LONGVARCHAR},
+      `status` = #{status,jdbcType=OTHER},
+      error_message = #{errorMessage,jdbcType=LONGVARCHAR},
+      sent_time = #{sentTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

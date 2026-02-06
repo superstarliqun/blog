@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.system.provider.dal.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.china.soft.system.provider.dal.entity.Comment">
+    <!--@mbg.generated-->
+    <!--@Table online_blog_db.t_comment-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="post_id" jdbcType="BIGINT" property="postId" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="site" jdbcType="VARCHAR" property="site" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="ip_address" jdbcType="VARCHAR" property="ipAddress" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_agent" jdbcType="VARCHAR" property="userAgent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, post_id, parent_id, content, nickname, email, site, avatar, ip_address, `status`,
+    create_time, user_agent
+  </sql>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.china.soft.system.provider.dal.entity.Comment" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into online_blog_db.t_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="content != null and content != ''">
+        content,
+      </if>
+      <if test="nickname != null and nickname != ''">
+        nickname,
+      </if>
+      <if test="email != null and email != ''">
+        email,
+      </if>
+      <if test="site != null and site != ''">
+        site,
+      </if>
+      <if test="avatar != null and avatar != ''">
+        avatar,
+      </if>
+      <if test="ipAddress != null and ipAddress != ''">
+        ip_address,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="userAgent != null and userAgent != ''">
+        user_agent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null and content != ''">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nickname != null and nickname != ''">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null and email != ''">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null and site != ''">
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null and avatar != ''">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null and ipAddress != ''">
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAgent != null and userAgent != ''">
+        #{userAgent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.china.soft.system.provider.dal.entity.Comment">
+    <!--@mbg.generated-->
+    update online_blog_db.t_comment
+    <set>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null and content != ''">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nickname != null and nickname != ''">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null and email != ''">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null and site != ''">
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null and avatar != ''">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null and ipAddress != ''">
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAgent != null and userAgent != ''">
+        user_agent = #{userAgent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.china.soft.system.provider.dal.entity.Comment">
+    <!--@mbg.generated-->
+    update t_comment
+    set post_id = #{postId,jdbcType=BIGINT},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      content = #{content,jdbcType=LONGVARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_agent = #{userAgent,jdbcType=VARCHAR}
+    where
+        id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByPostId" resultMap="BaseResultMap">
+    SELECT
+      a.id,
+      a.post_id,
+      a.parent_id,
+      a.content,
+      a.nickname,
+      a.email,
+      a.site,
+      a.avatar,
+      a.ip_address,
+      a.STATUS,
+      a.create_time,
+      a.user_agent
+    FROM
+      t_comment a
+    WHERE
+      a.`status` = 0
+      AND a.post_id = #{postId}
+    ORDER BY
+      create_time DESC
+  </select>
+</mapper>

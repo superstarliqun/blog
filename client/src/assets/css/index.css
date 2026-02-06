@@ -1,0 +1,84 @@
+@import 'https://at.alicdn.com/t/c/font_3571066_jf0w1lcw1e.css';
+html,
+body,
+#app {
+  margin: 0;
+  height: 100%;
+  font-size: 20px;
+  background: var(--theme-background);
+  transition: font-family 0.3s;
+  word-break: break-word;
+  line-height: 1.7;
+  font-family: var(--base-font);
+}
+
+[data-font-theme='default'] {
+  --base-font: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑';
+}
+[data-font-theme='MingYue'] {
+  --base-font: 'font-mingyue', serif;
+}
+[data-font-theme='PingFang'] {
+  --base-font: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑';
+}
+
+/* 自定义MingYue字体 */
+@font-face {
+  font-family: 'font-mingyue';
+  src: url('@/assets/fonts/font.woff2') format('woff2');
+  font-style: normal;
+  font-display: swap;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* 自定义样式滚动条 start */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(73, 177, 245, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f7f8fa;
+  border-radius: 1em;
+}
+
+/* 自定义样式滚动条 end */
+
+/* 渐变 */
+@keyframes jianBian {
+  to {
+    background-position: -2000rem;
+  }
+}
+
+.icon-container {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  gap: 4px;
+}
+.iconfont {
+  /* display: inline-block; */
+  /* line-height: 1; */
+  /* 有时 iconfont 自身带有基线偏移，可用 transform 微调 */
+  /* transform: translateY(1px); */
+}
+
+/* live2D 样式 */
+#waifu-toggle {
+  z-index: 100;
+}
+
+#waifu #live2d {
+  height: 200px;
+  width: 200px;
+}
+
+#waifu-toggle.waifu-toggle-active {
+  margin-left: -43px !important;
+}

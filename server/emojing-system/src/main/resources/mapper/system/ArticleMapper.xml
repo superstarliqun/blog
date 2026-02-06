@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.system.provider.dal.mapper.ArticleMapper">
+
+
+    <select id="selectPageHome" resultType="com.china.soft.system.provider.dal.entity.Article">
+        SELECT
+            a.id,
+            a.title,
+            a.summary,
+            a.content,
+            a.category,
+            a.tags,
+            a.author_id,
+            a.create_by,
+            a.create_time,
+            a.update_time,
+            IFNULL(b.number,0) AS views,
+            IFNULL(c.number,0) AS comments,
+            IFNULL(d.number,0) AS likes,
+            ((IFNULL(b.number,0)  + ( IFNULL(c.number,0) * 5 ) + (IFNULL(d.number,0)  * 10)) / POWER(TIMESTAMPDIFF(HOUR, a.create_time, NOW()) + 2, 1.5)) AS score
+        FROM
+            t_articles a
+            LEFT JOIN (SELECT post_id,COUNT(id) AS number FROM t_post_view GROUP BY post_id) b ON a.id = b.post_id
+            LEFT JOIN (SELECT post_id,COUNT(id) AS number FROM t_comment GROUP BY post_id) c ON a.id = c.post_id
+            LEFT JOIN (SELECT post_id,COUNT(id) AS number FROM t_post_likes GROUP BY post_id ) d ON a.id = d.post_id
+        <where>
+            a.is_deleted = 0
+            <if test="param.category != null and param.category != ''">
+                AND a.category LIKE CONCAT('%',#{param.category},'%')
+            </if>
+            <if test="param.tags != null">
+                AND EXISTS (
+                SELECT 1
+                FROM t_post_tag_relation ptr
+                INNER JOIN t_tags t ON ptr.tag_id = t.id
+                WHERE ptr.post_id = a.id
+                AND t.tags_name LIKE CONCAT('%', #{param.tags}, '%')
+                )
+            </if>
+        </where>
+        ORDER BY
+        <trim suffixOverrides=",">
+            <choose>
+                <when test="param.authorId == 2">
+                    (a.author_id = #{param.authorId}) DESC,
+                    a.update_time DESC,
+                    a.create_time DESC,
+                </when>
+                <!-- 其它人按热度分、时间倒序 -->
+                <otherwise>
+                    score DESC,
+                    a.create_time DESC,
+                    a.update_time DESC,
+                </otherwise>
+            </choose>
+        </trim>
+    </select>
+
+    <!-- 手动 COUNT，字段随便写个常量即可 -->
+    <select id="selectPageHome_COUNT" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM t_articles a
+        <where>
+            a.is_deleted = 0
+            <if test="param.category != null and param.category != ''">
+                AND a.category LIKE CONCAT('%',#{param.category},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByPrimaryKey" resultType="com.china.soft.system.provider.dal.entity.Article">
+        SELECT
+            a.id,
+            a.title,
+            a.summary,
+            a.content,
+            a.category,
+            a.tags,
+            a.views,
+            a.comments,
+            a.likes,
+            a.author_id,
+            a.create_by,
+            a.create_time,
+            a.update_time,
+            a.is_deleted,
+            b.category_name
+        FROM
+            t_articles a
+            LEFT JOIN t_articles_category b ON a.category = b.id
+        WHERE
+            a.id = #{id}
+    </select>
+
+    <select id="dailyCounts" resultType="java.util.HashMap">
+        SELECT
+            DATE_FORMAT(create_time, '%Y-%m-%d') AS `day`,
+            COUNT( a.id ) AS `count`
+        FROM
+            t_articles a
+        WHERE
+            a.is_deleted = 0
+            AND YEAR ( create_time ) = #{searchYear}
+        GROUP BY
+            `day`
+        ORDER BY
+            `day`
+    </select>
+
+    <select id="fromArchiveList" resultType="com.china.soft.system.provider.dal.entity.Article">
+        SELECT
+            a.id,
+            a.title,
+            a.summary,
+            a.content,
+            a.category,
+            a.tags,
+            a.views,
+            a.comments,
+            a.likes,
+            a.author_id,
+            a.create_by,
+            a.create_time,
+            a.update_time,
+            a.is_deleted
+        FROM
+            t_articles a
+        <where>
+            a.is_deleted = 0
+            <if test="searchYear != null and searchYear != ''">
+                AND YEAR ( a.create_time ) = #{searchYear}
+            </if>
+            <if test="searchDate != null and searchDate != ''">
+                AND DATE_FORMAT( a.create_time, '%Y-%m-%d' ) = #{searchDate}
+            </if>
+        </where>
+        ORDER BY
+            a.create_time
+    </select>
+</mapper>

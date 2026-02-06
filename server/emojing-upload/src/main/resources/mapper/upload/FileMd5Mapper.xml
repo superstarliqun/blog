@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.upload.provider.dal.mapper.SysFileMd5Mapper">
+  <resultMap id="BaseResultMap" type="com.china.soft.upload.provider.dal.entity.SysFileMd5">
+    <!--@mbg.generated-->
+    <!--@Table blog_db.sys_file_md5-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="file_md5" jdbcType="VARCHAR" property="fileMd5" />
+    <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="file_size" jdbcType="DOUBLE" property="fileSize" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="deleted" jdbcType="VARCHAR" property="deleted" />
+    <result column="file_config" jdbcType="VARCHAR" property="fileConfig" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, file_md5, file_name, file_size, upload_time, file_path, deleted, file_config
+  </sql>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.china.soft.upload.provider.dal.entity.SysFileMd5" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into blog_db.sys_file_md5
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileMd5 != null and fileMd5 != ''">
+        file_md5,
+      </if>
+      <if test="fileName != null and fileName != ''">
+        file_name,
+      </if>
+      <if test="fileSize != null">
+        file_size,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+      <if test="filePath != null and filePath != ''">
+        file_path,
+      </if>
+      <if test="deleted != null and deleted != ''">
+        deleted,
+      </if>
+      <if test="fileConfig != null and fileConfig != ''">
+        file_config,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileMd5 != null and fileMd5 != ''">
+        #{fileMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null and fileName != ''">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=DOUBLE},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filePath != null and filePath != ''">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null and deleted != ''">
+        #{deleted,jdbcType=VARCHAR},
+      </if>
+      <if test="fileConfig != null and fileConfig != ''">
+        #{fileConfig,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.china.soft.upload.provider.dal.entity.SysFileMd5">
+    <!--@mbg.generated-->
+    update blog_db.sys_file_md5
+    <set>
+      <if test="fileMd5 != null and fileMd5 != ''">
+        file_md5 = #{fileMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null and fileName != ''">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        file_size = #{fileSize,jdbcType=DOUBLE},
+      </if>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filePath != null and filePath != ''">
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null and deleted != ''">
+        deleted = #{deleted,jdbcType=VARCHAR},
+      </if>
+      <if test="fileConfig != null and fileConfig != ''">
+        file_config = #{fileConfig,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.china.soft.upload.provider.dal.entity.SysFileMd5">
+    <!--@mbg.generated-->
+    update blog_db.sys_file_md5
+    set file_md5 = #{fileMd5,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=DOUBLE},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=VARCHAR},
+      file_config = #{fileConfig,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getPageList" resultMap="BaseResultMap">
+    select * from sys_file_md5
+  </select>
+</mapper>

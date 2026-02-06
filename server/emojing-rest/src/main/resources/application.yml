@@ -1,0 +1,114 @@
+server:
+  port: 8585
+# 应用程序框架
+spring:
+  servlet:
+    multipart:
+      max-file-size: 5120MB
+      max-request-size: 5120MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  ai:
+    moonshot:
+      api-key: sk-4SZKMjvKhoewgm4sqREqlbKAs2YLcjxB1BY18i7JZGHgUOPv
+      chat:
+        options:
+          model: moonshot-v1-8k
+          temperature: 0.7
+  es:
+    uris: 172.24.247.146:9200
+    username: elastic
+    password: 123456
+  # 德鲁伊数据源
+  datasource:
+    url: jdbc:mysql://172.24.247.146:3306/online_blog_db?useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  # redis 非关系型数据库
+  redis:
+    database: 0
+    host: 172.24.247.146
+    port: 6379
+    password: JSznF6xWJwN2BG5c
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+  kafka:
+    # 生产者配置
+    producer:
+      # Kafka Broker 地址
+      bootstrap-servers: 172.24.247.146:9092 # 替换成你的 Kafka 集群地址
+      # Key 和 Value 的序列化类
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 消息发送确认机制 (0:不确认, 1:leader确认, all/-1:所有副本确认)
+      acks: all
+    # 消费者配置
+    consumer:
+      # Kafka Broker 地址 (与生产者相同)
+      bootstrap-servers: 172.24.247.146:9092
+      # 消费者组 ID
+      group-id: my-blog-consumer-group
+      # Key 和 Value 的反序列化类
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # 初始偏移量策略: earliest(从头开始), latest(从新消息开始)
+      auto-offset-reset: latest
+      # 禁用自动提交 (通常用于手动控制提交，实现更精确的消费控制)
+      enable-auto-commit: true
+#Wechat
+wx:
+  appId: wx49af18648475a457
+  appSecret: f1d8049383fe5f64edff8508a3c09e65
+  server: https://wuliqun.cn
+# 讯飞星火认知大模型
+xfyun:
+  hostUrl: https://spark-api.xf-yun.com/v1.1/chat
+  appid: ec2b0613
+  apiSecret: ZDFlY2Q0YTZhZTY3Y2YxYmY1ZmRmNWZi
+  apiKey: 8838d3542db3f02468c58f0e85932ff7
+# 存储服务
+s3:
+  endpoint: http://172.24.247.146:9000
+  domain: https://wuliqun.cn/resources
+  accessKey: miniowlq
+  secretKey: kaifa123456
+  bucketName: lqs3bucket
+  region: cn-north-1
+  maxConnections: 100
+# 七牛云
+qiniu:
+  accessKey: -vcYpDaBgOi9avF5652M1Q7Ebv532b7EuNe00M-W
+  secretKey: TAkK9VKiyhcwkJeeznLTUDsOPV7TvEbERaRqqIfX
+  bucket: sp-blog-pics
+  domain: https://file.wuliqun.cn
+# orm框架
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.china.soft.system.provider.dal.entity
+wechat:
+  app-id: wx49af18648475a457
+  secret: f1d8049383fe5f64edff8508a3c09e65
+  token: liupanpan624
+  aesKey: OTiNhNf8xx6alzsHUJDcgBmKYID93XOBFJNylgkjXlX
+management:
+  health:
+    elasticsearch:
+      enabled: false
+logging:
+  level:
+    # 精准关闭ConsumerConfig的INFO日志
+    org.apache.kafka.clients: WARN
+    # 只针对您代码所在的特定包开启 DEBUG 级别
+    com.china.soft.upload: DEBUG
+    # 关闭MyBatis核心初始化日志（包含插件注册、Mapper解析）
+    org.apache.ibatis: WARN
+    # 关闭MyBatis-Plus插件日志
+    com.baomidou.mybatisplus: WARN

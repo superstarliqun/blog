@@ -1,0 +1,41 @@
+/* 颜色模板合集 */
+:root {
+  --theme-color1: #282c37;
+  --theme-color2: #2b90d9;
+  --theme-color3: #acdcff;
+  --theme-color4: #d9e1e8;
+  --theme-color5: #9baec8;
+  --theme-background: #f5f5f7;
+}
+
+/* 默认样式，适用于PC端 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+/* 设置card边框浮动样式 */
+.card-shadow {
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+.top10 {
+  margin-top: 10px;
+}
+
+/* 标题装饰性竖条 */
+.decoration-bar {
+  position: relative;
+  font-size: 18px;
+}
+
+/* 手机端样式 */
+@media only screen and (max-width: 768px) {
+  body {
+    background-color: unset;
+  }
+}

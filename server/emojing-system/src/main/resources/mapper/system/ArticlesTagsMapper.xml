@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.system.provider.dal.mapper.ArticlesTagsMapper">
+
+    <select id="list" resultType="com.china.soft.system.provider.dal.entity.Tag">
+        SELECT
+            a.id,
+            a.seq,
+            a.tags_name,
+            a.create_time,
+            COUNT( b.rel_id ) AS number
+        FROM
+            t_tags a
+            LEFT JOIN t_post_tag_relation b ON a.id = b.tag_id
+            LEFT JOIN t_articles c ON b.post_id = c.id
+        WHERE
+            c.is_deleted = 0
+        GROUP BY
+            a.id,
+            a.create_time
+        ORDER BY
+            a.create_time DESC
+    </select>
+
+    <select id="selectByName" resultType="com.china.soft.system.provider.dal.entity.Tag">
+        SELECT
+            a.id,
+            a.tags_name,
+            a.seq,
+            a.create_time
+        FROM
+            t_tags a
+        WHERE
+            a.tags_name = #{name}
+    </select>
+
+    <insert id="fromRelationInsert">
+        insert into t_post_tag_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="postId != null">
+                post_id,
+            </if>
+            <if test="id != null">
+                tag_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="postId != null">
+                #{postId,jdbcType=INTEGER},
+            </if>
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="fromRelationDelete">
+        DELETE FROM t_post_tag_relation a WHERE a.post_id = #{postId}
+    </delete>
+
+    <select id="unused" resultType="com.china.soft.system.provider.dal.entity.Tag">
+        SELECT
+            a.id,
+            COUNT( b.rel_id ) AS number
+        FROM
+            t_tags a
+                LEFT JOIN t_post_tag_relation b ON a.id = b.tag_id
+        GROUP BY
+            a.id
+        HAVING
+            number = 0
+    </select>
+
+    <select id="fromRelationSelectByPostId" resultType="com.china.soft.system.provider.dal.entity.Tag">
+        SELECT
+            b.id,
+            b.tags_name
+        FROM
+            t_post_tag_relation a
+                LEFT JOIN t_tags b ON a.tag_id = b.id
+        WHERE
+            a.post_id = #{postId}
+    </select>
+</mapper>

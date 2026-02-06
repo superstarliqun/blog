@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>友情链接申请</title>
+    <style>
+      /* 全局样式重置 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Microsoft Yahei', 'PingFang SC', sans-serif;
+      }
+
+      body {
+        background-color: #f5f7fa;
+        padding: 40px 0;
+      }
+
+      /* 申请卡片容器 */
+      .link-apply-card {
+        width: 90%;
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        padding: 30px;
+      }
+
+      /* 标题样式 */
+      .card-title {
+        font-size: 20px;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+      }
+
+      .card-title i {
+        display: inline-block;
+        width: 4px;
+        height: 20px;
+        background-color: #409eff;
+        margin-right: 10px;
+        border-radius: 2px;
+      }
+
+      /* 申请信息列表 */
+      .apply-info {
+        margin: 20px 0;
+      }
+
+      .info-item {
+        display: flex;
+        margin-bottom: 15px;
+        line-height: 1.6;
+      }
+
+      .info-label {
+        width: 80px;
+        color: #666;
+        font-weight: 500;
+        flex-shrink: 0;
+      }
+
+      .info-value {
+        color: #333;
+        flex: 1;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="link-apply-card">
+      <!-- 标题 -->
+      <div class="card-title">
+        <i></i>
+        新的友情链接申请
+      </div>
+
+      <!-- 申请信息 -->
+      <div class="apply-info">
+        <div class="info-item">
+          <div class="info-label">申请人：</div>
+          <div class="info-value">{name}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">博客地址：</div>
+          <div class="info-value">{url}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">博客描述：</div>
+          <div class="info-value">{description}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">申请时间：</div>
+          <div class="info-value">{dateTime}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">联系方式：</div>
+          <div class="info-value">{email}</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.china</groupId>
+        <artifactId>emoji-blog-admin</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.china</groupId>
+    <artifactId>emojing-upload</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>emojing-upload</name>
+    <description>基础上传服务</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.china</groupId>
+            <artifactId>emojing-commons</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>[7.13.0, 7.13.99]</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId> <!-- 文件客户端：解决 ftp 连接 -->
+            <version>3.11.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId> <!-- 文件客户端：解决 sftp 连接 -->
+            <version>0.1.55</version>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId> <!-- 文件客户端：解决阿里云、腾讯云、minio 等 S3 连接 -->
+            <version>8.5.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId> <!-- 文件客户端：文件类型的识别 -->
+            <version>2.9.2</version>
+        </dependency>
+    </dependencies>
+
+</project>

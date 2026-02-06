@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.soft.system.provider.dal.mapper.ViewUserMapper">
+  <resultMap id="BaseResultMap" type="com.china.soft.system.provider.dal.entity.ViewUser">
+    <!--@mbg.generated-->
+    <!--@Table blog_db.t_view_user-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="articles_id" jdbcType="INTEGER" property="articlesId" />
+    <result column="ip_address" jdbcType="VARCHAR" property="ipAddress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, articles_id, ip_address
+  </sql>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.china.soft.system.provider.dal.entity.ViewUser" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into blog_db.t_view_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="articlesId != null">
+        articles_id,
+      </if>
+      <if test="ipAddress != null and ipAddress != ''">
+        ip_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="articlesId != null">
+        #{articlesId,jdbcType=INTEGER},
+      </if>
+      <if test="ipAddress != null and ipAddress != ''">
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.china.soft.system.provider.dal.entity.ViewUser">
+    <!--@mbg.generated-->
+    update blog_db.t_view_user
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="articlesId != null">
+        articles_id = #{articlesId,jdbcType=INTEGER},
+      </if>
+      <if test="ipAddress != null and ipAddress != ''">
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.china.soft.system.provider.dal.entity.ViewUser">
+    <!--@mbg.generated-->
+    update blog_db.t_view_user
+    set user_id = #{userId,jdbcType=INTEGER},
+      articles_id = #{articlesId,jdbcType=INTEGER},
+      ip_address = #{ipAddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
