@@ -213,16 +213,16 @@ export default {
     .card-widget {
       box-shadow: 0 8px 16px -4px rgba(44, 45, 48, 0.0470588235);
       padding: 10px;
-      border: 1px solid #e3e8f7;
+      border: var(--style-border);
       border-radius: 8px;
-      background-color: #fff;
+      background-color: var(--card-background);
       font-size: 16px;
       line-height: 2;
     }
 
     .left-banner {
       display: block;
-      box-shadow: 0 8px 16px -4px #2c2d300c;
+      box-shadow: var(--box-shadow);
       width: 100%;
       height: 420px;
       object-fit: cover;

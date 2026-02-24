@@ -85,9 +85,10 @@ export default {
 
 <style lang="scss" scoped>
 .love-card {
-  background: white;
+  background: var(--card-background);
   border-radius: 6px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  border: var(--style-border);
+  box-shadow: var(--box-shadow)
 }
 
 .love-container {

@@ -16,7 +16,7 @@
 .notice_box.ios {
   margin: 32px 0;
   padding: 14px 16px;
-  background: #f7f8fa;
+  background: var(--card-background);
   border-radius: 12px;
   border: 0.4px solid #d1d9e0;
   counter-reset: notice-counter;
@@ -30,8 +30,7 @@
 .notice_title {
   font-size: 13px;
   font-weight: 600;
-  color: #1c1c1e;
-  /* iOS label */
+  color: var(--text-color);
   margin-bottom: 8px;
 }
 

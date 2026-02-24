@@ -3,21 +3,8 @@ html {
   font-size: 20px;
   overflow-x: hidden;
 }
-ul {
-  li {
-    list-style-type: none;
-    // 去除a标签的下划线样式
-    a {
-      text-decoration: none;
-      color: inherit;
-      background-color: transparent;
-      padding: 0;
-      color: #999aaa;
-    }
-  }
-}
 .wu-wrap {
-  background-color: #f7f8fa;
+  background-color: var(--background);
   padding-top: 10px;
   padding-bottom: 20px;
 }

@@ -106,8 +106,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 45px;
-    color: #ddd;
-    background-color: #161c1f;
+    background-color: var(--background);
     gap: 28px;
 
     .beian {

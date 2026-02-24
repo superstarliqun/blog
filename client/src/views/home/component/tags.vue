@@ -38,9 +38,10 @@ export default {
 <style lang="scss" scoped>
 .card-widget {
   padding: 16px;
-  background: white;
+  background: var(--card-background);
   border-radius: 6px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
+  border: var(--style-border);
   font-size: 16px;
 
   .card-title {

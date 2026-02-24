@@ -64,27 +64,32 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  z-index: 1;
 }
 
 .banner {
   height: 100px;
   background: linear-gradient(17deg, #ffafbd, #ffc3a0, #ebedee, #ffafbd, #f4f4f4);
-  border-radius: 6px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  border: var(--style-border);
+  z-index: 1;
 }
 
 .content-wrapper {
   padding: 40px 16px 16px;
   position: relative;
-  background: white;
-  border-radius: 6px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: var(--card-background);
+  box-shadow: var(--box-shadow);
+  border: var(--style-border);
 }
 
 .avatar-container {
   position: absolute;
   top: -46px;
   left: 24px;
+  z-index: 2;
 }
 
 .avatar {
@@ -132,7 +137,7 @@ export default {
   color: #fff;
   border: none;
   padding: 6px 8px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.3)
@@ -208,7 +213,7 @@ export default {
         width: 30px;
         height: 30px;
         border: 0.6px solid #e2e2e2;
-        border-radius: 6px;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;

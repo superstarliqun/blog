@@ -6,8 +6,8 @@
         <i class="iconfont icon-hanbaocaidan" />
       </div>
       <h1 class="font-logo">
-        <span>S</span><span>U</span><span>P</span><span>E</span><span>R</span>
-        <span>S</span><span>T</span><span>A</span><span>R</span>
+        <span class="text-content">Ling Guang</span>
+        <!-- <i class="iconfont icon-home" /> -->
       </h1>
       <div v-show="isMenuOpen" class="menu-mask" @click="isMenuOpen = false" />
       <ul class="navbar" :class="{ 'show-menu': isMenuOpen }">
@@ -30,84 +30,24 @@
           <router-link to="/link">友链</router-link>
         </li>
       </ul>
-      <div class="avatar-container">
-        <i class="iconfont icon-search" @click="clickSearch" />
-        <el-dropdown v-if="tokenLink">
-          <span class="create-center el-dropdown-link">创作者中心</span>
-          <el-dropdown-menu slot="dropdown">
-            <div class="dorpdown-menu">
-              <div class="menu-card">
-                <div class="menu-card-info">
-                  <el-avatar>用户</el-avatar>
-                  <div class="menu-card-name">
-                    <p>故里明月</p>
-                    <p>暂未认证，去认证</p>
-                  </div>
-                </div>
-                <el-divider />
-                <div class="recommend-card">
-                  <img class="recommend-img" src="https://static.nowcoder.com/fe/file/oss/1660831936829GCLLO.png">
-                  博客会员
-                </div>
-                <ul class="menu-item">
-                  <li @click="toPath(1)">
-                    <i class="iconfont icon-dengji" />
-                    <span>去创作</span>
-                  </li>
-                  <li @click="toPath(2)">
-                    <i class="iconfont icon-neirong" />
-                    <span>文章内容</span>
-                  </li>
-                  <li>
-                    <i class="iconfont icon-baogao" />
-                    <span>草稿箱</span>
-                  </li>
-                  <li>
-                    <i class="iconfont icon-cunchu" />
-                    <span>我的收藏</span>
-                  </li>
-                  <li>
-                    <i class="iconfont icon-pinglun" />
-                    <span>我的评论</span>
-                  </li>
-                  <li>
-                    <i class="iconfont icon-genzong" />
-                    <span>订单处理</span>
-                  </li>
-                  <li>
-                    <i class="iconfont icon-bianqian" />
-                    <!-- 控制博客主页资源管理 -->
-                    <span>资源便签</span>
-                  </li>
-                  <li @click="toPath(8)">
-                    <i class="iconfont icon-chakandingdan" />
-                    <span>控制面板</span>
-                  </li>
-                </ul>
-                <div class="caozuo">
-                  <span>账号设置</span>
-                  <el-divider direction="vertical" />
-                  <span @click="logout">退出登录</span>
-                </div>
-              </div>
-            </div>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <div v-else class="no-login">
-          <span class="toLogin" @click="toPath(1)">登录</span>
-        </div>
+      <div class="nav-right">
+        <i class="iconfont icon-search tooltip-wrapper" data-tooltip="站内搜索" @click="clickSearch" />
+        <i class="iconfont icon-application tooltip-wrapper" data-tooltip="中控台" @click="clickControl" />
       </div>
     </header>
-    <search v-if="searchOpen" @close="searchOpen = false" />
+    <Search v-if="searchOpen" @close="searchOpen = false" />
+    <Control v-if="controlOpen" @close="controlOpen = false" />
   </div>
 </template>
 
 <script>
 import { getAccessToken, removeToken } from '@/utils/auth'
 import parser from '@/utils/ua-parser'
-import search from '../search/index.vue'
+import Search from './search'
+import Control from './control'
+import { mapActions } from 'vuex'
 export default {
-  components: { search },
+  components: { Search, Control },
   data() {
     return {
       tokenLink: getAccessToken(),
@@ -115,34 +55,56 @@ export default {
       isHovered: false,
       keywords: undefined,
       system: undefined,
-      searchOpen: false, // 全局搜索框显示状态
-      isMenuOpen: false // 新增：控制移动端菜单显示隐藏
+      searchOpen: false,
+      isMenuOpen: false,
+      controlOpen: false
     }
   },
   mounted() {
-    // 添加键盘事件监听
     window.addEventListener('keydown', this.handleKeyCombination)
   },
   beforeUnmount() {
-    // 组件销毁时移除监听
     window.removeEventListener('keydown', this.handleKeyCombination)
   },
   created() {
-    const parseritem = new parser.UAParser(window.navigator.userAgent)
-    const res = parseritem.getResult()
+    const parserItem = new parser.UAParser(window.navigator.userAgent)
+    const res = parserItem.getResult()
     this.system = res.os.name
   },
   methods: {
-    // 检查是否按下 Ctrl 或 Command 以及 K
+    ...mapActions('app', ['setTheme', 'getTheme']),
     handleKeyCombination(event) {
+      // 检查是否按下 Ctrl 或 Command 以及 K
       if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
         this.searchOpen = !this.searchOpen
-        // 阻止默认行为
+        event.preventDefault()
+      }
+      // 检查是否按下 Ctrl 或 Command 以及 D
+      if ((event.ctrlKey || event.metaKey) && event.key === 'd') {
+        this.handleTheme()
+        event.preventDefault()
+      }
+      // 检查是否按下 Ctrl 或 Command 以及 M
+      if ((event.ctrlKey || event.metaKey) && event.key === 'm') {
+        this.controlOpen = !this.controlOpen
         event.preventDefault()
       }
     },
+    // 使用vuex进行切换主题
+    handleTheme() {
+      this.getTheme().then(theme => {
+        if (theme === 'light') {
+          this.setTheme('dark')
+        } else {
+          this.setTheme('light')
+        }
+      })
+    },
     clickSearch() {
       this.searchOpen = !this.searchOpen
+    },
+    clickControl() {
+      this.controlOpen = !this.controlOpen
     },
     // 查询文章记录
     querySearchAsync(queryString, cb) {
@@ -234,6 +196,19 @@ export default {
   padding: 0px;
 }
 
+ul {
+  li {
+    list-style-type: none;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      background-color: transparent;
+      padding: 0;
+    }
+  }
+}
+
 // 新增：汉堡按钮样式
 .hamburger {
   color: white;
@@ -278,69 +253,15 @@ export default {
   width: unset !important;
 }
 
-.font-logo {
-  height: 100%;
-  display: flex;
-  font-size: 1.3em;
-  font-weight: 600;
-  align-items: center;
-
-  span:nth-child(1) {
-    color: #ff6b6b;
-  }
-
-  /* 珊瑚红 */
-  span:nth-child(2) {
-    color: #ffd166;
-  }
-
-  /* 金黄 */
-  span:nth-child(3) {
-    color: #06d6a0;
-  }
-
-  /* 薄荷绿 */
-  span:nth-child(4) {
-    color: #118ab2;
-  }
-
-  /* 蓝绿 */
-  span:nth-child(5) {
-    color: #f4a261;
-  }
-
-  /* 暖橙 */
-  span:nth-child(6) {
-    color: #9f86c0;
-  }
-
-  /* 浅紫 */
-  span:nth-child(7) {
-    color: #e76f51;
-  }
-
-  /* 红橙 */
-  span:nth-child(8) {
-    color: #ff9f1c;
-  }
-
-  /* 橘黄 */
-  span:nth-child(9) {
-    color: #2ec4b6;
-  }
-
-  /* 绿蓝 */
-}
-
 // 左侧导航分类
 .main-header {
   height: 48px;
-  background: #283b42;
   position: relative;
+  background-color: var(--background);
 
   .header-wrapper {
+
     max-width: 1440px;
-    padding: 0 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -350,19 +271,48 @@ export default {
 
     // logo绝对定位到左侧
     .font-logo {
+      font-size: 20px;
       position: absolute;
-      left: 1.5rem;
+      left: 2.5rem;
       top: 50%;
       transform: translateY(-50%);
+      letter-spacing: -1px;
+      color: var(--text-color);
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
     }
 
     // 右侧头像容器绝对定位到右侧
-    .avatar-container {
-      height: 100%;
+    .nav-right {
       position: absolute;
-      right: 1.5rem;
+      right: 2.5rem;
       top: 50%;
       transform: translateY(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+
+      .iconfont {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: 1px solid #d1d9e0;
+        border-radius: 8px;
+      }
+
+      .iconfont:hover {
+        background-color: #eaecf0;
+      }
+
+      .scroll {
+        font-size: 14px;
+        border-width: 600;
+      }
     }
 
     // ul标签选项样式
@@ -390,40 +340,33 @@ export default {
     }
 
     // 右侧
-    .avatar-container {
-      display: flex;
-      align-items: center;
+    // .nav-right {
+    //   display: flex;
+    //   align-items: center;
 
-      .create-center {
-        display: inline-block;
-        line-height: 1;
-        white-space: nowrap;
-        border: 1px solid #fff;
-        color: #fff;
-        text-align: center;
-        box-sizing: border-box;
-        font-weight: 500;
-        padding: 10px 16px;
-        font-size: 14px;
-        border-radius: 4px;
-        margin-left: 16px;
-        cursor: pointer;
-      }
+    //   .create-center {
+    //     display: inline-block;
+    //     line-height: 1;
+    //     white-space: nowrap;
+    //     border: 1px solid #fff;
+    //     color: #fff;
+    //     text-align: center;
+    //     box-sizing: border-box;
+    //     font-weight: 500;
+    //     padding: 10px 16px;
+    //     font-size: 14px;
+    //     border-radius: 4px;
+    //     margin-left: 16px;
+    //     cursor: pointer;
+    //   }
 
-      // 未登录样式
-      .no-login {
-        text-align: center;
-        justify-content: center;
-        display: flex;
-
-        .toLogin {
-          font-size: 0.8rem;
-          color: white;
-          margin: 0 8px;
-          cursor: pointer;
-        }
-      }
-    }
+    //   // 未登录样式
+    //   .no-login {
+    //     text-align: center;
+    //     justify-content: center;
+    //     display: flex;
+    //   }
+    // }
   }
 }
 
@@ -564,14 +507,12 @@ export default {
 // 导航选中状态
 .router-link-active {
   text-decoration: none;
-  color: #fff;
 }
 
-.icon-search {
-  color: white;
+.iconfont {
   font-size: 18px;
-  cursor: pointer;
-  margin: 0 8px;
+  // cursor: pointer;
+  // margin: 0 8px;
 }
 </style>
 <style lang="scss" scoped>
@@ -657,7 +598,7 @@ export default {
     }
 
     // 移动端头像容器调整（可选，目标网站可能隐藏）
-    .avatar-container {
+    .nav-right {
       display: none !important;
 
       span:first-child {
@@ -694,7 +635,7 @@ export default {
     display: none !important;
   }
 
-  .avatar-container {
+  .nav-right {
     // display: none;
     right: 4.5rem !important;
   }

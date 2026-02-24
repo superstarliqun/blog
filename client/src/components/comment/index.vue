@@ -251,7 +251,7 @@ export default {
 <style scoped>
 .comment-section {
   margin: 0 auto;
-  background: #fff;
+  background: var(--card-background);
   border-radius: 8px;
 }
 
@@ -373,7 +373,7 @@ export default {
 /* 评论项 */
 .comment-item {
   padding: 16px 0;
-  border-bottom: 1px solid #f0f2f7;
+  border-bottom: 1px solid var(--article-border-bottom);
 }
 
 .comment-item:last-child {
@@ -422,7 +422,7 @@ export default {
   font-size: 15px;
   font-weight: 600;
   margin-top: 0px;
-  color: #121212;
+  color: var(--text-color);
   line-height: 1;
 }
 
@@ -442,7 +442,7 @@ export default {
 .comment-text {
   font-size: 15px;
   line-height: 1.6;
-  color: #121212;
+  color: var(--text-color);
 }
 
 .comment-actions {

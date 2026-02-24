@@ -1,4 +1,4 @@
-@import 'https://at.alicdn.com/t/c/font_3571066_jf0w1lcw1e.css';
+@import 'https://at.alicdn.com/t/c/font_3571066_zlnmen4g67c.css';
 html,
 body,
 #app {
@@ -10,6 +10,7 @@ body,
   word-break: break-word;
   line-height: 1.7;
   font-family: var(--base-font);
+  color: var(--text-color);
 }
 
 [data-font-theme='default'] {
@@ -32,6 +33,10 @@ body,
   line-height: 1.7;
 }
 
+.el-skeleton__item.el-skeleton__p {
+  background: var(--style-skeleton);
+}
+
 /* 自定义样式滚动条 start */
 ::-webkit-scrollbar {
   width: 6px;
@@ -49,6 +54,52 @@ body,
 
 /* 自定义样式滚动条 end */
 
+.tooltip-wrapper {
+  position: relative;
+}
+.tooltip-wrapper::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  isolation: isolate;
+  z-index: 9999;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  border: var(--style-border);
+  white-space: nowrap;
+  display: inline-block;
+
+  padding: 4px 8px;
+  background: var(--background);
+  color: var(--text-color);
+  font-size: 12px;
+  border-radius: 8px;
+
+  left: 50%;
+  top: 100%;
+  margin-top: 12px;
+  transform: translateX(-50%);
+}
+
+.tooltip-wrapper:hover::after,
+.tooltip-wrapper:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-wrapper:hover::after {
+  opacity: 1;
+  visibility: visible;
+  /* 可选：添加轻微上浮动画，更丝滑 */
+  transform: translateX(-50%) translateY(0);
+}
+
+/* 可选：初始状态添加轻微下移，配合hover动画 */
+.tooltip-wrapper::after {
+  transform: translateX(-50%) translateY(4px);
+}
+
 /* 渐变 */
 @keyframes jianBian {
   to {
@@ -62,23 +113,15 @@ body,
   vertical-align: middle;
   gap: 4px;
 }
-.iconfont {
-  /* display: inline-block; */
-  /* line-height: 1; */
-  /* 有时 iconfont 自身带有基线偏移，可用 transform 微调 */
-  /* transform: translateY(1px); */
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* live2D 样式 */
-#waifu-toggle {
-  z-index: 100;
-}
-
-#waifu #live2d {
-  height: 200px;
-  width: 200px;
-}
-
-#waifu-toggle.waifu-toggle-active {
-  margin-left: -43px !important;
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

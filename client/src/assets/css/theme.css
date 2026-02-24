@@ -1,11 +1,33 @@
-/* 颜色模板合集 */
+/* 默认模式 */
 :root {
-  --theme-color1: #282c37;
-  --theme-color2: #2b90d9;
-  --theme-color3: #acdcff;
-  --theme-color4: #d9e1e8;
-  --theme-color5: #9baec8;
-  --theme-background: #f5f5f7;
+  --text-color: #000000;
+  --text-color2: #1f2328;
+  --text-color3: #555666;
+  --text-hover: #2791ff;
+  --style-border: 1px solid #e3e8f7;
+  --background: #f7f8fa;
+  --card-background: #ffffff;
+  --article-border-bottom: #f0f0f2;
+  --box-shadow: 0 8px 16px -4px #2c2d300c;
+  --style-skeleton: #e0e0e0;
+}
+/* 黑暗模式 */
+[data-theme='dark'] {
+  --text-color: #e0e0e0;
+  --text-color2: #909090;
+  --text-color3: #666666;
+  --text-hover: #2791ff;
+  --style-border: 1px solid #36363a;
+  --background: #14161a;
+  --card-background: #1c1e22;
+  --article-border-bottom: #36363a;
+  --box-shadow: 0 8px 16px -4px #2c2d300c;
+  --style-skeleton: #1c1e22;
+}
+/* 统一改变模式之后，需要一个过度效果 */
+* {
+  transition: background 0.7s ease, color 0.7s ease, border-color 0.7s ease;
+  box-sizing: border-box;
 }
 
 /* 默认样式，适用于PC端 */

@@ -68,7 +68,7 @@
           <div v-else class="source">
             <el-skeleton :rows="6" />
           </div>
-          <Page v-if="total" :total-number="total" />
+          <Page v-if="total" :total="total" :current-page="currentPage" @current-change="handleCurrentPage" />
           <!-- 分页组件 -->
         </div>
       </div>
@@ -125,6 +125,12 @@ export default {
   methods: {
     // 获取文章列表 支持分页参数
     requestData() {
+      const abc = Number(this.$route.params.id)
+      if (isNaN(abc)) {
+        this.currentPage = 1
+      } else {
+        this.currentPage = abc
+      }
       this.loadingShow = true
       // 只有第一次加载或需要时才查分类，没必要每次分页都查
       if (this.categoryList.length === 0) {
@@ -204,6 +210,9 @@ export default {
     },
     checkDevice() {
       this.isMobile = window.innerWidth <= 768 // 常用阈值
+    },
+    handleCurrentPage(number) {
+      window.location.href = number === 1 ? '/' : `/page/${number}`
     }
   }
 }
@@ -436,9 +445,10 @@ export default {
 
 // 文章列表样式
 .article-content {
-  background-color: #fff;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  background-color: var(--card-background);
+  box-shadow: var(--box-shadow);
+  border: var(--style-border);
+  border-radius: 8px;
 }
 
 // 文章列表下#分类悬浮效果
@@ -510,12 +520,10 @@ export default {
 .article-item {
   display: flex;
   align-items: center;
-  /* 垂直居中 */
   justify-content: center;
-  /* 水平居中 */
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid #f0f0f2;
+  border-bottom: 1px solid var(--article-border-bottom);
   margin: 0 24px;
   transition: all 0.2s ease-in-out 0s;
 
@@ -542,7 +550,7 @@ export default {
     font-size: 18px;
     font-weight: 600;
     line-height: 24px;
-    color: #222226;
+    color: var(--text-color);
     overflow: hidden;
     white-space: normal;
     word-break: break-word;
@@ -557,7 +565,7 @@ export default {
     min-height: 3em;
     margin-top: 8px;
     font-size: 14px;
-    color: #555666;
+    color: var(--text-color2);
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
@@ -566,7 +574,7 @@ export default {
 
 .article-item-bottom {
   display: flex;
-  color: #8a8a8a;
+  color: var(--text-color2);
   font-size: 12px;
   margin-top: 14px;
 

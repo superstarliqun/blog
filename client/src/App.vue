@@ -1,21 +1,15 @@
 <template>
   <div id="app">
     <router-view :key="$route.fullPath" />
-    <rightside />
-    <ContextMenu ref="contextMenuRef" />
+    <RightSide />
   </div>
 </template>
 <script>
-import rightside from '@/components/rightside'
-import ContextMenu from '@/components/menu/ContextMenu'
+import RightSide from '@/components/sidebar'
 export default {
-  components: {
-    rightside,
-    ContextMenu
-  },
+  components: { RightSide },
   created() {
-    // 页面加载时，去读取 Cookie 并设置到 HTML 标签上
-    this.$store.dispatch('app/initFontTheme')
+    this.$store.dispatch('app/initTheme')
   },
   methods: {
     initContextMenu() {
@@ -25,7 +19,6 @@ export default {
         const handleContextMenu = (e) => {
           this.$refs.contextMenuRef.show(e)
         }
-
         const handleClick = () => {
           this.$refs.contextMenuRef.hide()
         }
@@ -51,28 +44,5 @@ body {
   padding: 0;
   /* 核心代码：阻止触控板/手机端回弹白边 */
   /* overscroll-behavior-y: none; */
-}
-</style>
-<style lang="scss" scoped>
-//公共自定义返回顶部
-#app {
-  height: 100%;
-}
-
-.custom-backtop {
-  height: 100%;
-  width: 100%;
-  background-color: #f2f5f6;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
-  text-align: center;
-  line-height: 40px;
-  color: #1989fa;
-}
-
-.iconfont {
-  font-size: 26px;
-  margin-right: 12px;
-  cursor: pointer;
-  color: #5a5c66;
 }
 </style>

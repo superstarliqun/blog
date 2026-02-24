@@ -50,9 +50,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card-widget {
-  background: white;
   border-radius: 6px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  background: var(--card-background);
+  box-shadow: var(-box-shadow);
+  border: var(--style-border);
   padding: 8px 16px;
   font-size: 16px;
 
@@ -100,7 +101,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 0.6px solid #e7e9f0;
+    border: var(--style-border);
     padding: 4px 8px;
     border-radius: 4px;
     color: #191d22;

@@ -189,7 +189,7 @@ export default {
 
     // 内容区域
     .modal-content {
-      background: #f7f8fa;
+      background: var(--card-background);
       padding: 20px 18px;
       border-radius: 12px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -262,13 +262,14 @@ export default {
       // 搜索框
       .search_input {
         border: 1px solid rgb(232, 232, 232);
-        background-color: #f7f8fa;
+        background-color: var(--background);
         line-height: 38px;
         border-radius: 8px;
         font-size: 18px;
         font-weight: 600;
         margin-top: 18px;
         padding: 4px 18px;
+        color: var(--text-color);
 
         &:focus-visible {
           outline: none;

@@ -249,7 +249,6 @@ export default {
 </script>
 
 <style scoped>
-/* Light theme tuned for background #f7f8fa */
 .panel {
   display: flex;
   align-items: center;
