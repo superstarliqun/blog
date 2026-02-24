@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.china</groupId>
+        <artifactId>emoji-blog-admin</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.china</groupId>
+    <artifactId>emojing-search</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>emojing-rss</name>
+    <description>emojing-rss</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.china</groupId>
+            <artifactId>emojing-commons</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <!-- RSS/Atom核心处理库 -->
+        <dependency>
+            <groupId>com.rometools</groupId>
+            <artifactId>rome</artifactId>
+            <version>2.1.0</version> <!-- 推荐使用最新稳定版 -->
+        </dependency>
+        <!-- 若需要处理XML解析（Rome依赖） -->
+        <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom2</artifactId>
+            <version>2.0.6</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
