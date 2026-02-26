@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.china</groupId>
-    <artifactId>emojing-search</artifactId>
+    <artifactId>emojing-rss</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>emojing-rss</name>
     <description>emojing-rss</description>
@@ -35,12 +35,14 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>

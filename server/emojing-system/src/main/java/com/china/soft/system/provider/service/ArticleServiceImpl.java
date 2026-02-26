@@ -1,6 +1,5 @@
 package com.china.soft.system.provider.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.china.soft.commons.base.LoginUser;
@@ -16,21 +15,16 @@ import com.china.soft.system.api.service.ArticleService;
 import com.china.soft.system.api.service.ArticlesTagsService;
 import com.china.soft.system.provider.converter.ArticleConverter;
 import com.china.soft.system.provider.dal.entity.Article;
-import com.china.soft.system.provider.dal.entity.SysEmailConfig;
 import com.china.soft.system.provider.dal.entity.Tag;
 import com.china.soft.system.provider.dal.mapper.ArticleMapper;
-import com.china.soft.system.provider.dal.mapper.ArticlesTagsMapper;
 import com.github.houbb.sensitive.word.core.SensitiveWordHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronizationAdapter;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;

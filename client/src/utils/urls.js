@@ -70,7 +70,9 @@ const urls = {
   // 查询归档列表
   getComment: '/comment',
   // 查询归档列表
-  addComment: '/comment/add'
+  addComment: '/comment/add',
+  // rss列表
+  rss: '/rss/list'
 }
 
 export default urls

@@ -23,6 +23,7 @@
         <module>emojing-system</module>
         <module>emojing-chatai</module>
         <module>emojing-upload</module>
+        <module>emojing-rss</module>
     </modules>
      <dependencies>
          <dependency>

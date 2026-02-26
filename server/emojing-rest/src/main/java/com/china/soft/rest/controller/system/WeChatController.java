@@ -104,6 +104,7 @@ public class WeChatController {
         paramList.forEach(stringBuilder::append);
         //sha1加密
         String encode = SHA1.encode(stringBuilder.toString());
+        log.info("这个是联调微信公众号AI回复功能的：{}", weiXinCheckUrl.getEchostr());
         if (encode.equals(weiXinCheckUrl.getSignature())) {
             return weiXinCheckUrl.getEchostr();
         }
@@ -132,27 +133,11 @@ public class WeChatController {
                 return res;
             }
         }else{
-            // 进行socket连接
-//            OkHttpClient client = new OkHttpClient.Builder().build();
-//            String url = xunFeiIntegration.buildXunFeiUrl();
-//            Request newRequest = new Request.Builder().url(url).build();
-//            WebSocketHandler webSocketHandler = new WebSocketHandler();
-//            WebSocket webSocket = client.newWebSocket(newRequest, webSocketHandler);
-//            String body = xunFeiIntegration.buildSendMsg("5e9be7727a5a", request.getContent());
-//            webSocket.send(body);
-//            // sockt响应参数
-//            String receive = waitForWebSocketData(webSocketHandler);
-//            WxMpXmlOutTextMessage data = null;
-//            // 获取content字段的内容
-//            if(receive == null){
-//                request.setContent("AI数据生成过多请稍后!");
-//            }else{
-//                request.setContent(receive);
-//            }
+            // 设置微信公众号AI自动回复
+            request.setMsgType("transfer_biz_ai_ivr");
         }
         WxResponseResultVo res = wxAckHelper.buildResponseBody(request,request.getFromUserName());
         return res;
-
     }
 
     @GetMapping(path = "/subscribe", produces = {org.springframework.http.MediaType.TEXT_EVENT_STREAM_VALUE})

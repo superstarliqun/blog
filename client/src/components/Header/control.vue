@@ -13,42 +13,61 @@
               <div class="dot maximize" />
             </div>
           </div>
-          <div class="center-container">
-            <div class="center-comment">
-              <p>最近评论</p>
-              <ul class="comment-list">
-                <li>2026年新年快乐<span>2026年2月18号</span></li>
+          <div style="display: flex;gap: 20px;">
+            <div class="center-container">
+              <span class="container-title">RSS订阅消息</span>
+              <ul>
+                <li v-for="(item, index) in list" :key="index" @click="handleLink(item)">
+                  <span class="rss-time">{{ dayjs(item.pubDate).format('MMM DD, YYYY') }}</span>
+                  <div class="rss-title">
+                    <div class="rss-title-text">{{ item.title }}</div>
+                    <span class="rss-icon" />
+                  </div>
+                </li>
               </ul>
             </div>
-            <div>这是用户登录了吗</div>
+            <div class="comment-container">
+              <span class="container-title">最新评论</span>
+            </div>
           </div>
           <div class="control-container">
+            <span class="container-title">中控操作台</span>
             <ul class="btn">
-              <li class="tooltip-wrapper" data-tooltip="开始创作" @click="toPath"><i class="iconfont icon-chuangzuo" /></li>
+              <li class="tooltip-wrapper" data-tooltip="开始创作" @click="toPath"><i class="iconfont icon-chuangzuo" />
+              </li>
               <li class="tooltip-wrapper" data-tooltip="载体部署" @click="deploy"><i class="iconfont icon-cunchu" /></li>
               <li class="tooltip-wrapper" data-tooltip="快捷键"><i class="iconfont icon-kuaijiejian" /></li>
-              <li class="tooltip-wrapper" data-tooltip="模式切换" @click="handleTheme"><i class="iconfont icon-dark" /></li>
+              <li class="tooltip-wrapper" data-tooltip="模式切换" @click="handleTheme"><i class="iconfont icon-dark" />
+              </li>
               <li class="tooltip-wrapper" data-tooltip="退出用户" @click="logout"><i class="iconfont icon-tuichu" /></li>
             </ul>
           </div>
         </div>
+
       </div>
     </transition>
+
   </div>
 </template>
 
 <script>
 import { removeToken } from '@/utils/auth'
 import { mapActions } from 'vuex'
+import dayjs from 'dayjs'
 export default {
   data() {
     return {
-      runningNow: false
+      runningNow: false,
+      list: [],
+      dayjs
     }
   },
   mounted() {
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', this.handleKeyboard)
+  },
+  created() {
+    this.requestData()
   },
   beforeDestroy() {
     window.removeEventListener('keydown', this.handleKeyboard)
@@ -57,6 +76,15 @@ export default {
   },
   methods: {
     ...mapActions('app', ['setTheme', 'getTheme']),
+    requestData() {
+      this.$get(this.$urls.rss).then((res) => {
+        this.list = res.data
+        console.log(res.data)
+      })
+    },
+    handleLink(item) {
+      window.open(item.link, '_blank', 'noopener,noreferrer')
+    },
     // 监听关闭
     handleClose() {
       this.$emit('close')
@@ -76,6 +104,9 @@ export default {
           this.setTheme('light')
         }
       })
+    },
+    handleCurrentPage() {
+      console.log(123)
     },
     // 载体部署访问
     deploy() {
@@ -124,6 +155,7 @@ export default {
     width: 100vw;
     height: 100vh;
     z-index: 99;
+    animation: 0.6s ease 0s 1 normal none running to_show;
 
     /* 关键：蒙版本身不要太厚，主要靠 blur 透出底层内容 */
     background: rgba(255, 255, 255, 0.1);
@@ -154,13 +186,12 @@ export default {
 
     // 内容区域
     .modal-content {
-      width: 64rem;
-      height: 80vh;
+      width: 60rem;
+      min-height: 40vh;
       background: var(--card-background);
       padding: 20px 18px;
       border-radius: 12px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      position: relative;
 
       // 右上角工具栏
       .mac-control-bar {
@@ -211,24 +242,107 @@ export default {
       }
 
       .center-container {
-        display: flex;
-        margin-top: 10px;
+        flex: 1;
+        font-size: 16px;
+        border: var(--style-border);
+        margin-top: 24px;
+        padding: 20px;
+        border-radius: 6px;
+        position: relative;
 
-        .center-comment {
-          min-width: 400px;
+        .container-title {
+          position: absolute;
+          top: -14px;
+          left: 26px;
+          font-weight: 600;
+          padding: 0 16px;
+          background-color: var(--card-background);
+        }
 
-          .comment-list {
-            font-size: 12px;
+        ul {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
 
-            li {
-              padding: 0 10px;
+          li {
+            display: flex;
+            gap: 20px;
+            border-radius: 16px;
+            padding: 4px 8px;
+            cursor: pointer;
+
+            .rss-time {
+              font-size: 12px;
+              display: flex;
+              align-items: center;
+              color: #45454A;
             }
 
-            li>span {
-              font-size: 10px;
-              float: right;
+            .rss-title {
+              flex: 1;
+              display: flex;
+              justify-content: space-between;
+
+              .rss-icon {
+                position: relative;
+                transition: opacity 0.35 ease-in-out;
+              }
+
+              .rss-icon::after {
+                font-family: 'iconfont';
+                content: "\e756";
+                position: absolute;
+                top: 0;
+                left: -17px;
+                color: #333;
+                opacity: 1;
+
+              }
+
+              .rss-title-text {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-right: 20px;
+                width: 390px;
+              }
+
+            }
+
+            &:hover {
+              background-color: #f5f5f5;
+
+              .rss-title>.rss-icon::after {
+                font-family: 'iconfont';
+                content: "\e62b";
+              }
+
+              .rss-title>.rss-title-text {
+                color: #517E94;
+              }
             }
           }
+        }
+
+      }
+
+      .comment-container {
+        flex: 1;
+        font-size: 16px;
+        border: var(--style-border);
+        margin-top: 24px;
+        padding: 20px;
+        border-radius: 6px;
+        position: relative;
+
+        .container-title {
+          position: absolute;
+          top: -14px;
+          left: 26px;
+          font-weight: 600;
+          padding: 0 16px;
+          background-color: var(--card-background);
         }
       }
     }
@@ -247,15 +361,16 @@ export default {
 }
 
 .control-container {
-  padding: 8px 0 48px 0;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 6px;
+  border: var(--style-border);
+  position: relative;
 
   .btn {
     display: flex;
     gap: 8px;
+    justify-content: center;
 
     li {
       cursor: pointer;
@@ -264,7 +379,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: var(--background);
+      background-color: var(--card-background);
       border-radius: 24px;
       border: var(--style-border);
 
@@ -278,5 +393,38 @@ export default {
       }
     }
   }
+
+  .container-title {
+    position: absolute;
+    top: -14px;
+    left: 26px;
+    font-weight: 600;
+    padding: 0 16px;
+    background-color: var(--card-background);
+    font-size: 16px;
+  }
+}
+
+.tooltip-wrapper::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  isolation: isolate;
+  z-index: 9999;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  border: var(--style-border);
+  white-space: nowrap;
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--background);
+  color: var(--text-color);
+  font-size: 12px;
+  border-radius: 8px;
+  left: 50%;
+  top: -100%;
+  margin-top: unset;
+  transform: translateX(-50%);
 }
 </style>
