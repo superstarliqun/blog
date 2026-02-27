@@ -16,15 +16,18 @@
           <div style="display: flex;gap: 20px;">
             <div class="center-container">
               <span class="container-title">RSS订阅消息</span>
-              <ul>
-                <li v-for="(item, index) in list" :key="index" @click="handleLink(item)">
-                  <span class="rss-time">{{ dayjs(item.pubDate).format('MMM DD, YYYY') }}</span>
-                  <div class="rss-title">
-                    <div class="rss-title-text">{{ item.title }}</div>
-                    <span class="rss-icon" />
-                  </div>
-                </li>
-              </ul>
+              <Transition name="fade">
+                <ul v-if="list.length > 0">
+                  <li v-for="(item, index) in list" :key="index" @click="handleLink(item)">
+                    <span class="rss-time">{{ dayjs(item.pubDate).format('MMM DD, YYYY') }}</span>
+                    <div class="rss-title">
+                      <div class="rss-title-text">{{ item.title }}</div>
+                      <span class="rss-icon" />
+                    </div>
+                  </li>
+                </ul>
+                <Loading v-else ref="loadingContainer" />
+              </Transition>
             </div>
             <div class="comment-container">
               <span class="container-title">最新评论</span>
@@ -54,7 +57,9 @@
 import { removeToken } from '@/utils/auth'
 import { mapActions } from 'vuex'
 import dayjs from 'dayjs'
+import Loading from '@/components/loading/index.vue'
 export default {
+  components: { Loading },
   data() {
     return {
       runningNow: false,
@@ -78,8 +83,9 @@ export default {
     ...mapActions('app', ['setTheme', 'getTheme']),
     requestData() {
       this.$get(this.$urls.rss).then((res) => {
-        this.list = res.data
-        console.log(res.data)
+        setTimeout(() => {
+          this.list = res.data
+        }, 1000)
       })
     },
     handleLink(item) {
@@ -249,6 +255,10 @@ export default {
         padding: 20px;
         border-radius: 6px;
         position: relative;
+        height: 292px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .container-title {
           position: absolute;
@@ -324,7 +334,6 @@ export default {
             }
           }
         }
-
       }
 
       .comment-container {

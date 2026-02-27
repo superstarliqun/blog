@@ -25,7 +25,7 @@
               </div>
             </li>
           </ul>
-          <div v-if="queryData.length > 0" class="op">
+          <div v-if="loading" class="op">
             找到 {{ total }} 条结果，用时 {{ searchDuration }} 毫秒
           </div>
         </div>
@@ -43,7 +43,8 @@ export default {
       input: null,
       selectedIndex: -1,
       total: 0,
-      searchDuration: null
+      searchDuration: null,
+      loading: false
     }
   },
   watch: {
@@ -71,6 +72,7 @@ export default {
   methods: {
     // 防抖
     debouncedSearch: debounce(function () {
+      this.loading = false
       if (this.input == null || !this.input.trim()) {
         this.queryData = []
         return
@@ -80,6 +82,7 @@ export default {
 
     // 监听搜索
     handleSearch() {
+      this.loading = true
       const startTime = performance.now()
       this.$get(this.$urls.elasticSearchFindHighlight, { keywords: this.input }).then((res) => {
         const endTime = performance.now()

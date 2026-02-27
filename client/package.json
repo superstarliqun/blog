@@ -1,6 +1,6 @@
 {
   "name": "soft-emoji-frontend",
-  "version": "0.23.0",
+  "version": "0.23.6",
   "private": true,
   "scripts": {
     "build": "vue-cli-service build --mode production",
@@ -23,6 +23,7 @@
     "js-sha1": "^0.7.0",
     "js-sha256": "^0.11.1",
     "lodash": "^4.17.21",
+    "lottie-web": "^5.13.0",
     "lunar-calendar": "^0.1.4",
     "sass": "^1.62.0",
     "sortablejs": "^1.15.0",
@@ -31,6 +32,7 @@
     "vue-calendar-heatmap": "^0.8.4",
     "vue-contextmenujs": "^1.4.11",
     "vue-infinite-loading": "^2.4.5",
+    "vue-meta": "^1.6.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0",
     "xlsx": "0.17.0",
@@ -51,6 +53,7 @@
     "@bytemd/plugin-medium-zoom": "^1.21.0",
     "@bytemd/plugin-mermaid": "^1.21.0",
     "@bytemd/vue": "^1.21.0",
+    "@dreysolano/prerender-spa-plugin": "^1.0.3",
     "@vue/cli-plugin-babel": "5.0.8",
     "@vue/cli-plugin-eslint": "5.0.8",
     "@vue/cli-plugin-router": "5.0.8",

@@ -10,6 +10,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 import enLocale from 'element-ui/lib/locale/lang/en'
 import Contextmenu from 'vue-contextmenujs'
+import VueMeta from 'vue-meta'
+
 // global css
 import './assets/css/theme.css'
 import './assets/css/common.css'
@@ -51,6 +53,8 @@ Vue.config.productionTip = false
 Vue.config.ignoredElements = ['super-sidebar-right', 'super-container', 'super-header', 'super-main', 'super-content', 'super-sidebar-left', /^super-/]
 Vue.prototype.$emoji = parseEmojiToHtml
 
+// 页面元信息
+Vue.use(VueMeta)
 Vue.config.productionTip = false
 // 注册组件
 new Vue({

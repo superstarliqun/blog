@@ -29,6 +29,7 @@ const setPackageJsonVersion = () => {
 }
 
 module.exports = {
+  runtimeCompiler: true, // 开启运行时编译器，支持template选项
   // 服务器路径
   publicPath: PRO_MODE ? '/' : '/',
   // 打包文件名

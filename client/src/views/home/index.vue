@@ -90,6 +90,13 @@ import Category from './component/category'
 import Tags from './component/tags'
 import Love from './component/love'
 export default {
+  metaInfo: {
+    title: '灵光一刻',
+    meta: [
+      { name: 'description', content: '专注分享Java后端、前端开发、系统运维、面试经验等技术干货，提供编程实战、学习笔记与项目总结，帮助开发者提升技能、高效成长。' },
+      { name: 'keywords', content: '个人博客,Java,后端开发,前端,Vue,系统运维,面试总结,技术教程,原创博客' }
+    ]
+  },
   components: { Page, Blogger, Category, Tags, Love },
   mixins: [listMixin],
   data() {
