@@ -13,7 +13,7 @@
               <div class="dot maximize" />
             </div>
           </div>
-          <div style="display: flex;gap: 20px;">
+          <div style="display: flex;gap: 20px;margin-top: 12px;">
             <div class="center-container">
               <span class="container-title">RSS订阅消息</span>
               <Transition name="fade">
@@ -193,7 +193,7 @@ export default {
     // 内容区域
     .modal-content {
       width: 60rem;
-      min-height: 40vh;
+      height: 40rem;
       background: var(--card-background);
       padding: 20px 18px;
       border-radius: 12px;
@@ -370,7 +370,7 @@ export default {
 }
 
 .control-container {
-  margin-top: 24px;
+  margin-top: 50px;
   padding: 20px;
   border-radius: 6px;
   border: var(--style-border);
