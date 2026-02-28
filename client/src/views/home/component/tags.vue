@@ -41,7 +41,7 @@ export default {
   background: var(--card-background);
   border-radius: 6px;
   box-shadow: var(--box-shadow);
-  border: var(--style-border);
+  border: var(--home-border);
   font-size: 16px;
 
   .card-title {

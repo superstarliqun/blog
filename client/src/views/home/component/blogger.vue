@@ -1,21 +1,15 @@
 <template>
   <div class="profile-card">
-    <div class="banner" />
-
     <div class="content-wrapper">
-      <div class="avatar-container">
-        <img src="https://pic1.zhimg.com/v2-5be04c5f2debd0260f86da2a324655bf_xl.jpg?source=32738c0c&needBackground=1"
-          alt="Avatar" class="avatar">
-      </div>
       <div class="info">
         <div class="head-container">
+          <img src="https://pic1.zhimg.com/v2-5be04c5f2debd0260f86da2a324655bf_xl.jpg?source=32738c0c&needBackground=1"
+            alt="Avatar" class="avatar">
           <div class="name">
             <p>MingYue</p>
             <span class="handle">@superstarliqun</span>
           </div>
-          <div class="main-actions">
-            <button class="btn-follow"><span class="plus">+</span> Follow</button>
-          </div>
+          <div class="avatar-container" />
         </div>
         <h3 class="section-title">About</h3>
         <p class="bio">
@@ -69,7 +63,6 @@ export default {
 
 .banner {
   height: 100px;
-  background: linear-gradient(17deg, #ffafbd, #ffc3a0, #ebedee, #ffafbd, #f4f4f4);
   border-radius: 8px;
   box-shadow: var(--box-shadow);
   border: var(--style-border);
@@ -77,19 +70,12 @@ export default {
 }
 
 .content-wrapper {
-  padding: 40px 16px 16px;
+  padding: 20px 16px 16px;
   position: relative;
   border-radius: 8px;
   background: var(--card-background);
   box-shadow: var(--box-shadow);
-  border: var(--style-border);
-}
-
-.avatar-container {
-  position: absolute;
-  top: -46px;
-  left: 24px;
-  z-index: 2;
+  border: var(--home-border);
 }
 
 .avatar {
@@ -105,8 +91,21 @@ export default {
 
 .head-container {
   display: flex;
-  justify-content: space-between;
+  gap: 12px;
 
+  /* justify-content: space-between; */
+  .name {
+
+    flex: 1;
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.2;
+
+    p {
+      font-weight: 600;
+      font-size: 22px;
+    }
+  }
 }
 
 .action-buttons {
@@ -124,32 +123,6 @@ export default {
   border-radius: 8px;
   font-size: 13px;
   cursor: pointer;
-}
-
-.main-actions {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-}
-
-.btn-follow {
-  background: #111;
-  color: #fff;
-  border: none;
-  padding: 6px 8px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.3)
-}
-
-.name {
-  font-size: 16px;
-  line-height: 1.2;
-
-  p {
-    font-weight: 600;
-  }
 }
 
 .handle {
@@ -212,7 +185,8 @@ export default {
       .iconfont {
         width: 30px;
         height: 30px;
-        border: 0.6px solid #e2e2e2;
+        /* border: 0.6px solid #e2e2e2; */
+        border: var(--home-border);
         border-radius: 8px;
         display: flex;
         align-items: center;

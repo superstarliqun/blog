@@ -53,7 +53,7 @@ export default {
   border-radius: 6px;
   background: var(--card-background);
   box-shadow: var(-box-shadow);
-  border: var(--style-border);
+  border: var(--home-border);
   padding: 8px 16px;
   font-size: 16px;
 

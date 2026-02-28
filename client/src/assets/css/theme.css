@@ -5,6 +5,7 @@
   --text-color3: #555666;
   --text-hover: #2791ff;
   --style-border: 1px solid #e3e8f7;
+  --home-border: 1px solid rgb(209, 217, 224);
   --background: #f7f8fa;
   --card-background: #ffffff;
   --article-border-bottom: #f0f0f2;
@@ -18,6 +19,7 @@
   --text-color3: #666666;
   --text-hover: #2791ff;
   --style-border: 1px solid #36363a;
+  --home-border: 1px solid rgb(67, 67, 67);
   --background: #14161a;
   --card-background: #1c1e22;
   --article-border-bottom: #36363a;

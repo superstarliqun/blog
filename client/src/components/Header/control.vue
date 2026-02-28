@@ -192,8 +192,7 @@ export default {
 
     // 内容区域
     .modal-content {
-      width: 60rem;
-      height: 40rem;
+      min-width: 60rem;
       background: var(--card-background);
       padding: 20px 18px;
       border-radius: 12px;

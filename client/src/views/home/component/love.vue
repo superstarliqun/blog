@@ -87,7 +87,7 @@ export default {
 .love-card {
   background: var(--card-background);
   border-radius: 6px;
-  border: var(--style-border);
+  border: var(--home-border);
   box-shadow: var(--box-shadow)
 }
 
