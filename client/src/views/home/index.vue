@@ -53,9 +53,9 @@
                     {{ item.createTime }}
                   </div>
                   <div class="article-item-trends">
-                    <span>观看 {{ item.views }}</span>
-                    <span>回复 {{ item.comments }}</span>
-                    <span>点赞 {{ item.likes }}</span>
+                    <span><i class="iconfont icon-heat" /> {{ item.views }}</span>
+                    <span><i class="iconfont icon-dianzan" /> {{ item.likes }}</span>
+                    <span><i class="iconfont icon-comment1" /> {{ item.comments }}</span>
                   </div>
                 </div>
               </div>
@@ -452,10 +452,9 @@ export default {
 
 // 文章列表样式
 .article-content {
-  background-color: var(--card-background);
-  box-shadow: var(--box-shadow);
-  border: var(--style-border);
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 // 文章列表下#分类悬浮效果
@@ -525,13 +524,14 @@ export default {
 }
 
 .article-item {
+  border: var(--home-border);
+  background-color: var(--card-background);
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid var(--article-border-bottom);
-  margin: 0 24px;
   transition: all 0.2s ease-in-out 0s;
 
   img {
@@ -547,10 +547,8 @@ export default {
   display: flex;
   position: relative;
   z-index: 2;
-  justify-content: space-between;
   flex-direction: column;
-  padding: 18px 0;
-  margin-left: 0.8rem;
+  padding: 20px;
   flex: 1;
 
   .article-item-title {
@@ -606,9 +604,13 @@ export default {
     display: flex;
     justify-content: space-between;
     margin-left: auto;
+    gap: 8px;
 
     span {
-      margin-left: 10px;
+      color: var(--text-color2);
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
   }
 }

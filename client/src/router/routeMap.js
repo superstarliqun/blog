@@ -16,7 +16,7 @@ const routeMap = [
       {
         path: '/',
         name: 'home',
-        component: () => import('@/views/home/index1')
+        component: () => import('@/views/home/index')
       },
       {
         path: '/page/:id',

@@ -72,7 +72,7 @@ export default {
 .content-wrapper {
   padding: 20px 16px 16px;
   position: relative;
-  border-radius: 8px;
+  border-radius: 6px;
   background: var(--card-background);
   box-shadow: var(--box-shadow);
   border: var(--home-border);
