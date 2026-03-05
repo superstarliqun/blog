@@ -137,6 +137,7 @@ export default {
     display: flex;
     gap: 12px;
     align-items: center;
+    color: var(--text-color2);
   }
 }
 </style>

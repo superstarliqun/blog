@@ -1,66 +1,43 @@
 <template>
-  <div class="loading-container">
-    <!-- 插槽：可自定义加载提示文字，可选 -->
-    <slot>
-      <!-- 默认只显示动画，无文字 -->
-    </slot>
+  <div class="github-loader-container">
+    <div class="github-loader" />
   </div>
 </template>
 
 <script>
-import lottie from 'lottie-web'
-
 export default {
-  name: 'LoadingAnimation',
-  props: {
-    animationPath: {
-      type: String,
-      default: '/loading.json'
-    },
-    loop: {
-      type: Boolean,
-      default: true
-    },
-    height: {
-      type: [String, Number],
-      default: '100%'
-    },
-    width: {
-      type: [String, Number],
-      default: '100%'
-    }
-  },
-  data() {
-    return {
-      animationInstance: null
-    }
-  },
-  mounted() {
-    this.initLoadingAnimation()
-  },
-  beforeDestroy() {
-    // 组件销毁时销毁动画实例，避免内存泄漏
-    if (this.animationInstance) {
-      this.animationInstance.destroy()
-    }
-  },
-  methods: {
-    initLoadingAnimation() {
-      // 初始化lottie动画
-      this.animationInstance = lottie.loadAnimation({
-        container: this.$el, // 组件根元素作为容器
-        renderer: 'svg',
-        loop: this.loop,
-        autoplay: true,
-        path: this.animationPath
-      })
-    }
-  }
+  name: 'GitHubLoader'
 }
 </script>
 
-<style lang="scss" scoped>
-.loading-container {
-  height: 100px;
+<style scoped>
+.github-loader-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 核心加载动画样式 */
+.github-loader {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #e1e4e8;
+  border-top-color: #000000;
+  box-sizing: border-box;
+  animation: github-spin linear infinite 1s;
+}
+
+/* 旋转关键帧 */
+@keyframes github-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

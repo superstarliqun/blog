@@ -126,7 +126,7 @@ export default {
 }
 
 .handle {
-  color: #888;
+  color: var(--text-color2);
   margin: 4px 0 16px;
   font-size: 12px;
 }
@@ -139,7 +139,7 @@ export default {
 
 .bio {
   font-size: 12px;
-  color: #555;
+  color: var(--text-color2);
   line-height: 1.5;
 }
 

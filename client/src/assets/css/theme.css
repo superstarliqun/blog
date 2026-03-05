@@ -1,7 +1,7 @@
 /* 默认模式 */
 :root {
   --text-color: #000000;
-  --text-color2: #1f2328;
+  --text-color2: #59636e;
   --text-color3: #555666;
   --text-hover: #2791ff;
   --style-border: 1px solid #e3e8f7;
@@ -11,20 +11,27 @@
   --article-border-bottom: #f0f0f2;
   --box-shadow: 0 8px 16px -4px #2c2d300c;
   --style-skeleton: #e0e0e0;
+  --tag-background: rgba(56, 139, 253, 0.05);
+  --tag-border: 1px solid rgba(56, 139, 253, 0.15);
+  --tag-text: #7a7f87;
 }
 /* 黑暗模式 */
 [data-theme='dark'] {
-  --text-color: #e0e0e0;
-  --text-color2: #909090;
-  --text-color3: #666666;
-  --text-hover: #2791ff;
-  --style-border: 1px solid #36363a;
-  --home-border: 1px solid rgb(67, 67, 67);
-  --background: #14161a;
-  --card-background: #1c1e22;
-  --article-border-bottom: #36363a;
-  --box-shadow: 0 8px 16px -4px #2c2d300c;
-  --style-skeleton: #1c1e22;
+  --text-color: #e6e6e6;
+  --text-color2: #a6a6a6;
+  --text-color3: #7a7f87;
+  --text-hover: #4ea1ff;
+  --background: #2b2d30;
+  --card-background: #313338;
+  --card-hover: #35383d;
+  --style-border: 1px solid rgba(255, 255, 255, 0.05);
+  --home-border: 1px solid rgba(255, 255, 255, 0.06);
+  --article-border-bottom: rgba(255, 255, 255, 0.06);
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --style-skeleton: #2f3136;
+  --tag-text: #6aa6e8;
+  --tag-background: rgba(76, 142, 217, 0.1);
+  --tag-border: 1px solid rgba(76, 142, 217, 0.22);
 }
 /* 统一改变模式之后，需要一个过度效果 */
 * {

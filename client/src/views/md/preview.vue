@@ -14,9 +14,10 @@
           <span><i class="iconfont icon-daohang_daohanglan_xungeng" />阅读{{
             Math.floor(countWords() / 500)
             }}分钟</span>
-          <span v-if="formData.updateTime != undefined"><i class="iconfont icon-riqi" />{{
-            formData.createTime.slice(0, 10)
-            }}</span>
+          <span><i class="iconfont icon-riqi" />
+            <!-- {{ formData.createTime.slice(0, 10) }} -->
+            {{ formData.createTime | formatDate }}
+          </span>
           <span @click="fixedScroll('comment_box')"><i class="iconfont icon-pinglun1" />{{ comment }}</span>
           <span v-if="showEdit" class="edit-button" @click="toEdit(formData.id)"><i
               class="iconfont icon-bianji" /></span>
@@ -85,6 +86,7 @@ import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index
 import '@kangc/v-md-editor/lib/plugins/todo-list/todo-list.css'
 import CommentBox from '@/components/comment/index.vue'
 import Copyright from './component/copyright'
+import dayjs from 'dayjs'
 
 const prismTheme = creatPrismTheme({
   Prism,
@@ -102,6 +104,14 @@ VMdPreview.use(createTodoListPlugin())
 Vue.use(VMdPreview)
 import { getUserInfo } from '@/utils/auth'
 export default {
+  filters: {
+    formatDate(value) {
+      console.log(value)
+
+      if (!value) return ''
+      return dayjs(value).format('YYYY年MM月DD日 HH:mm')
+    }
+  },
   components: { CommentBox, Copyright },
   props: {
     value: {
@@ -150,7 +160,6 @@ export default {
   },
   methods: {
     onPageLoaded() {
-      console.log('页面所有资源加载完成')
       this.isReady = true
     },
     scrollActiveTocIntoView() {

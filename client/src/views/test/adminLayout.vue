@@ -13,10 +13,10 @@
           </div>
         </div>
         <ul class="nav-info fr clearfix">
-          <li class="fl"><i class="el-icon-user"></i> 欢迎您,{{ userName }}</li>
+          <li class="fl"><i class="el-icon-user" /> 欢迎您,{{ userName }}</li>
           <li class="fl">|</li>
           <li class="fl">
-            <a @click="goExit()"><i class="el-icon-switch-button"></i>退出系统</a>
+            <a @click="goExit()"><i class="el-icon-switch-button" />退出系统</a>
           </li>
         </ul>
       </div>
@@ -25,7 +25,8 @@
     <el-container>
       <!-- 左侧侧边栏 -->
       <el-aside>
-        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" unique-opened router @select="handleSelect">
+        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" unique-opened router
+          @select="handleSelect">
           <el-submenu v-for="item in menulist" :key="item.id" :index="item.id + ''">
             <!-- 第一级 -->
             <template slot="title">
@@ -372,21 +373,26 @@ export default {
 .el-menu-item-group__title {
   padding: 0;
 }
+
 .el-submenu__title {
   padding-left: 10px !important;
 }
+
 .el-menu-item {
   padding-left: 20px !important;
   font-size: 12px;
 }
+
 .children_node {
   .el-submenu__title {
     padding-left: 20px !important;
   }
+
   .el-menu-item {
     padding-left: 25px !important;
   }
 }
+
 .mask {
   position: fixed;
   top: 0;
@@ -396,6 +402,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.5); // 设置遮罩层的颜色和透明度
   z-index: 999; // 将遮罩层置于侧边栏之下
 }
+
 .el-container {
   height: 1000px;
 }

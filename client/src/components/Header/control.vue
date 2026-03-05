@@ -17,16 +17,22 @@
             <div class="center-container">
               <span class="container-title">RSS订阅消息</span>
               <Transition name="fade">
-                <ul v-if="list.length > 0">
-                  <li v-for="(item, index) in list" :key="index" @click="handleLink(item)">
-                    <span class="rss-time">{{ dayjs(item.pubDate).format('MMM DD, YYYY') }}</span>
-                    <div class="rss-title">
-                      <div class="rss-title-text">{{ item.title }}</div>
-                      <span class="rss-icon" />
-                    </div>
-                  </li>
-                </ul>
-                <Loading v-else ref="loadingContainer" />
+                <!-- 关键修改1：添加外层容器，固定宽度 -->
+                <div v-if="list.length > 0" class="rss-content-wrapper">
+                  <ul>
+                    <li v-for="(item, index) in list" :key="index" @click="handleLink(item)">
+                      <span class="rss-time">{{ dayjs(item.pubDate).format('MMM DD, YYYY') }}</span>
+                      <div class="rss-title">
+                        <div class="rss-title-text">{{ item.title }}</div>
+                        <span class="rss-icon" />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- 关键修改2：Loading也放在相同宽度的容器中 -->
+                <div v-else class="rss-content-wrapper">
+                  <Loading ref="loadingContainer" />
+                </div>
               </Transition>
             </div>
             <div class="comment-container">
@@ -46,10 +52,8 @@
             </ul>
           </div>
         </div>
-
       </div>
     </transition>
-
   </div>
 </template>
 
@@ -76,7 +80,6 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('keydown', this.handleKeyboard)
-    // 补充：组件销毁时恢复body滚动，避免页面卡死
     document.body.style.overflow = ''
   },
   methods: {
@@ -91,17 +94,14 @@ export default {
     handleLink(item) {
       window.open(item.link, '_blank', 'noopener,noreferrer')
     },
-    // 监听关闭
     handleClose() {
       this.$emit('close')
     },
-    // 监听esc
     handleKeyboard(e) {
       if (e.key === 'Escape' || e.keyCode === 27) {
         this.handleClose()
       }
     },
-    // 使用vuex进行切换主题
     handleTheme() {
       this.getTheme().then(theme => {
         if (theme === 'light') {
@@ -114,20 +114,18 @@ export default {
     handleCurrentPage() {
       console.log(123)
     },
-    // 载体部署访问
     deploy() {
-      // 防抖：短时间内不重复触发
       if (this.runningNow) return
       this.runningNow = true
       this.$get(this.$urls.execute).then((res) => {
         this.$get(this.$urls.getUrl).then((res) => {
           navigator.clipboard.writeText(res.data + '/Eyb7sxFXft')
-          window.location.href(res.data + '/Eyb7sxFXft', '_blank')
+          // 修复：window.location.href 是属性不是方法
+          window.open(res.data + '/Eyb7sxFXft', '_blank')
         })
         this.runningNow = false
       })
     },
-    // 开始创作
     toPath() {
       this.$get(this.$urls.getUserInfo).then((res) => {
         if (res.code === 0) {
@@ -138,7 +136,6 @@ export default {
         this.handleClose()
       })
     },
-    // 退出登录
     logout() {
       removeToken()
       this.$router.push('/login')
@@ -153,7 +150,6 @@ export default {
   width: 100%;
   min-height: 100vh;
 
-  // 蒙版核心代码
   .modal-mask {
     position: fixed;
     top: 0;
@@ -162,14 +158,9 @@ export default {
     height: 100vh;
     z-index: 99;
     animation: 0.6s ease 0s 1 normal none running to_show;
-
-    /* 关键：蒙版本身不要太厚，主要靠 blur 透出底层内容 */
     background: rgba(255, 255, 255, 0.1);
-
-    /* 标准毛玻璃写法 */
     backdrop-filter: blur(18px) saturate(180%);
     -webkit-backdrop-filter: blur(18px) saturate(180%);
-
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -183,14 +174,11 @@ export default {
       right: 0;
       bottom: 0;
       z-index: -1;
-      /* 注入 SVG 噪点数据 */
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      /* 透明度必须极低，建议 0.03 - 0.08 */
       opacity: 0.05;
       pointer-events: none;
     }
 
-    // 内容区域
     .modal-content {
       min-width: 60rem;
       background: var(--card-background);
@@ -198,7 +186,6 @@ export default {
       border-radius: 12px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 
-      // 右上角工具栏
       .mac-control-bar {
         display: flex;
         align-items: center;
@@ -220,8 +207,8 @@ export default {
             .icon {
               font-size: 10px;
               color: rgba(0, 0, 0, 0.5);
-              display: none; // 默认隐藏图标
-              pointer-events: none; // 防止干扰点击
+              display: none;
+              pointer-events: none;
             }
 
             &.close {
@@ -258,6 +245,14 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        // 关键修改3：添加固定宽度的包装器样式
+        .rss-content-wrapper {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
 
         .container-title {
           position: absolute;
@@ -306,7 +301,6 @@ export default {
                 left: -17px;
                 color: #333;
                 opacity: 1;
-
               }
 
               .rss-title-text {
@@ -316,7 +310,6 @@ export default {
                 padding-right: 20px;
                 width: 390px;
               }
-
             }
 
             &:hover {
@@ -357,7 +350,6 @@ export default {
   }
 }
 
-// 过渡动画样式需要放在.modal-content外面，否则scoped会导致样式失效
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
@@ -434,5 +426,11 @@ export default {
   top: -100%;
   margin-top: unset;
   transform: translateX(-50%);
+}
+
+// 补充：让tooltip hover时显示
+.tooltip-wrapper:hover::after {
+  opacity: 1;
+  visibility: visible;
 }
 </style>

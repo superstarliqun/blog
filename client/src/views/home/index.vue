@@ -48,9 +48,10 @@
                 </div>
                 <div class="article-item-bottom">
                   <div class="article-item-category">
-                    {{ converter(item.category) }}
-                    |
-                    {{ item.createTime }}
+                    <span>{{ converter(item.category) }}</span>
+                    <!-- {{ dayjs(item.createTime).format('YYYY年MM月DD日') }} -->
+                    <!-- {{ item.createTime | formatDate }} -->
+                    <span> {{ formatRecentDay(item.createTime) }} 发布</span>
                   </div>
                   <div class="article-item-trends">
                     <span><i class="iconfont icon-heat" /> {{ item.views }}</span>
@@ -89,6 +90,11 @@ import Blogger from './component/blogger'
 import Category from './component/category'
 import Tags from './component/tags'
 import Love from './component/love'
+import dayjs from 'dayjs'
+import 'dayjs/locale/zh-cn'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
+dayjs.locale('zh-cn')
 export default {
   metaInfo: {
     title: '灵光一刻',
@@ -96,6 +102,12 @@ export default {
       { name: 'description', content: '专注分享Java后端、前端开发、系统运维、面试经验等技术干货，提供编程实战、学习笔记与项目总结，帮助开发者提升技能、高效成长。' },
       { name: 'keywords', content: '个人博客,Java,后端开发,前端,Vue,系统运维,面试总结,技术教程,原创博客' }
     ]
+  },
+  filters: {
+    formatDate(value) {
+      if (!value) return ''
+      return dayjs(value).format('YYYY.MM.DD')
+    }
   },
   components: { Page, Blogger, Category, Tags, Love },
   mixins: [listMixin],
@@ -220,6 +232,12 @@ export default {
     },
     handleCurrentPage(number) {
       window.location.href = number === 1 ? '/' : `/page/${number}`
+    },
+    // 时间转化
+    formatRecentDay(date) {
+      if (!date) return ''
+      const diff = dayjs().diff(dayjs(date), 'day')
+      return diff === 0 ? '今天' : dayjs(date).fromNow()
     }
   }
 }
@@ -457,13 +475,27 @@ export default {
   gap: 6px;
 }
 
-// 文章列表下#分类悬浮效果
-.article-item-category::before {
-  padding-right: 8px;
-  content: '#';
-  font-size: 12px;
-  opacity: 0.4;
+.article-item-category {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  span {
+    border-radius: 16px;
+    background-color: var(--tag-background);
+    color: var(--tag-text);
+    border: var(--tag-border);
+    padding: 0 8px;
+  }
 }
+
+// 文章列表下#分类悬浮效果
+// .article-item-category::before {
+//   padding-right: 8px;
+//   content: '#';
+//   font-size: 12px;
+//   opacity: 0.4;
+// }
 
 .article-item-category:hover {
   cursor: pointer;
