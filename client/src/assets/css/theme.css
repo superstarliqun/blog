@@ -17,21 +17,21 @@
 }
 /* 黑暗模式 */
 [data-theme='dark'] {
-  --text-color: #e6e6e6;
-  --text-color2: #a6a6a6;
-  --text-color3: #7a7f87;
-  --text-hover: #4ea1ff;
-  --background: #2b2d30;
-  --card-background: #313338;
-  --card-hover: #35383d;
-  --style-border: 1px solid rgba(255, 255, 255, 0.05);
-  --home-border: 1px solid rgba(255, 255, 255, 0.06);
-  --article-border-bottom: rgba(255, 255, 255, 0.06);
-  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  --style-skeleton: #2f3136;
-  --tag-text: #6aa6e8;
-  --tag-background: rgba(76, 142, 217, 0.1);
-  --tag-border: 1px solid rgba(76, 142, 217, 0.22);
+  --text-color: #e7e8eb;
+  --text-color2: #a7acb5;
+  --text-color3: #6f737b;
+  --text-hover: #4fa3ff;
+  --background: #1f2024;
+  --card-background: #26282d;
+  --card-hover: #2b2e33;
+  --style-border: 1px solid rgba(255, 255, 255, 0.06);
+  --home-border: 1px solid rgba(255, 255, 255, 0.05);
+  --article-border-bottom: rgba(255, 255, 255, 0.05);
+  --box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --style-skeleton: #2a2c31;
+  --tag-text: rgb(100, 149, 224, 0.8);
+  --tag-background: rgba(79, 163, 255, 0.12);
+  --tag-border: 1px solid rgba(79, 163, 255, 0.28);
 }
 /* 统一改变模式之后，需要一个过度效果 */
 * {

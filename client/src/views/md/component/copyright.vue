@@ -41,7 +41,7 @@
 
   font-size: 13px;
   line-height: 1.6;
-  color: #6e6e73;
+  color: var(--text-color2);
   /* iOS secondary label */
 
   display: flex;

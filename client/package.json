@@ -1,6 +1,6 @@
 {
   "name": "soft-emoji-frontend",
-  "version": "0.23.9",
+  "version": "0.24.2",
   "private": true,
   "scripts": {
     "build": "vue-cli-service build --mode production",

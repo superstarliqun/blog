@@ -280,7 +280,7 @@ export default {
               font-size: 12px;
               display: flex;
               align-items: center;
-              color: #45454A;
+              color: var(--text-color2);
             }
 
             .rss-title {

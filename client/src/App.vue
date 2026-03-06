@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <router-view :key="$route.fullPath" />
-    <RightSide />
+    <!-- <RightSide /> -->
   </div>
 </template>
 <script>
-import RightSide from '@/components/sidebar'
+// import RightSide from '@/components/sidebar'
 export default {
-  components: { RightSide },
+  // components: { RightSide },
   created() {
     this.$store.dispatch('app/initTheme')
   },
