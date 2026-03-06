@@ -443,7 +443,8 @@ pre[class*='language-'] {
 
 :not(pre) > code[class*='language-'],
 pre[class*='language-'] {
-  background: #2d2d2d;
+  // background: #2d2d2d;
+  background: var(--code-background);
 }
 
 :not(pre) > code[class*='language-'] {

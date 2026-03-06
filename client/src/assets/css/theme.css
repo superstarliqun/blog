@@ -3,11 +3,13 @@
   --text-color: #000000;
   --text-color2: #59636e;
   --text-color3: #555666;
+
   --text-hover: #2791ff;
   --style-border: 1px solid #e3e8f7;
   --home-border: 1px solid rgb(209, 217, 224);
   --background: #f7f8fa;
   --card-background: #ffffff;
+  --code-background: #2d2d2d;
   --article-border-bottom: #f0f0f2;
   --box-shadow: 0 8px 16px -4px #2c2d300c;
   --style-skeleton: #e0e0e0;
@@ -23,6 +25,7 @@
   --text-hover: #4fa3ff;
   --background: #1f2024;
   --card-background: #26282d;
+  --code-background: #1e1f22;
   --card-hover: #2b2e33;
   --style-border: 1px solid rgba(255, 255, 255, 0.06);
   --home-border: 1px solid rgba(255, 255, 255, 0.05);
