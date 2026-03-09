@@ -104,6 +104,24 @@ VMdPreview.use(createTodoListPlugin())
 Vue.use(VMdPreview)
 import { getUserInfo } from '@/utils/auth'
 export default {
+  metaInfo() {
+    // 优先用异步获取的标题，无数据时用默认值
+    const pageTitle = this.formData.title ? `${this.formData.title} - 灵光一刻` : '灵光一刻 - 技术博客'
+    // 可以根据 formData 动态生成 description/keywords（比如从文章摘要/标签生成）
+    const pageDesc = this.formData.summary || '专注分享Java后端、前端开发、系统运维、面试经验等技术干货...'
+    const pageKeywords = this.formData.tagsList ? this.formData.tagsList.join(',') : 'Java,Vue,后端开发,面试总结'
+
+    return {
+      title: pageTitle,
+      meta: [
+        { name: 'description', content: pageDesc },
+        { name: 'keywords', content: pageKeywords },
+        // 可选：补充 og 标签，优化社交分享
+        { property: 'title', content: this.formData.title || '灵光一刻' },
+        { property: 'description', content: pageDesc }
+      ]
+    }
+  },
   filters: {
     formatDate(value) {
       console.log(value)
