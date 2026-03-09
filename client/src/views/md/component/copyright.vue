@@ -18,7 +18,7 @@
   padding: 14px 16px;
   background: var(--card-background);
   border-radius: 12px;
-  border: 0.4px solid #d1d9e0;
+  border: var(--tag-border);
   counter-reset: notice-counter;
 }
 

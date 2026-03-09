@@ -3,7 +3,6 @@
   --text-color: #000000;
   --text-color2: #59636e;
   --text-color3: #555666;
-
   --text-hover: #2791ff;
   --style-border: 1px solid #e3e8f7;
   --home-border: 1px solid rgb(209, 217, 224);
@@ -16,6 +15,10 @@
   --tag-background: rgba(56, 139, 253, 0.05);
   --tag-border: 1px solid rgba(56, 139, 253, 0.15);
   --tag-text: #7a7f87;
+  --directory-default-text: #94a3b8;
+  --directory-text: #1890ff;
+  --directory-background: #fafcff;
+  --directory-border: #f4f4f4;
 }
 /* 黑暗模式 */
 [data-theme='dark'] {
@@ -35,6 +38,10 @@
   --tag-text: rgb(100, 149, 224, 0.8);
   --tag-background: rgba(79, 163, 255, 0.12);
   --tag-border: 1px solid rgba(79, 163, 255, 0.28);
+  --directory-default-text: #9ca3af;
+  --directory-text: #1890ff;
+  --directory-background: #2f3238;
+  --directory-border: #3a3f45;
 }
 /* 统一改变模式之后，需要一个过度效果 */
 * {

@@ -135,7 +135,7 @@ super-sidebar-left {
   padding: 1rem 2rem;
   border-radius: 12px;
   background: var(--card-background);
-  border: 1px solid #e3e8f7;
+  border: var(--style-border);
   width: calc(100% - 300px);
   align-self: flex-start;
   animation: slide-in 0.6s 0.1s backwards;
@@ -185,7 +185,7 @@ super-header div {
 // 目录样式
 .card-shadow {
   box-shadow: 0 8px 16px -4px rgba(44, 45, 48, 0.0470588235);
-  border: 1px solid #e3e8f7;
+  border: var(--style-border);
   background: var(--card-background);
   border-radius: 12px;
   display: flex;
@@ -220,7 +220,7 @@ super-header div {
   .toc-list-container {
     line-height: 28px;
     border: 1px solid transparent;
-    color: #94a3b8;
+    color: var(--directory-default-text);
     font-size: 14px;
     transition: font-size 0.2s ease-in-out;
     cursor: pointer;
@@ -229,19 +229,19 @@ super-header div {
     &.active {
       font-weight: 700;
       line-height: 28px;
-      color: #1890ff;
+      color: var(--directory-text);
       border-radius: 4px;
-      background-color: #fafcff;
-      border: 1px solid #f4f4f4;
+      background-color: var(--directory-background);
+      border: 1px solid var(--directory-border);
       margin-right: 4px;
     }
 
     &:hover {
-      color: #1890ff;
+      color: var(--directory-text);
       cursor: pointer;
       border-radius: 4px;
-      background-color: #fafcff;
-      border: 1px solid #f4f4f4;
+      background-color: var(--directory-background);
+      border: 1px solid var(--directory-border);
       margin-right: 4px;
     }
   }
