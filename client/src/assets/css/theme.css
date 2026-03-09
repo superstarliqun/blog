@@ -22,7 +22,7 @@
 }
 /* 黑暗模式 */
 [data-theme='dark'] {
-  --text-color: #e7e8eb;
+  --text-color: #bcbec4;
   --text-color2: #a7acb5;
   --text-color3: #6f737b;
   --text-hover: #4fa3ff;
