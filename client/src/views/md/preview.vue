@@ -10,17 +10,10 @@
         </div>
         <h1 class="post-title">{{ formData.title }}</h1>
         <div class="post-mate">
-          <span><i class="iconfont icon-Word" />{{ countWords() }}</span>
-          <span><i class="iconfont icon-daohang_daohanglan_xungeng" />阅读{{
-            Math.floor(countWords() / 500)
-            }}分钟</span>
-          <span><i class="iconfont icon-riqi" />
-            <!-- {{ formData.createTime.slice(0, 10) }} -->
-            {{ formData.createTime | formatDate }}
-          </span>
-          <span @click="fixedScroll('comment_box')"><i class="iconfont icon-pinglun1" />{{ comment }}</span>
-          <span v-if="showEdit" class="edit-button" @click="toEdit(formData.id)"><i
-              class="iconfont icon-bianji" /></span>
+          <span><i class="iconfont icon-zishu" />{{ countWords() }}</span>
+          <span><i class="iconfont icon-time" />{{ formData.createTime | formatDate }}</span>
+          <span @click="fixedScroll('comment_box')"><i class="iconfont icon-comment1" />{{ comment }}</span>
+          <span v-if="showEdit" class="edit-button" @click="toEdit(formData.id)"><i class="iconfont icon-edit" /></span>
         </div>
       </div>
     </super-post-header>

@@ -86,20 +86,19 @@ super-post-header {
 
     .post-mate {
       display: flex;
-      gap: 24px;
+      gap: 12px;
       line-height: 1;
-      font-size: 16px;
+      font-size: 12px;
 
       span {
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 2px;
       }
 
       i {
-        font-size: 16px;
-      }
-
-      .iconfont:before {
-        margin-right: 2px;
+        font-size: 14px;
       }
     }
   }
