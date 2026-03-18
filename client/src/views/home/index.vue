@@ -61,10 +61,9 @@
                 </div>
               </div>
             </li>
-            <li v-if="loadingShow">
-              <el-skeleton class="loading-icon" :rows="3" animated />
+            <li v-if="loadingShow" class="loading-container">
+              <Loading />
             </li>
-
           </ul>
           <div v-else class="source">
             <el-skeleton :rows="6" />
@@ -93,6 +92,7 @@ import Love from './component/love'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import Loading from '@/components/loading/index.vue'
 dayjs.extend(relativeTime)
 dayjs.locale('zh-cn')
 export default {
@@ -109,7 +109,7 @@ export default {
       return dayjs(value).format('YYYY.MM.DD')
     }
   },
-  components: { Page, Blogger, Category, Tags, Love },
+  components: { Page, Blogger, Category, Tags, Love, Loading },
   mixins: [listMixin],
   data() {
     return {
@@ -145,9 +145,7 @@ export default {
     // 获取文章列表 支持分页参数
     requestData() {
       const abc = Number(this.$route.params.id)
-      if (isNaN(abc)) {
-        this.currentPage = 1
-      } else {
+      if (!isNaN(abc)) {
         this.currentPage = abc
       }
       this.loadingShow = true
@@ -210,6 +208,7 @@ export default {
     loadMoreData() {
       if (this.tableData.length < this.total) {
         this.currentPage++ // Mixin 里的变量
+        console.log('loadMoreData', this.currentPage)
         this.requestData()
       }
     },
@@ -488,14 +487,6 @@ export default {
     padding: 0 8px;
   }
 }
-
-// 文章列表下#分类悬浮效果
-// .article-item-category::before {
-//   padding-right: 8px;
-//   content: '#';
-//   font-size: 12px;
-//   opacity: 0.4;
-// }
 
 .article-item-category:hover {
   cursor: pointer;
@@ -919,6 +910,14 @@ export default {
   #pagination {
     display: none;
   }
+
+  // 加载动画
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
 }
 
 .love-container {

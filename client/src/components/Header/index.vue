@@ -1,13 +1,8 @@
 <template>
   <div class="main-header">
     <header class="header-wrapper">
-      <!-- 新增汉堡按钮 -->
-      <div v-show="!isMenuOpen" class="hamburger" @click="toggleMenu">
-        <i class="iconfont icon-hanbaocaidan" />
-      </div>
       <h1 class="font-logo">
         <span class="text-content">Ling Guang</span>
-        <!-- <i class="iconfont icon-home" /> -->
       </h1>
       <div v-show="isMenuOpen" class="menu-mask" @click="isMenuOpen = false" />
       <ul class="navbar" :class="{ 'show-menu': isMenuOpen }">
@@ -80,26 +75,26 @@ export default {
         event.preventDefault()
       }
       // 检查是否按下 Ctrl 或 Command 以及 D
-      if ((event.ctrlKey || event.metaKey) && event.key === 'd') {
-        this.handleTheme()
-        event.preventDefault()
-      }
+      // if ((event.ctrlKey || event.metaKey) && event.key === 'd') {
+      //   this.handleTheme()
+      //   event.preventDefault()
+      // }
       // 检查是否按下 Ctrl 或 Command 以及 M
-      if ((event.ctrlKey || event.metaKey) && event.key === 'm') {
-        this.controlOpen = !this.controlOpen
-        event.preventDefault()
-      }
+      // if ((event.ctrlKey || event.metaKey) && event.key === 'm') {
+      //   this.controlOpen = !this.controlOpen
+      //   event.preventDefault()
+      // }
     },
     // 使用vuex进行切换主题
-    handleTheme() {
-      this.getTheme().then(theme => {
-        if (theme === 'light') {
-          this.setTheme('dark')
-        } else {
-          this.setTheme('light')
-        }
-      })
-    },
+    // handleTheme() {
+    //   this.getTheme().then(theme => {
+    //     if (theme === 'light') {
+    //       this.setTheme('dark')
+    //     } else {
+    //       this.setTheme('light')
+    //     }
+    //   })
+    // },
     clickSearch() {
       this.searchOpen = !this.searchOpen
     },
@@ -206,27 +201,6 @@ ul {
       background-color: transparent;
       padding: 0;
     }
-  }
-}
-
-// 新增：汉堡按钮样式
-.hamburger {
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  display: none; // 桌面端隐藏
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  right: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
   }
 }
 
@@ -338,35 +312,6 @@ ul {
         cursor: pointer;
       }
     }
-
-    // 右侧
-    // .nav-right {
-    //   display: flex;
-    //   align-items: center;
-
-    //   .create-center {
-    //     display: inline-block;
-    //     line-height: 1;
-    //     white-space: nowrap;
-    //     border: 1px solid #fff;
-    //     color: #fff;
-    //     text-align: center;
-    //     box-sizing: border-box;
-    //     font-weight: 500;
-    //     padding: 10px 16px;
-    //     font-size: 14px;
-    //     border-radius: 4px;
-    //     margin-left: 16px;
-    //     cursor: pointer;
-    //   }
-
-    //   // 未登录样式
-    //   .no-login {
-    //     text-align: center;
-    //     justify-content: center;
-    //     display: flex;
-    //   }
-    // }
   }
 }
 
@@ -550,11 +495,6 @@ ul {
   .header-wrapper {
     justify-content: space-between !important; // 汉堡按钮和头像（如果显示）分列两侧
 
-    // 显示汉堡按钮
-    .hamburger {
-      display: flex !important;
-    }
-
     .menu-mask {
       position: fixed;
       top: 48px;
@@ -599,10 +539,13 @@ ul {
 
     // 移动端头像容器调整（可选，目标网站可能隐藏）
     .nav-right {
-      display: none !important;
+
+      // 隐藏控制台
+      .icon-application {
+        display: none !important;
+      }
 
       span:first-child {
-        // display: none; // 隐藏搜索图标
         margin-right: 58px;
       }
     }
@@ -635,17 +578,20 @@ ul {
     display: none !important;
   }
 
-  .nav-right {
-    // display: none;
-    right: 4.5rem !important;
-  }
-
   // 设置半透明
   .show-menu {
     /* 黑色 (0, 0, 0), 透明度 0.5 (50%) */
     background-color: rgba(44, 59, 65, 0.9) !important;
     /* 确保内容与背景层叠 */
     z-index: 10 !important;
+  }
+
+  .main-header .header-wrapper .font-logo {
+    left: 20px;
+  }
+
+  .main-header .header-wrapper .nav-right {
+    right: 20px;
   }
 }
 </style>

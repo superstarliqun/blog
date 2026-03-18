@@ -17,7 +17,6 @@
             <div class="center-container">
               <span class="container-title">RSS订阅消息</span>
               <Transition name="fade">
-                <!-- 关键修改1：添加外层容器，固定宽度 -->
                 <div v-if="list.length > 0" class="rss-content-wrapper">
                   <ul>
                     <li v-for="(item, index) in list" :key="index" @click="handleLink(item)">
@@ -29,7 +28,6 @@
                     </li>
                   </ul>
                 </div>
-                <!-- 关键修改2：Loading也放在相同宽度的容器中 -->
                 <div v-else class="rss-content-wrapper">
                   <Loading ref="loadingContainer" />
                 </div>
@@ -37,6 +35,22 @@
             </div>
             <div class="comment-container">
               <span class="container-title">最新评论</span>
+              <Transition name="fade">
+                <div v-if="commentList.length > 0" class="rss-content-wrapper">
+                  <ul>
+                    <li v-for="(item, index) in commentList" :key="index">
+                      <span class="rss-time">{{ dayjs(item.pubDate).format('MMM DD, YYYY') }}</span>
+                      <div class="rss-title">
+                        <div class="rss-title-text">{{ item.comment }}</div>
+                        <span class="rss-icon" />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div v-else class="rss-content-wrapper">
+                  <Loading ref="loadingContainer" />
+                </div>
+              </Transition>
             </div>
           </div>
           <div class="control-container">
@@ -66,9 +80,13 @@ export default {
   components: { Loading },
   data() {
     return {
+      dayjs,
       runningNow: false,
       list: [],
-      dayjs
+      commentList: [
+        { nikeName: '张三', time: new Date(), comment: '这个评论可视有点问题呢' }
+      ]
+
     }
   },
   mounted() {
@@ -84,24 +102,26 @@ export default {
   },
   methods: {
     ...mapActions('app', ['setTheme', 'getTheme']),
+    // 查询基础信息
     requestData() {
       this.$get(this.$urls.rss).then((res) => {
-        setTimeout(() => {
-          this.list = res.data
-        }, 1000)
+        this.list = res.data
       })
     },
     handleLink(item) {
       window.open(item.link, '_blank', 'noopener,noreferrer')
     },
+    // 关闭
     handleClose() {
       this.$emit('close')
     },
+    // 监听esc退出弹窗
     handleKeyboard(e) {
       if (e.key === 'Escape' || e.keyCode === 27) {
         this.handleClose()
       }
     },
+    // 主题模式切换
     handleTheme() {
       this.getTheme().then(theme => {
         if (theme === 'light') {
@@ -111,9 +131,7 @@ export default {
         }
       })
     },
-    handleCurrentPage() {
-      console.log(123)
-    },
+    // 载体部署
     deploy() {
       if (this.runningNow) return
       this.runningNow = true
@@ -126,6 +144,7 @@ export default {
         this.runningNow = false
       })
     },
+    // 路径跳转
     toPath() {
       this.$get(this.$urls.getUserInfo).then((res) => {
         if (res.code === 0) {
@@ -181,9 +200,10 @@ export default {
 
     .modal-content {
       min-width: 60rem;
-      background: var(--card-background);
+      height: 530px;
       padding: 20px 18px;
       border-radius: 12px;
+      background: var(--card-background);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 
       .mac-control-bar {
@@ -241,7 +261,7 @@ export default {
         padding: 20px;
         border-radius: 6px;
         position: relative;
-        height: 292px;
+        height: 300px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -331,6 +351,7 @@ export default {
       .comment-container {
         flex: 1;
         font-size: 16px;
+        height: 300px;
         border: var(--style-border);
         margin-top: 24px;
         padding: 20px;
@@ -344,6 +365,17 @@ export default {
           font-weight: 600;
           padding: 0 16px;
           background-color: var(--card-background);
+        }
+
+        ul {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+
+          li {
+            display: flex;
+            gap: 10px;
+          }
         }
       }
     }

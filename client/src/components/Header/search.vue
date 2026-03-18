@@ -17,9 +17,8 @@
             @input="debouncedSearch">
           <ul class="result-container">
             <li v-for="(item, index) in queryData" :key="index" class="result_item"
-              :class="{ active: index === selectedIndex }">
-              <p class="result_item_title" @click="handleTo(item)"
-                v-html="item.highlights?.title?.[0] || item.title || '暂无标题'" />
+              :class="{ active: index === selectedIndex }" @click="handleTo(item)">
+              <p class="result_item_title" v-html="item.highlights?.title?.[0] || item.title || '暂无标题'" />
               <div v-for="(item3, index3) in item.highlights.contentText" :key="index3">
                 <span v-html="item3" />
               </div>
@@ -313,7 +312,7 @@ export default {
 
         .result_item {
           font-size: 14px;
-          color: #606266;
+          color: var(--text-color2);
           padding: 10px 12px;
           border-radius: 8px;
           transition: all 0.15s ease;
@@ -333,7 +332,7 @@ export default {
             font-size: 16px;
             line-height: 1.2;
             font-weight: 600;
-            color: black;
+            color: var(--text-color);
             cursor: pointer;
             cursor: pointer;
           }
