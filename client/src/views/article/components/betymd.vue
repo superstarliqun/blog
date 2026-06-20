@@ -1,7 +1,7 @@
 <template>
   <div class="details">
     <Editor v-if="display ==='edit'" class="editos" :value="value" :plugins="plugins" :locale="zhHans" :upload-images="uploadImage" @change="handleChange" />
-    <Viewer v-else class="viewer" :tabindex="2" :sanitize="23" :value="value" :plugins="plugins" :locale="zhHans"></Viewer>
+    <Viewer v-else class="viewer" :tabindex="2" :sanitize="23" :value="value" :plugins="plugins" :locale="zhHans" />
   </div>
 </template>
 

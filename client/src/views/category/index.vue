@@ -3,7 +3,8 @@
     <div class="container">
       <div class="category-top-category fixed-top">
         <a v-for="(item, index) in list" :key="index" :class="{ 'active-selected': activeName === item.categoryName }"
-          @click="handleSearchValue(item)">
+           @click="handleSearchValue(item)"
+        >
           {{ item.categoryName }}
         </a>
       </div>
@@ -39,6 +40,13 @@
       <div v-else class="transition2">
         <el-skeleton :rows="20" animated />
       </div>
+      <div v-if="total > 0" class="pagination-wrapper">
+        <Page
+          :total="total"
+          :current-page="currentPage"
+          @current-change="handlePageChange"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -46,8 +54,10 @@
 <script>
 import CryptoJS from 'crypto-js'
 import listMixin from '@/utils/mixins/listMixin'
+import Page from '@/views/home/component/page.vue'
 export default {
   name: 'Category',
+  components: { Page },
   mixins: [listMixin],
   data() {
     return {
@@ -128,6 +138,12 @@ export default {
           params: { id: row.id }
         })
       }
+    },
+    // 分页切换
+    handlePageChange(val) {
+      this.currentPage = val
+      this.requestArticleList(this.activeId || 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 }

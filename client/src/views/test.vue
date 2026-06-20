@@ -37,6 +37,11 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapGetters({
+      language: 'language'
+    })
+  },
   methods: {
     // vuex测试
     checkName() {
@@ -58,11 +63,6 @@ export default {
     loginout() {
       this.$store.commit('LOGINOUT')
     }
-  },
-  computed: {
-    ...mapGetters({
-      language: 'language'
-    })
   }
 }
 </script>

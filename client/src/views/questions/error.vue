@@ -5,18 +5,15 @@
       <el-button type="primary" plain @click="requestData">查询</el-button>
     </h1>
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="id" label="编号" width="80"> </el-table-column>
+      <el-table-column prop="id" label="编号" width="80" />
       <el-table-column
         prop="questionId"
         label="题目编号"
         show-overflow-tooltip
         width="80"
-      >
-      </el-table-column>
-      <el-table-column prop="question" label="题目" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column prop="createdAt" label="创建时间" width="170">
-      </el-table-column>
+      />
+      <el-table-column prop="question" label="题目" show-overflow-tooltip />
+      <el-table-column prop="createdAt" label="创建时间" width="170" />
       <el-table-column prop="updatedAt" label="更新时间" width="170">
         <template slot-scope="scope">
           {{ scope.row.updatedAt || '-' }}
@@ -49,8 +46,7 @@
       layout="prev, pager, next"
       :total="total"
       @current-change="handleChange"
-    >
-    </el-pagination>
+    />
     <!-- 答案弹出框 -->
     <el-dialog
       title="错题弹出框"
@@ -65,9 +61,7 @@
       </span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
   </super-container>

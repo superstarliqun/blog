@@ -1,6 +1,6 @@
 <template>
   <div class="tree-drag">
-    <el-tree ref="tree2" :data="treeData2" class="tree" node-key="id" draggable default-expand-all :allow-drop="returnTrue"></el-tree>
+    <el-tree ref="tree2" :data="treeData2" class="tree" node-key="id" draggable default-expand-all :allow-drop="returnTrue" />
   </div>
 </template>
 

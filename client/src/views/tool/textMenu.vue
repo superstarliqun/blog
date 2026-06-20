@@ -1,5 +1,5 @@
 <template>
-  <div @contextmenu.prevent="onContextmenu"></div>
+  <div @contextmenu.prevent="onContextmenu" />
 </template>
 
 <script>

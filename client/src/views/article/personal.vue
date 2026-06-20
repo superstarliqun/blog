@@ -20,9 +20,7 @@
                 </div>
               </div>
               <span class="show-button edit" @click="gotoEdit(item)">编辑</span>
-              <span class="show-button remove" @click="remove(item.id)"
-                >删除</span
-              >
+              <span class="show-button remove" @click="remove(item.id)">删除</span>
             </div>
           </li>
         </ul>
@@ -35,9 +33,9 @@
           :distance="0"
           @infinite="loadMoreData"
         >
-          <div slot="spinner"></div>
-          <div slot="no-more"></div>
-          <div slot="no-results"></div>
+          <div slot="spinner" />
+          <div slot="no-more" />
+          <div slot="no-results" />
         </infinite-loading>
       </div>
       <div class="wu-home-right">
@@ -46,9 +44,9 @@
             <div class="group-image">
               <img
                 src="https://wx.zsxq.com/dweb2/assets/images/group_bg/1.png"
-              />
+              >
             </div>
-            <div class="shadow"></div>
+            <div class="shadow" />
             <div class="owner-info">
               <div class="name">简单小屋的博客</div>
               <div class="date">卬明月而太息兮，步列星而极明</div>
@@ -56,22 +54,14 @@
             <img
               class="avatar"
               src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"
-            />
+            >
           </div>
           <div class="group-text">
-            <a href="https://space.bilibili.com/352095550"
-              ><i class="iconfont icon-bilibili-line"></i
-            ></a>
-            <a href="https://blog.csdn.net/liqun_super"
-              ><i class="iconfont icon-csdn"></i
-            ></a>
-            <a href="#"><i class="iconfont icon-QQ"></i></a>
-            <a href="https://github.com/superstarliqun"
-              ><i class="iconfont icon-github-fill"></i
-            ></a>
-            <a href="https://www.zhihu.com/people/superstarliqun"
-              ><i class="iconfont icon-shejiaotubiao"></i
-            ></a>
+            <a href="https://space.bilibili.com/352095550"><i class="iconfont icon-bilibili-line" /></a>
+            <a href="https://blog.csdn.net/liqun_super"><i class="iconfont icon-csdn" /></a>
+            <a href="#"><i class="iconfont icon-QQ" /></a>
+            <a href="https://github.com/superstarliqun"><i class="iconfont icon-github-fill" /></a>
+            <a href="https://www.zhihu.com/people/superstarliqun"><i class="iconfont icon-shejiaotubiao" /></a>
           </div>
         </div>
       </div>

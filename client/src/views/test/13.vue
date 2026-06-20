@@ -8,10 +8,10 @@
       </div>
       <p class="tCenter gSize bold black pt10">MBTI职业性格测评报告</p>
     </div>
-    <p class="line"></p>
+    <p class="line" />
     <!-- 图表展示 -->
     <div class="flex-between">
-      <div></div>
+      <div />
       <!-- MBTI倾向示意图 -->
       <div class="charts">
         <p class="bold tCenter dSize">MBTI倾向示意图</p>
@@ -35,7 +35,7 @@
     <!-- 维度分析 -->
     <div class="mt20">
       <div class="flex">
-        <p class="title_line"></p>
+        <p class="title_line" />
         <p class="bold bSize pl10">维度分析</p>
       </div>
       <div class="pl15 black2 sSize">
@@ -90,7 +90,7 @@
     <!-- 性格类型维度分析 -->
     <div class="mt20">
       <div class="flex">
-        <p class="title_line"></p>
+        <p class="title_line" />
         <p class="bold bSize pl10">性格类型维度分析</p>
       </div>
       <div class="pl15 black2 sSize">
@@ -106,43 +106,43 @@
     <!-- 性格优点 -->
     <div class="mt20">
       <div class="flex">
-        <p class="title_line"></p>
+        <p class="title_line" />
         <p class="bold bSize pl10">性格优点</p>
       </div>
       <div class="pl15 black2 sSize">
         <p class="pt10">{{ mbtiMany.advantageTop }}</p>
-        <div id="container" v-html="mbtiMany.advantageContent"></div>
+        <div id="container" v-html="mbtiMany.advantageContent" />
         <p class="pt5">{{ mbtiMany.advantageEnd }}</p>
       </div>
     </div>
     <!--性格可能的不足  -->
     <div class="mt20">
       <div class="flex">
-        <p class="title_line"></p>
+        <p class="title_line" />
         <p class="bold bSize pl10">性格可能的不足</p>
       </div>
       <div class="pl15 black2 sSize">
         <p class="pt10">{{ mbtiMany.dimensionTop }}</p>
-        <div id="container" v-html="mbtiMany.disadvantageContent"></div>
+        <div id="container" v-html="mbtiMany.disadvantageContent" />
         <p class="pt5">{{ mbtiMany.dimensionEnd }}</p>
       </div>
     </div>
     <!-- 职场工作 -->
     <div class="mt20">
       <div class="flex">
-        <p class="title_line"></p>
+        <p class="title_line" />
         <p class="bold bSize pl10">职场工作</p>
       </div>
       <div class="pl15 black2 sSize">
         <p class="pt10">{{ mbtiMany.workTop }}</p>
-        <div id="container" v-html="mbtiMany.workContent"></div>
+        <div id="container" v-html="mbtiMany.workContent" />
         <p class="pt5">{{ mbtiMany.workEnd }}</p>
       </div>
     </div>
     <!-- 建议 -->
     <div class="mt20">
       <div class="flex">
-        <p class="title_line"></p>
+        <p class="title_line" />
         <p class="bold bSize pl10">建议</p>
       </div>
       <p class="pl15 pt10 black2 sSize">

@@ -26,7 +26,8 @@
       <!-- 左侧侧边栏 -->
       <el-aside>
         <el-menu :default-active="$route.path" class="el-menu-vertical-demo" unique-opened router
-          @select="handleSelect">
+                 @select="handleSelect"
+        >
           <el-submenu v-for="item in menulist" :key="item.id" :index="item.id + ''">
             <!-- 第一级 -->
             <template slot="title">

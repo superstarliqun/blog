@@ -294,7 +294,7 @@ ul {
       height: 100%;
       list-style-type: none;
       display: flex;
-      gap: 35px;
+      gap: 28px;
       justify-content: center;
 
       li {

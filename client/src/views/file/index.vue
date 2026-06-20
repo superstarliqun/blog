@@ -3,7 +3,7 @@
     <!-- 顶部操作栏 -->
     <div class="top-bar">
       <h2 class="title">
-        <i class="el-icon-cloud-upload"></i> 多渠道文件上传系统
+        <i class="el-icon-cloud-upload" /> 多渠道文件上传系统
       </h2>
       <div class="operate-group">
         <el-button type="primary" icon="el-icon-setting" class="config-btn" @click="openConfigModal">
@@ -19,19 +19,19 @@
     <div class="channel-selector">
       <el-radio-group v-model="selectedChannel" class="channel-group">
         <el-radio label="local" class="channel-item">
-          <i class="el-icon-folder"></i>
+          <i class="el-icon-folder" />
           <span>本地存储</span>
         </el-radio>
         <el-radio label="ftp" class="channel-item">
-          <i class="el-icon-server"></i>
+          <i class="el-icon-server" />
           <span>FTP服务器</span>
         </el-radio>
         <el-radio label="minio" class="channel-item">
-          <i class="el-icon-cloud"></i>
+          <i class="el-icon-cloud" />
           <span>MinIO</span>
         </el-radio>
         <el-radio label="qiniu" class="channel-item">
-          <i class="el-icon-globe"></i>
+          <i class="el-icon-globe" />
           <span>七牛云</span>
         </el-radio>
       </el-radio-group>
@@ -40,9 +40,10 @@
     <!-- 分片上传核心区域 -->
     <div class="upload-core">
       <el-upload ref="uploadRef" :auto-upload="false" :file-list="fileList" :on-change="handleFileChange"
-        :on-remove="handleFileRemove" :before-upload="handleBeforeUpload" class="upload-area" drag multiple>
+                 :on-remove="handleFileRemove" :before-upload="handleBeforeUpload" class="upload-area" drag multiple
+      >
         <div class="upload-mask">
-          <i class="el-icon-upload2 upload-icon"></i>
+          <i class="el-icon-upload2 upload-icon" />
           <div class="upload-text">
             <p class="main-text">拖拽文件至此处上传</p>
             <p class="sub-text">
@@ -59,7 +60,7 @@
           <el-table-column label="文件名" width="300">
             <template slot-scope="scope">
               <div class="file-name">
-                <i :class="getfileIcon(scope.row.raw.type)"></i>
+                <i :class="getfileIcon(scope.row.raw.type)" />
                 <span>{{ scope.row.name }}</span>
               </div>
             </template>
@@ -67,7 +68,7 @@
           <el-table-column label="大小" width="120">
             <template slot-scope="scope">{{
               formatFileSize(scope.row.size)
-              }}</template>
+            }}</template>
           </el-table-column>
           <el-table-column label="状态" width="120">
             <template slot-scope="scope">
@@ -79,7 +80,8 @@
           <el-table-column label="进度" width="200">
             <template slot-scope="scope">
               <el-progress v-if="scope.row.status === 'uploading'" :percentage="scope.row.progress" size="small"
-                status="success"></el-progress>
+                           status="success"
+              />
               <span v-else-if="scope.row.status === 'success'">100%</span>
               <span v-else>-</span>
             </template>
@@ -87,13 +89,16 @@
           <el-table-column label="操作" width="180">
             <template slot-scope="scope">
               <el-button v-if="scope.row.status === 'waiting'" icon="el-icon-play" size="mini"
-                @click="startUpload(scope.row)"></el-button>
+                         @click="startUpload(scope.row)"
+              />
               <el-button v-if="scope.row.status === 'uploading'" icon="el-icon-pause" size="mini"
-                @click="pauseUpload(scope.row)"></el-button>
+                         @click="pauseUpload(scope.row)"
+              />
               <el-button v-if="scope.row.status === 'paused'" icon="el-icon-play" size="mini"
-                @click="resumeUpload(scope.row)"></el-button>
-              <el-button icon="el-icon-delete" size="mini" type="text" @click="handleFileRemove(scope.row)"></el-button>
-              <el-button icon="el-icon-info" size="mini" type="text" @click="showFileHash(scope.row)"></el-button>
+                         @click="resumeUpload(scope.row)"
+              />
+              <el-button icon="el-icon-delete" size="mini" type="text" @click="handleFileRemove(scope.row)" />
+              <el-button icon="el-icon-info" size="mini" type="text" @click="showFileHash(scope.row)" />
             </template>
           </el-table-column>
         </el-table>
@@ -111,10 +116,10 @@
           清空列表
         </el-button>
         <el-select v-model="chunkSize" placeholder="分片大小" size="mini" class="chunk-size-select">
-          <el-option label="1MB" value="1048576"></el-option>
-          <el-option label="5MB" value="5242880"></el-option>
-          <el-option label="10MB" value="10485760"></el-option>
-          <el-option label="20MB" value="20971520"></el-option>
+          <el-option label="1MB" value="1048576" />
+          <el-option label="5MB" value="5242880" />
+          <el-option label="10MB" value="10485760" />
+          <el-option label="20MB" value="20971520" />
         </el-select>
       </div>
     </div>
@@ -125,87 +130,87 @@
         <el-tab-pane label="FTP配置" name="ftp">
           <el-form :model="config.ftp" :rules="configRules.ftp" label-width="140px">
             <el-form-item label="服务器地址" prop="host">
-              <el-input v-model="config.ftp.host" placeholder="输入FTP服务器IP或域名"></el-input>
+              <el-input v-model="config.ftp.host" placeholder="输入FTP服务器IP或域名" />
             </el-form-item>
             <el-form-item label="端口" prop="port">
-              <el-input v-model="config.ftp.port" type="number" min="1" max="65535"></el-input>
+              <el-input v-model="config.ftp.port" type="number" min="1" max="65535" />
             </el-form-item>
             <el-form-item label="用户名" prop="username">
-              <el-input v-model="config.ftp.username" placeholder="输入登录用户名"></el-input>
+              <el-input v-model="config.ftp.username" placeholder="输入登录用户名" />
             </el-form-item>
             <el-form-item label="密码" prop="password">
-              <el-input v-model="config.ftp.password" type="password"></el-input>
+              <el-input v-model="config.ftp.password" type="password" />
             </el-form-item>
             <el-form-item label="远程路径" prop="remotePath">
-              <el-input v-model="config.ftp.remotePath" placeholder="例如：/data/upload/"></el-input>
+              <el-input v-model="config.ftp.remotePath" placeholder="例如：/data/upload/" />
             </el-form-item>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="MinIO配置" name="minio">
           <el-form :model="config.minio" :rules="configRules.minio" label-width="140px">
             <el-form-item label="Endpoint" prop="endpoint">
-              <el-input v-model="config.minio.endpoint" placeholder="MinIO服务地址"></el-input>
+              <el-input v-model="config.minio.endpoint" placeholder="MinIO服务地址" />
             </el-form-item>
             <el-form-item label="Access Key" prop="accessKey">
-              <el-input v-model="config.minio.accessKey"></el-input>
+              <el-input v-model="config.minio.accessKey" />
             </el-form-item>
             <el-form-item label="Secret Key" prop="secretKey">
-              <el-input v-model="config.minio.secretKey" type="password"></el-input>
+              <el-input v-model="config.minio.secretKey" type="password" />
             </el-form-item>
             <el-form-item label="Bucket名称" prop="bucket">
-              <el-input v-model="config.minio.bucket"></el-input>
+              <el-input v-model="config.minio.bucket" />
             </el-form-item>
             <el-form-item label="HTTPS协议">
-              <el-switch v-model="config.minio.useHttps"></el-switch>
+              <el-switch v-model="config.minio.useHttps" />
             </el-form-item>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="七牛云配置" name="qiniu">
           <el-form :model="config.qiniu" :rules="configRules.qiniu" label-width="140px">
             <el-form-item label="Access Key" prop="accessKey">
-              <el-input v-model="config.qiniu.accessKey"></el-input>
+              <el-input v-model="config.qiniu.accessKey" />
             </el-form-item>
             <el-form-item label="Secret Key" prop="secretKey">
-              <el-input v-model="config.qiniu.secretKey" type="password"></el-input>
+              <el-input v-model="config.qiniu.secretKey" type="password" />
             </el-form-item>
             <el-form-item label="存储空间" prop="bucket">
-              <el-input v-model="config.qiniu.bucket"></el-input>
+              <el-input v-model="config.qiniu.bucket" />
             </el-form-item>
             <el-form-item label="存储区域" prop="region">
               <el-select v-model="config.qiniu.region">
-                <el-option label="华东(z0)" value="z0"></el-option>
-                <el-option label="华北(z1)" value="z1"></el-option>
-                <el-option label="华南(z2)" value="z2"></el-option>
-                <el-option label="北美(na0)" value="na0"></el-option>
-                <el-option label="东南亚(as0)" value="as0"></el-option>
+                <el-option label="华东(z0)" value="z0" />
+                <el-option label="华北(z1)" value="z1" />
+                <el-option label="华南(z2)" value="z2" />
+                <el-option label="北美(na0)" value="na0" />
+                <el-option label="东南亚(as0)" value="as0" />
               </el-select>
             </el-form-item>
             <el-form-item label="自定义域名" prop="domain">
-              <el-input v-model="config.qiniu.domain" placeholder="可选"></el-input>
+              <el-input v-model="config.qiniu.domain" placeholder="可选" />
             </el-form-item>
           </el-form>
         </el-tab-pane>
         <el-tab-pane label="上传设置" name="upload">
           <el-form :model="uploadSettings" label-width="140px">
             <el-form-item label="最大文件大小(GB)">
-              <el-input v-model="uploadSettings.maxFileSize" type="number" min="1" max="100"></el-input>
+              <el-input v-model="uploadSettings.maxFileSize" type="number" min="1" max="100" />
             </el-form-item>
             <el-form-item label="默认分片大小">
               <el-select v-model="uploadSettings.defaultChunkSize">
-                <el-option label="1MB" value="1048576"></el-option>
-                <el-option label="5MB" value="5242880"></el-option>
-                <el-option label="10MB" value="10485760"></el-option>
-                <el-option label="20MB" value="20971520"></el-option>
+                <el-option label="1MB" value="1048576" />
+                <el-option label="5MB" value="5242880" />
+                <el-option label="10MB" value="10485760" />
+                <el-option label="20MB" value="20971520" />
               </el-select>
             </el-form-item>
             <el-form-item label="并发上传数">
-              <el-input v-model="uploadSettings.concurrent" type="number" min="1" max="10"></el-input>
+              <el-input v-model="uploadSettings.concurrent" type="number" min="1" max="10" />
             </el-form-item>
             <el-form-item label="自动秒传检测">
-              <el-switch v-model="uploadSettings.autoQuickUpload"></el-switch>
+              <el-switch v-model="uploadSettings.autoQuickUpload" />
             </el-form-item>
             <el-form-item label="断点续传保留时间(天)">
-              <el-input v-model="uploadSettings.resumeExpire" type="number" min="1" max="30"></el-input>
+              <el-input v-model="uploadSettings.resumeExpire" type="number" min="1" max="30" />
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -218,7 +223,8 @@
 
     <!-- 文件哈希值弹窗 -->
     <el-dialog v-if="currentFile" title="文件哈希信息" :visible.sync="hashModalVisible" width="50%"
-      :close-on-click-modal="false">
+               :close-on-click-modal="false"
+    >
       <div class="hash-info">
         <div class="hash-item">
           <label>文件名称：</label>
@@ -244,7 +250,7 @@
           <label>SHA256：</label>
           <el-tooltip content="点击复制" placement="top">
             <span class="hash-value" @click="copyToClipboard(currentFile.hash.sha256)">{{ currentFile.hash.sha256
-              }}</span>
+            }}</span>
           </el-tooltip>
         </div>
         <div class="hash-item">

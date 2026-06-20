@@ -7,7 +7,8 @@
           <div class="banner-text">
             <a href="#">用腾讯CoDesign打造专属SVG图标库</a>
             <span
-              class="desc jianjie">腾讯CoDesign支持用户上传自定义SVG图标文件，帮助设计团队建立专属图标库。通过简单的拖拽操作即可批量上传SVG文件，支持保留或去除颜色，实现图标资源的统一管理和高效调用。</span>
+              class="desc jianjie"
+            >腾讯CoDesign支持用户上传自定义SVG图标文件，帮助设计团队建立专属图标库。通过简单的拖拽操作即可批量上传SVG文件，支持保留或去除颜色，实现图标资源的统一管理和高效调用。</span>
             <p class="banner-list-footer">
               <span># 2026-01-14 </span>
               <span>Java</span>
@@ -881,6 +882,15 @@ export default {
     }
   }
 }
+// Override el-skeleton colors for dark mode support
+::v-deep .el-skeleton__item {
+  background: var(--style-skeleton);
+}
+
+::v-deep .el-skeleton.is-animated .el-skeleton__item {
+  background: linear-gradient(90deg, var(--style-skeleton) 25%, var(--card-background) 37%, var(--style-skeleton) 63%);
+  background-size: 400% 100%;
+}
 </style>
 
 <style lang="scss" scoped>
@@ -953,5 +963,14 @@ export default {
       font-size: 14px;
     }
   }
+}
+// Override el-skeleton colors for dark mode support
+::v-deep .el-skeleton__item {
+  background: var(--style-skeleton);
+}
+
+::v-deep .el-skeleton.is-animated .el-skeleton__item {
+  background: linear-gradient(90deg, var(--style-skeleton) 25%, var(--card-background) 37%, var(--style-skeleton) 63%);
+  background-size: 400% 100%;
 }
 </style>

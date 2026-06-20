@@ -1,7 +1,7 @@
 <template>
   <div class="progress-container">
-    <div class="progress-left" :style="{ width: '20%' }"></div>
-    <div class="progress-right" :style="{ width: '40%' }"></div>
+    <div class="progress-left" :style="{ width: '20%' }" />
+    <div class="progress-right" :style="{ width: '40%' }" />
   </div>
 </template>
 

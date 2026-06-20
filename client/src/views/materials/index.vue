@@ -11,8 +11,9 @@
 
       <ul class="file-list">
         <li v-for="note in filteredNotes" :key="note.id" :class="{ active: note.id === currentId }"
-          @click="selectNote(note.id)">
-          <div class="accent" :style="{ background: note.color }"></div>
+            @click="selectNote(note.id)"
+        >
+          <div class="accent" :style="{ background: note.color }" />
           <div class="meta">
             <div class="title">{{ note.title }}</div>
             <div class="time">{{ formatTime(note.updatedAt) }}</div>
@@ -44,10 +45,11 @@
       <transition name="fade">
         <section v-if="current" class="editor-body">
           <div class="card">
-            <div v-if="preview" class="preview" v-html="renderedHtml"></div>
+            <div v-if="preview" class="preview" v-html="renderedHtml" />
 
             <textarea v-else v-model="current.content" class="editor-textarea"
-              placeholder="在此输入 Markdown… 支持简单的标题、粗体、斜体、代码、列表与链接。"></textarea>
+                      placeholder="在此输入 Markdown… 支持简单的标题、粗体、斜体、代码、列表与链接。"
+            />
           </div>
         </section>
       </transition>

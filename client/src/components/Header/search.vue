@@ -14,10 +14,12 @@
             </div>
           </div>
           <input ref="searchInput" v-model="input" class="search_input" type="text" placeholder="请输入搜索内容..."
-            @input="debouncedSearch">
+                 @input="debouncedSearch"
+          >
           <ul class="result-container">
             <li v-for="(item, index) in queryData" :key="index" class="result_item"
-              :class="{ active: index === selectedIndex }" @click="handleTo(item)">
+                :class="{ active: index === selectedIndex }" @click="handleTo(item)"
+            >
               <p class="result_item_title" v-html="item.highlights?.title?.[0] || item.title || '暂无标题'" />
               <div v-for="(item3, index3) in item.highlights.contentText" :key="index3">
                 <span v-html="item3" />

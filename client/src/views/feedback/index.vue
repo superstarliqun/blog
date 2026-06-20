@@ -65,7 +65,8 @@
         <!-- 回复输入框 -->
         <div v-if="comment.showReply" class="reply-editor">
           <textarea v-model="comment.replyContent" :placeholder="'回复 @' + comment.author" class="reply-textarea"
-            rows="2" />
+                    rows="2"
+          />
           <div class="reply-actions">
             <button class="btn-cancel" @click="cancelReply(comment)">取消</button>
             <button class="btn-submit" @click="submitReply(comment)">回复</button>
@@ -102,7 +103,8 @@
             <!-- 回复子评论的输入框 -->
             <div v-if="reply.showReply" class="reply-editor reply-to-reply">
               <textarea v-model="reply.replyContent" :placeholder="'回复 @' + reply.author" class="reply-textarea"
-                rows="2" />
+                        rows="2"
+              />
               <div class="reply-actions">
                 <button class="btn-cancel" @click="cancelReply(reply)">取消</button>
                 <button class="btn-submit" @click="submitReplyToReply(reply, comment)">回复</button>

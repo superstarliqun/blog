@@ -33,7 +33,8 @@
           <div class="comment-content">
             <div class="comment-header">
               <a :href="comment.site.startsWith('http') ? comment.site : `https://${comment.site}`" target="_blank"
-                rel="noopener noreferrer" style="  color: inherit;text-decoration: none;">
+                 rel="noopener noreferrer" style="  color: inherit;text-decoration: none;"
+              >
                 <span class="author-name">{{ comment.nickname }}</span>
               </a>
               <span v-if="comment.isAuthor" class="author-badge">作者</span>
@@ -60,7 +61,8 @@
         </div>
         <!-- 子评论列表 -->
         <Item v-for="item in comment.children" :key="item.id" :item="item"
-          :parent-info="{ id: comment.id, postId: comment.postId, nickname: comment.nickname }" />
+              :parent-info="{ id: comment.id, postId: comment.postId, nickname: comment.nickname }"
+        />
       </div>
     </div>
   </div>

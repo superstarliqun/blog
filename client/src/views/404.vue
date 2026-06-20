@@ -25,12 +25,12 @@
     <div class="world">
       <div class="forward">
         <div class="box">
-          <div class="wall"></div>
-          <div class="wall"></div>
-          <div class="wall"></div>
-          <div class="wall"></div>
-          <div class="wall"></div>
-          <div class="wall"></div>
+          <div class="wall" />
+          <div class="wall" />
+          <div class="wall" />
+          <div class="wall" />
+          <div class="wall" />
+          <div class="wall" />
         </div>
       </div>
     </div>

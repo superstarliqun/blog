@@ -24,7 +24,7 @@
               <span v-else> 较低 </span>
             </div>
             <div class="weather-banner-content-wind">
-              <i class="iconfont icon-duoyun weather-banner-content-svg"></i>
+              <i class="iconfont icon-duoyun weather-banner-content-svg" />
               <span>{{ lives.weather }}</span>
               <span>{{ lives.winddirection }}风</span>
               <span>{{ lives.windpower }}级 </span>

@@ -8,7 +8,8 @@
         <div class="heatmap-years">
           <ul>
             <li v-for="(item, index) in yearOption" :key="index" :class="currentYear == item ? 'active' : ''"
-              @click="queryHeatMapYear(item)">{{ item }}</li>
+                @click="queryHeatMapYear(item)"
+            >{{ item }}</li>
           </ul>
         </div>
 
@@ -21,7 +22,8 @@
               <h3 class="month-title">{{ item.month }} 月</h3>
               <div class="articles-list">
                 <article v-for="(item2, index2) in item.data" :key="index2" class="article-item"
-                  @click="goToArticle(item2.id)">
+                         @click="goToArticle(item2.id)"
+                >
                   <div class="article-date">
                     <span class="day">{{ new Date(item2.createTime.replace(/-/g, '/')).getDate() }}</span>
                     <span class="weekday">{{ getWeekday(item2.createTime) }}</span>
@@ -362,7 +364,7 @@ export default {
 
 <style lang="scss" scoped>
 .wu-wrap {
-  background-color: #f7f8fa;
+  background-color: var(--background);
 }
 
 .archive-container {
@@ -377,9 +379,9 @@ export default {
 
   .heatmap-container {
     display: table-caption;
-    border: 1px solid #ececec;
+    border: var(--style-border);
     border-radius: 8px;
-    background-color: #fff;
+    background-color: var(--card-background);
     padding-right: 16px;
   }
 
@@ -396,13 +398,11 @@ export default {
   }
 }
 
-/* 时间轴容器 */
 .timeline-container {
-  background: #f7f8fa;
-  background-color: white;
+  background-color: var(--card-background);
   border-radius: 12px;
   padding: 30px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   margin-top: 20px;
 }
 
@@ -417,7 +417,7 @@ export default {
 .month-title {
   font-size: 20px;
   font-weight: 500;
-  color: #409EFF;
+  color: var(--text-hover);
   margin: 0 0 20px 0;
 }
 
@@ -431,14 +431,15 @@ export default {
   display: flex;
   gap: 20px;
   padding: 20px;
-  border: 1px solid #e9ecef;
+  border: var(--style-border);
   border-radius: 8px;
+  background-color: var(--card-background);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .article-item:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--box-shadow);
   transform: translateY(-2px);
 }
 
@@ -448,19 +449,19 @@ export default {
   align-items: center;
   min-width: 60px;
   padding: 10px;
-  background: #f8f9fa;
+  background: var(--tag-background);
   border-radius: 6px;
 }
 
 .day {
   font-size: 24px;
   font-weight: 600;
-  color: #409EFF;
+  color: var(--text-hover);
 }
 
 .weekday {
   font-size: 12px;
-  color: #95a5a6;
+  color: var(--text-color3);
 }
 
 .article-content {
@@ -470,12 +471,12 @@ export default {
 .article-title {
   font-size: 18px;
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--text-color);
   margin: 0 0 8px 0;
 }
 
 .article-excerpt {
-  color: #7f8c8d;
+  color: var(--text-color2);
   font-size: 14px;
   line-height: 1.5;
   margin: 0 0 12px 0;
@@ -485,7 +486,7 @@ export default {
   display: flex;
   gap: 20px;
   font-size: 13px;
-  color: #95a5a6;
+  color: var(--text-color3);
 }
 
 .meta-item {
@@ -494,32 +495,6 @@ export default {
   gap: 4px;
 }
 
-/* 回到顶部按钮 */
-.back-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: #409EFF;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.back-to-top:hover {
-  background: #66b1ff;
-  transform: translateY(-2px);
-}
-
-/* 图标样式 */
 .icon-category::before {
   content: "📁";
 }
@@ -541,19 +516,18 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    // gap: 8px;
 
     li {
-      // background-color: #0969DA;
       padding: 8px 16px;
       cursor: pointer;
       width: 120px;
       border-radius: 4px;
       text-align: center;
+      color: var(--text-color);
     }
 
     li:hover {
-      background-color: #f5f7f9;
+      background-color: var(--tag-background);
       padding: 8px 16px;
       cursor: pointer;
       width: 120px;
@@ -562,14 +536,13 @@ export default {
     }
 
     li.active {
-      background-color: #0969DA;
+      background-color: var(--text-hover);
       color: #FFFFFF;
       font-weight: 600;
     }
   }
 }
 
-/* 响应式设计 */
 @media (max-width: 768px) {
   .wu-wrap {
     padding-top: 10px;

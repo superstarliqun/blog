@@ -108,7 +108,7 @@ export default {
     cursor: pointer;
 
     &:hover {
-      background-color: #f2f7fd;
+      background-color: var(--text-color3);
     }
 
     img {

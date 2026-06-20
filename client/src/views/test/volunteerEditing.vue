@@ -6,7 +6,7 @@
         <div class="basic_choose">
           <el-form-item label="省份：" prop="sysProvinceId">
             <el-select v-model="volunteerForm.sysProvinceId" @change="getQueryProvince">
-              <el-option v-for="item in batchProList" :key="item.id" :label="item.name" :value="item.id"></el-option>
+              <el-option v-for="item in batchProList" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
           </el-form-item>
           <p class="info"> 年份：<span>{{ paramObj.yearText }}</span>
@@ -19,7 +19,7 @@
               <div class="moudle_volunteer">
                 <!-- 删除按钮 -->
                 <div class="close-icon" @click="handleDelete(index)">
-                  <i class="el-icon-circle-close icon"></i>
+                  <i class="el-icon-circle-close icon" />
                 </div>
                 <div class="radio-container">
                   <el-form-item label="志愿投档模式：" prop="voluntMode">
@@ -48,11 +48,11 @@
                   </el-form-item>
                 </div>
                 <el-form-item label="志愿数量：" prop="voluntNum">
-                  <el-input v-model="item.voluntNum" maxlength="30"></el-input>
+                  <el-input v-model="item.voluntNum" maxlength="30" />
                 </el-form-item>
                 <el-form-item label="志愿组专业数量：" prop="voluntGroupSpecialityNum">
-                  <el-input v-if="item.isGroup === 0" v-model="initNum" readonly disabled></el-input>
-                  <el-input v-else v-model="item.voluntGroupSpecialityNum" maxlength="30"></el-input>
+                  <el-input v-if="item.isGroup === 0" v-model="initNum" readonly disabled />
+                  <el-input v-else v-model="item.voluntGroupSpecialityNum" maxlength="30" />
                 </el-form-item>
                 <div class="radio3">
                   <el-form-item label="调剂志愿：" prop="adjustVolunt">

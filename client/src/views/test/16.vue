@@ -7,8 +7,7 @@
           {{ row.name + row.logoUrl }}
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="招生区域" width="180">
-      </el-table-column>
+      <el-table-column prop="name" label="招生区域" width="180" />
       <el-table-column prop="specialityGroup" label="专业组别" width="180" class="aaa">
         <template slot-scope="{row}">
           <div class="borderP">
@@ -27,10 +26,8 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="entryTime" label="报名时间" width="180">
-      </el-table-column>
-      <el-table-column prop="amount3" label="资料查看" width="180">
-      </el-table-column>
+      <el-table-column prop="entryTime" label="报名时间" width="180" />
+      <el-table-column prop="amount3" label="资料查看" width="180" />
     </el-table>
   </div>
 </template>

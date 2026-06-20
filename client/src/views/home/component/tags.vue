@@ -57,7 +57,7 @@ export default {
       font-weight: unset;
       cursor: pointer;
       font-size: 12px;
-      color: #959595;
+      color: var(--text-color3);
 
       &::after {
         content: '\e756';
@@ -66,7 +66,7 @@ export default {
       }
 
       &:hover {
-        color: #4b9bcb;
+        color: var(--text-hover);
       }
 
       &>i {
@@ -90,28 +90,28 @@ export default {
         display: flex;
         align-items: center;
         padding: 2px 10px;
-        background-color: #f6f8fa;
-        color: #4c4948;
+        background-color: var(--tag-background);
+        color: var(--text-color2);
         border-radius: 15px;
         font-size: 13px;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
 
         &:hover {
-          background-color: #49b1f5;
-          color: #fff;
+          background-color: var(--tag-background);
+          color: var(--text-hover);
 
           .tag-number {
-            background-color: #fff;
-            color: #49b1f5;
+            background-color: var(--tag-background);
+            color: var(--text-hover);
           }
         }
       }
 
       .tag-number {
         margin-left: 5px;
-        background-color: #a3abc1;
-        color: #fff;
+        background-color: var(--style-skeleton);
+        color: var(--text-color3);
         font-size: 11px;
         height: 16px;
         min-width: 16px;

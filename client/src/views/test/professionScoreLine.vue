@@ -7,32 +7,32 @@
         <div class="flex mr10">
           <span>地区：</span>
           <el-select v-model="param.provinceId" class="zyType" @change="getQuery">
-            <el-option v-for="item in provinceList" :key="item.id" :label="item.name" :value="item.id"></el-option>
+            <el-option v-for="item in provinceList" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </div>
         <div class="flex mr10">
           <span>年份：</span>
           <el-select v-model="param.time" class="zyType" @change="changeYear">
-            <el-option v-for="(item,index) in yearList" :key="index" :label="item.name" :value="item.name"></el-option>
+            <el-option v-for="(item,index) in yearList" :key="index" :label="item.name" :value="item.name" />
           </el-select>
         </div>
         <div v-if="subjectTypeList && subjectTypeList.length > 0" class="flex mr10">
           <span>首选：</span>
           <el-select v-model="param.subjectId" class="zyType" @change="changeSubject">
-            <el-option v-for="(item,index) in subjectTypeList" :key="index" :label="item.name" :value="item.name"></el-option>
+            <el-option v-for="(item,index) in subjectTypeList" :key="index" :label="item.name" :value="item.name" />
           </el-select>
         </div>
         <div v-if="batchList && batchList.length > 0" class="flex mr10">
           <span>批次：</span>
           <el-select v-model="param.batchId" class="zyType" @change="changeBatch">
-            <el-option v-for="(item,index) in batchList" :key="index" :label="item.name" :value="item.name"></el-option>
+            <el-option v-for="(item,index) in batchList" :key="index" :label="item.name" :value="item.name" />
           </el-select>
         </div>
         <div v-if="specialityGroupList && specialityGroupList.length > 0" class="flex mr10">
           <span>专业组：</span>
           <el-select v-model="param.groupId" class="zyType" @change="getPageData">
-            <el-option value="" label="全部专业组"></el-option>
-            <el-option v-for="(item,index) in specialityGroupList" :key="index" :label="item" :value="item"></el-option>
+            <el-option value="" label="全部专业组" />
+            <el-option v-for="(item,index) in specialityGroupList" :key="index" :label="item" :value="item" />
           </el-select>
         </div>
       </div>
@@ -81,8 +81,7 @@
         </el-table>
         <!-- 分页 -->
         <div v-if="tableData && tableData.length > 10" class="me-fx-row-c-c mt20">
-          <el-pagination layout="prev, pager, next,total" :page-size="pagination.pageSize" :current-page="pagination.pageNum" :total="pagination.total" @current-change="currentPage">
-          </el-pagination>
+          <el-pagination layout="prev, pager, next,total" :page-size="pagination.pageSize" :current-page="pagination.pageNum" :total="pagination.total" @current-change="currentPage" />
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@
     >
       <span>我来啦!</span>
     </el-drawer>
-    <el-button @click="drawer = true" type="primary" style="margin-left: 16px">
+    <el-button type="primary" style="margin-left: 16px" @click="drawer = true">
       点我打开
     </el-button>
   </div>

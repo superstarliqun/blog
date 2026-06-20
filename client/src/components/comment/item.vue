@@ -29,7 +29,8 @@
     </div>
     <template v-if="item.children && item.children.length">
       <comment-item v-for="(child, index) in item.children" :key="index" :item="child"
-        :parent-info="{ id: item.id, postId: item.postId, nickname: item.nickname }" />
+                    :parent-info="{ id: item.id, postId: item.postId, nickname: item.nickname }"
+      />
     </template>
   </div>
 </template>
@@ -39,7 +40,16 @@ import Input from './input.vue'
 export default {
   name: 'CommentItem',
   components: { Input }, // 必须定义 name 才能在模板中递归调用
-  props: ['item', 'parentInfo'],
+  props: {
+    item: {
+      type: Object,
+      required: true
+    },
+    parentInfo: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       newComment: '',

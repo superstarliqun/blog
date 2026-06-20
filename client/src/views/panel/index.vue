@@ -5,32 +5,15 @@
 
       <div class="row">
         <label>预设正则：</label>
-        <el-select
-          v-model="selected"
-          placeholder="请选择"
-          size="mini"
-          style="width: 100%"
-          @change="onPresetChange"
-        >
-          <el-option
-            v-for="(p, i) in presets"
-            :key="i"
-            :label="p.name"
-            :value="i"
-          >
-          </el-option>
+        <el-select v-model="selected" placeholder="请选择" size="mini" style="width: 100%" @change="onPresetChange">
+          <el-option v-for="(p, i) in presets" :key="i" :label="p.name" :value="i" />
         </el-select>
       </div>
 
       <div class="row">
         <label>编辑 / 应用：</label>
         <div style="display: flex; gap: 10px">
-          <el-input
-            v-model="current"
-            size="mini"
-            placeholder="输入或编辑正则，例如: \d+"
-            style="width: 100%"
-          ></el-input>
+          <el-input v-model="current" size="mini" placeholder="输入或编辑正则，例如: \d+" style="width: 100%" />
           <button class="apply" @click="applyCron">应用</button>
         </div>
       </div>
@@ -58,12 +41,7 @@
 
       <div class="tester">
         <div class="notice-title">Demo文本 (演示数据)</div>
-        <textarea
-          v-model="sample"
-          rows="5"
-          disabled
-          style="margin-top: 4px; color: #bebebe"
-        ></textarea>
+        <textarea v-model="sample" rows="5" disabled style="margin-top: 4px; color: #bebebe" />
         <div class="matches">
           <div v-for="(m, i) in matches" :key="i" class="match">
             {{ i + 1 }}. {{ m }}
@@ -77,8 +55,8 @@
             <span v-if="copyLoading == 0">复制访问路径</span>
             <span v-if="copyLoading == 1">复制ing{{ copyDots }}</span>
             <span v-if="copyLoading == 2">复制完成</span>
-            <i v-if="copyLoading == 0" class="el-icon-copy-document"></i>
-            <i v-if="copyLoading == 2" class="el-icon-circle-check"></i>
+            <i v-if="copyLoading == 0" class="el-icon-copy-document" />
+            <i v-if="copyLoading == 2" class="el-icon-circle-check" />
           </span>
           <span @click="autoDump">自动跳转</span>
         </div>
@@ -97,7 +75,7 @@
     </div>
 
     <!-- subtle animated background -->
-    <div class="bg"></div>
+    <div class="bg" />
   </div>
 </template>
 
@@ -162,10 +140,10 @@ export default {
         var endTime = Date.now()
         this.pushLog(
           '[定时任务-立刻执行] 状态：' +
-            (res.code === 0 ? '成功' : '失败') +
-            ' | 日志：耗时' +
-            (endTime - startTime) +
-            'ms'
+          (res.code === 0 ? '成功' : '失败') +
+          ' | 日志：耗时' +
+          (endTime - startTime) +
+          'ms'
         )
         this.runningNow = false
       })
@@ -190,10 +168,10 @@ export default {
         var endTime = Date.now()
         this.pushLog(
           '[定时任务-修改cron] 状态：' +
-            (res.code === 0 ? '成功' : '失败') +
-            ' | 日志：耗时' +
-            (endTime - startTime) +
-            'ms'
+          (res.code === 0 ? '成功' : '失败') +
+          ' | 日志：耗时' +
+          (endTime - startTime) +
+          'ms'
         )
       })
     },
@@ -438,11 +416,9 @@ textarea {
   overflow: auto;
   padding: 10px;
   border-radius: 10px;
-  background: linear-gradient(
-    180deg,
-    rgba(247, 248, 250, 1),
-    rgba(247, 248, 250, 1)
-  );
+  background: linear-gradient(180deg,
+      rgba(247, 248, 250, 1),
+      rgba(247, 248, 250, 1));
   border: 1px solid rgba(16, 32, 56, 0.03);
 }
 
@@ -465,16 +441,12 @@ textarea {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(
-      closest-side at 10% 20%,
+  background-image: radial-gradient(closest-side at 10% 20%,
       rgba(43, 152, 255, 0.04),
-      transparent 20%
-    ),
-    radial-gradient(
-      closest-side at 80% 80%,
+      transparent 20%),
+    radial-gradient(closest-side at 80% 80%,
       rgba(107, 140, 240, 0.03),
-      transparent 20%
-    );
+      transparent 20%);
   mix-blend-mode: normal;
 }
 

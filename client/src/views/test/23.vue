@@ -9,11 +9,13 @@
         width: slideWidth + 'px',
         height: slideHeight + 'px',
         transition: 'left 0.2s ease, top 0.2s ease, width 0.2s ease, height 0.2s ease'
-      }" />
+      }"
+      />
 
       <!-- 分类标签列表 -->
       <div v-for="(item, index) in categoryList" :key="index" ref="tabItems" class="category-tab"
-        @mouseenter="handleMouseEnter(index)">
+           @mouseenter="handleMouseEnter(index)"
+      >
         {{ item.name }}
       </div>
     </div>

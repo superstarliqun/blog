@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <plugin :value="data"></plugin>
+    <plugin :value="data" />
   </div>
 </template>
 

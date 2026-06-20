@@ -320,6 +320,12 @@ const routeMap = [
         meta: { hideHeader: true, hideFooter: true }
       },
       {
+        path: '/38',
+        name: '38',
+        component: () => import('@/views/test/38'),
+        meta: { hideHeader: true, hideFooter: true }
+      },
+      {
         path: '/md',
         name: 'md',
         component: () => import('@/views/md/editor'),

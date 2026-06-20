@@ -19,8 +19,9 @@
           <div class="art-content">
             <div v-if="directoryShow" class="contents">
               <p v-for="(link, index) in tocList" :key="link.id" class="contents-item"
-                :style="{ 'padding-left': link.level * 20 + 'px' }" @click="goDirectory('head-' + index)"
-                v-html="link.text" />
+                 :style="{ 'padding-left': link.level * 20 + 'px' }" @click="goDirectory('head-' + index)"
+                 v-html="link.text"
+              />
             </div>
             <betymd v-if="formData.content" v-model="formData.content" display="view" @tocList="tocListData" />
           </div>
@@ -35,7 +36,8 @@
             <div v-for="(link, index) in tocList" :key="link.id" class="toc-list-container" :style="{
               'padding-left': link.level * 20 + 'px',
               color: index === highlight ? '#409eff' : ''
-            }" @click="goDirectory('head-' + index)" v-html="link.text" />
+            }" @click="goDirectory('head-' + index)" v-html="link.text"
+            />
           </div>
         </div>
       </div>

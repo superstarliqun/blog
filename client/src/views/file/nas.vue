@@ -41,7 +41,7 @@
             <span>E: 娱乐磁盘</span>
           </li>
         </ul>
-        <el-divider></el-divider>
+        <el-divider />
         <ul class="folder-tree">
           <li
             v-for="(folder, index) in folderList"
@@ -92,14 +92,12 @@
                   <div
                     class="progress-bar"
                     :style="{ width: usageRate + '%' }"
-                  ></div>
+                  />
                 </div>
 
                 <!-- 容量统计 -->
                 <div class="capacity-stats">
-                  <span class="used-capacity"
-                    >{{ usedCapacity }}/{{ totalCapacity }}</span
-                  >
+                  <span class="used-capacity">{{ usedCapacity }}/{{ totalCapacity }}</span>
                   <span class="usage-percent">{{ usageRate }}%</span>
                 </div>
               </div>

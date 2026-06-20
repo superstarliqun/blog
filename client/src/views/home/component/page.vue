@@ -14,13 +14,15 @@
       <a v-if="currentPage + 2 <= pageCount" class="page-number finger" @click="handleJump(2)">{{ currentPage + 2 }}</a>
       <span v-if="currentPage + 2 < pageCount" class="space">…</span>
       <a v-if="currentPage + 2 < pageCount" class="page-number finger" @click="handleJump('last')">{{ pageCount
-        }}</a>
+      }}</a>
       <div class="toPageGroup" data-tip="跳转到指定页面">
         <input id="toPageText" v-model="jumpNumber" maxlength="3" @input="e => jumpNumber = e.target.value.replace(/\D/g, '').slice(0, 3) > pageCount
           ? String(pageCount)
-          : e.target.value.replace(/\D/g, '').slice(0, 3)">
+          : e.target.value.replace(/\D/g, '').slice(0, 3)"
+        >
         <a id="toPageButton" :class="jumpNumber != '' ? 'haveValue' : ''"
-          @click="handleJump(Number(jumpNumber - currentPage))">
+           @click="handleJump(Number(jumpNumber - currentPage))"
+        >
           <i class="iconfont icon-double-left-1" />
         </a>
       </div>

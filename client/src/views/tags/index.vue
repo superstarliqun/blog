@@ -1,42 +1,42 @@
 <template>
-  <div class="tag-page-container">
-    <!-- 标签展示区域 -->
-    <div class="tags-container">
-      <div
-        v-for="tag in list"
-        :key="tag.id"
-        class="tag-item"
-        :class="getTagSizeClass(tag.number)"
-        @click="selectTag(tag)"
-      >
-        <span class="tag-name"># {{ tag.tagsName }}</span>
-        <span class="tag-count">{{ tag.number }}</span>
-      </div>
-    </div>
-
-    <!-- 选中标签的文章列表 -->
-    <div v-if="selectedTag" class="tag-articles">
-      <h3 class="articles-title">"{{ selectedTag.tagsName }}" 相关的文章</h3>
-      <div class="articles-list">
-        <article
-          v-for="article in tagArticles"
-          :key="article.id"
-          class="article-item"
-          @click="goToArticle(article)"
+  <div class="tag-page-wrapper">
+    <div class="tag-page-container">
+      <!-- 标签展示区域 -->
+      <div class="tags-container">
+        <div
+          v-for="tag in list"
+          :key="tag.id"
+          class="tag-item"
+          :class="getTagSizeClass(tag.number)"
+          @click="selectTag(tag)"
         >
-          <h4 class="article-title">{{ article.title }}</h4>
-          <p class="article-excerpt">{{ article.summary }}</p>
-          <div class="article-meta">
-            <span class="article-date">测试占位符</span>
-            <span class="article-read-time"
-              >更新时间：{{
+          <span class="tag-name"># {{ tag.tagsName }}</span>
+          <span class="tag-count">{{ tag.number }}</span>
+        </div>
+      </div>
+
+      <!-- 选中标签的文章列表 -->
+      <div v-if="selectedTag" class="tag-articles">
+        <h3 class="articles-title">"{{ selectedTag.tagsName }}" 相关的文章</h3>
+        <div class="articles-list">
+          <article
+            v-for="article in tagArticles"
+            :key="article.id"
+            class="article-item"
+            @click="goToArticle(article)"
+          >
+            <h4 class="article-title">{{ article.title }}</h4>
+            <p class="article-excerpt">{{ article.summary }}</p>
+            <div class="article-meta">
+              <span class="article-date">测试占位符</span>
+              <span class="article-read-time">更新时间：{{
                 article.updateTime == null
                   ? ''
                   : article.updateTime.slice(0, 10)
-              }}</span
-            >
-          </div>
-        </article>
+              }}</span>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </div>
@@ -108,9 +108,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tag-page-wrapper {
+  background-color: var(--background);
+  min-height: 100vh;
+}
 .tag-page-container {
   max-width: 1200px;
-  min-height: 100%;
   margin: 0 auto;
   padding: 40px 20px;
 }
@@ -124,13 +127,13 @@ export default {
 .page-title {
   font-size: 36px;
   font-weight: 300;
-  color: #2c3e50;
+  color: var(--text-color);
   margin: 0 0 10px 0;
 }
 
 .page-subtitle {
   font-size: 16px;
-  color: #7f8c8d;
+  color: var(--text-color2);
   margin: 0;
 }
 
@@ -150,13 +153,14 @@ export default {
   border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: #f8f9fa;
-  border: 1px solid #e9ecef;
+  background: var(--tag-background);
+  border: var(--tag-border);
+  color: var(--text-color);
 }
 
 .tag-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .tag-name {
@@ -165,7 +169,8 @@ export default {
 }
 
 .tag-count {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--tag-background);
+  color: var(--tag-text);
   padding: 2px 6px;
   border-radius: 12px;
   font-size: 12px;
@@ -190,13 +195,13 @@ export default {
 .tag-articles {
   margin-top: 60px;
   padding-top: 40px;
-  border-top: 1px solid #ecf0f1;
+  border-top: var(--style-border);
 }
 
 .articles-title {
   font-size: 24px;
   font-weight: 400;
-  color: #2c3e50;
+  color: var(--text-color);
   margin-bottom: 30px;
   text-align: center;
 }
@@ -208,26 +213,28 @@ export default {
 
 .article-item {
   padding: 20px;
-  border: 1px solid #e9ecef;
+  background-color: var(--card-background);
+  border: var(--tag-border);
+  color: var(--text-color);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .article-item:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   transform: translateY(-2px);
 }
 
 .article-title {
   font-size: 18px;
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--text-color);
   margin: 0 0 10px 0;
 }
 
 .article-excerpt {
-  color: #7f8c8d;
+  color: var(--text-color2);
   line-height: 1.6;
   margin: 0 0 15px 0;
 }
@@ -236,11 +243,14 @@ export default {
   display: flex;
   gap: 20px;
   font-size: 13px;
-  color: #95a5a6;
+  color: var(--text-color3);
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+  .tag-page-wrapper {
+    padding-top: 48px;
+  }
   .tag-page-container {
     padding: 20px 15px;
   }
@@ -258,9 +268,4 @@ export default {
   }
 }
 
-@media only screen and (max-width: 768px) {
-  .tags-container {
-    margin-top: 50px;
-  }
-}
 </style>

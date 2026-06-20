@@ -6,7 +6,8 @@
         <!-- 循环表头 -->
         <el-table ref="table" :data="tableData" border @cell-click="cellClick">
           <el-table-column v-for="(item, index) in headData" :key="index" :index="index" :label="item.name"
-            align="center" show-overflow-tooltip :prop="item.key">
+                           align="center" show-overflow-tooltip :prop="item.key"
+          >
             <template slot-scope="{row}">
               <p :class="displayClass(row[item.key].id)">id:{{ row[item.key].id }}|{{ row[item.key].value }}</p>
             </template>

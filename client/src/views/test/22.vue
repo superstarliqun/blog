@@ -10,12 +10,14 @@
         height: activeHeight + 'px',
         transition:
           'left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease'
-      }" />
+      }"
+      />
 
       <!-- 分类标签列表 -->
       <div v-for="(item, index) in categoryList" :key="index" class="category-tab"
-        @click="handleTabClick(index, $event)" @mouseenter="handleMouseEnter(index, $event)"
-        @mouseleave="handleMouseLeave()">
+           @click="handleTabClick(index, $event)" @mouseenter="handleMouseEnter(index, $event)"
+           @mouseleave="handleMouseLeave()"
+      >
         {{ item.name }}
       </div>
     </div>

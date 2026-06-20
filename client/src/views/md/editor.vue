@@ -7,8 +7,9 @@
     </div>
     <releaseDialog v-if="releaseShow" :row="form" @close="releaseShow = false" />
     <v-md-editor v-model="form.content" class="poster-content" :include-level="[1, 2, 3]" :disabled-menus="[]"
-      height="calc(100vh - 108px)" :toolbar="toolbar" :left-toolbar="leftToolbar" :toolbar-config="toolbarConfig"
-      @copy-code-success="handleCopyCodeSuccess" @upload-image="handleUploadImage" />
+                 height="calc(100vh - 108px)" :toolbar="toolbar" :left-toolbar="leftToolbar" :toolbar-config="toolbarConfig"
+                 @copy-code-success="handleCopyCodeSuccess" @upload-image="handleUploadImage"
+    />
   </div>
 </template>
 <script>
@@ -284,6 +285,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.markdown-warp {
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
 ::v-deep .markdown-body {
   margin: 0 24px;
 }
@@ -291,6 +297,13 @@ export default {
 .markdown-warp-edit {
   display: flex;
   padding: 10px;
+  background-color: var(--card-background);
+  border-bottom: var(--style-border);
+  color: var(--text-color);
+
+  span {
+    color: var(--text-color);
+  }
 }
 
 .cherry-previewer {
@@ -306,5 +319,46 @@ export default {
   p {
     cursor: pointer;
   }
+}
+
+// Override codemirror editor theme for dark mode
+::v-deep .CodeMirror {
+  background: var(--card-background) !important;
+  color: var(--text-color) !important;
+}
+
+::v-deep .CodeMirror-gutters {
+  background: var(--background) !important;
+  border-right: var(--style-border) !important;
+}
+
+::v-deep .CodeMirror-cursor {
+  border-left: 2px solid var(--text-hover) !important;
+}
+
+::v-deep .CodeMirror-activeline-background {
+  background: var(--tag-background) !important;
+}
+
+::v-deep .el-input__inner {
+  background: var(--card-background) !important;
+  color: var(--text-color) !important;
+  border: var(--style-border) !important;
+}
+
+::v-deep .v-md-editor {
+  background: var(--background);
+}
+
+::v-deep .v-md-editor__toolbar {
+  background: var(--card-background) !important;
+  border-bottom: var(--style-border) !important;
+}
+
+::v-deep .v-md-editor__toolbar-item {
+  color: var(--text-color) !important;
+}
+::v-deep .v-md-editor__toolbar-item:hover {
+  color: var(--text-hover) !important;
 }
 </style>

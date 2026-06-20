@@ -36,7 +36,7 @@
   --box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
   --style-skeleton: #2a2c31;
   --tag-text: rgb(100, 149, 224, 0.8);
-  --tag-background: rgba(79, 163, 255, 0.12);
+  --tag-background: rgb(120 150 183 / 12%);
   --tag-border: 1px solid rgba(79, 163, 255, 0.28);
   --directory-default-text: #9ca3af;
   --directory-text: #1890ff;
@@ -45,6 +45,7 @@
 }
 /* 统一改变模式之后，需要一个过度效果 */
 * {
+  font-family: "font-mingyue";
   transition: background 0.7s ease, color 0.7s ease, border-color 0.7s ease;
   box-sizing: border-box;
 }

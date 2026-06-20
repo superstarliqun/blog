@@ -1,9 +1,10 @@
 <template>
   <div>
     <el-date-picker v-model="param.addTime" type="datetimerange" range-separator="至" start-placeholder="开始日期"
-      end-placeholder="结束日期" size="mini" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
+                    end-placeholder="结束日期" size="mini" value-format="yyyy-MM-dd HH:mm:ss"
+    />
     <el-button plain @click="getQuery">获取数据</el-button>
-    <el-input v-model="firstValue" @input="firstValue = firstValue.toString().replace(/^(0+)|[^\d]+/g, '')"></el-input>
+    <el-input v-model="firstValue" @input="firstValue = firstValue.toString().replace(/^(0+)|[^\d]+/g, '')" />
   </div>
 </template>
 

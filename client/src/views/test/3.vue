@@ -37,7 +37,7 @@
                 <span class="info-title">进度：</span>
               </p>
               <p class="progress-bar">
-                <el-progress v-if=" !isNaN(parseInt((expData.expTime / expData.expCyc) * 100)) " :text-inside="true" :stroke-width="8" :percentage="parseInt(expData.expTime / expData.expCyc) * 100" :format="format"></el-progress>
+                <el-progress v-if=" !isNaN(parseInt((expData.expTime / expData.expCyc) * 100)) " :text-inside="true" :stroke-width="8" :percentage="parseInt(expData.expTime / expData.expCyc) * 100" :format="format" />
               </p>
             </div>
           </div>

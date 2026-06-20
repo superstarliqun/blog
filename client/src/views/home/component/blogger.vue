@@ -4,7 +4,8 @@
       <div class="info">
         <div class="head-container">
           <img src="https://pic1.zhimg.com/v2-5be04c5f2debd0260f86da2a324655bf_xl.jpg?source=32738c0c&needBackground=1"
-            alt="Avatar" class="avatar">
+               alt="Avatar" class="avatar"
+          >
           <div class="name">
             <p>MingYue</p>
             <span class="handle">@superstarliqun</span>

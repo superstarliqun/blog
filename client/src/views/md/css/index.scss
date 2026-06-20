@@ -26,91 +26,6 @@ div.code-toolbar {
 //   height: 8px;
 // }
 
-// 头部样式
-super-post-header {
-  height: 20rem;
-  background-color: #374787;
-  display: flex;
-  align-items: center;
-
-  .header-content {
-    max-width: 1440px;
-    width: 100%;
-    padding: 0 4rem;
-    color: white;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    .post-first-info {
-      display: flex;
-      gap: 12px;
-      line-height: 1;
-      align-items: center;
-      font-size: 16px;
-
-      span {
-        cursor: pointer;
-      }
-
-      .cat {
-        display: inline-block;
-        padding: 4px 10px;
-        /* 主色 */
-        color: #fff;
-        border-radius: 4px;
-        /* 小圆角 */
-        font-size: 14px;
-        font-weight: 500;
-      }
-
-      .tag {
-        display: inline-block;
-        border-radius: 2px;
-
-        .iconfont {
-          margin-right: 2px;
-          vertical-align: middle;
-        }
-      }
-    }
-
-    .post-title {
-      color: white;
-      margin: 0;
-      font-weight: 700;
-      font-size: 42px;
-      line-height: 1.38;
-    }
-
-    .post-mate {
-      display: flex;
-      gap: 12px;
-      line-height: 1;
-      font-size: 12px;
-
-      span {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 2px;
-      }
-
-      i {
-        font-size: 14px;
-      }
-    }
-  }
-}
-
-// 媒体数据和文章的中间条
-.post-radius-bottom {
-  border-radius: 16px 16px 0 0;
-  height: 16px;
-  margin-top: -16px;
-  background-color: var(--background);
-}
 
 // 文章主体样式
 super-main {
@@ -197,7 +112,6 @@ super-header div {
       font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei';
       font-size: 16px;
       font-weight: 600;
-      margin-left: 10px;
       display: flex;
       gap: 2px;
       align-items: center;
@@ -992,32 +906,13 @@ pre[class*='language-'] {
     display: none;
   }
 
-  .post-radius-bottom {
-    display: none !important;
-  }
   super-sidebar-left {
     padding: unset;
   }
 
-  super-post-header .header-content {
-    padding: 7rem 1rem 60px 1rem;
-  }
+
 
   super-sidebar-left .poster-content {
     padding: 0 20px;
-  }
-  super-post-header .header-content .post-first-info {
-    justify-content: center;
-  }
-
-  super-post-header .header-content .post-title {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-
-  super-post-header .header-content .post-mate {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <el-dialog title="博客中控台" :visible.sync="dialogVisible" width="30%" :before-close="handleClose" append-to-body
-    :modal-append-to-body="true">
+             :modal-append-to-body="true"
+  >
     <p>字体设置</p>
     <el-radio-group v-model="currentFont" @change="handleFontChange">
       <el-radio label="default">系统默认</el-radio>

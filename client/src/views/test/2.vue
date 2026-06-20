@@ -47,10 +47,12 @@
                     <el-table-column label="往年修正专业id" align="center">
                       <template slot-scope="scope">
                         <el-input v-if="scope.row.isEdit" v-model="scope.row.lastId"
-                          @input="sgradeInp(scope.$index, scope.row, index)" />
+                                  @input="sgradeInp(scope.$index, scope.row, index)"
+                        />
                         <p v-else>{{ scope.row.lastId }}<i class="el-icon-edit"
-                            style="font-size: 16px;cursor: pointer;padding-left: 10px;"
-                            @click="getFirstYearData(scope.row, scope.$index)" /></p>
+                                                           style="font-size: 16px;cursor: pointer;padding-left: 10px;"
+                                                           @click="getFirstYearData(scope.row, scope.$index)"
+                        /></p>
                       </template>
                     </el-table-column>
                     <el-table-column prop="specialityName" label="专业名称" show-overflow-tooltip align="center" />

@@ -42,10 +42,10 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        additionalData: "@import '~@/assets/css/variables';"
+        additionalData: "@use '~@/assets/css/variables' as *;"
       },
       scss: {
-        additionalData: "@import '~@/assets/css/variables';"
+        additionalData: "@use '~@/assets/css/variables' as *;"
       }
     }
   },

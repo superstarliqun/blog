@@ -47,7 +47,8 @@
             </p>
             <p>网站描述：只为了记录每个时刻的想法<i class="el-icon-document-copy" @click="copyFunction('只为了记录每个时刻的想法')" /></p>
             <p>头像链接：https://wuliqun.cn/star.png<i class="el-icon-document-copy"
-                @click="copyFunction('https://wuliqun.cn/star.png')" /></p>
+                                                  @click="copyFunction('https://wuliqun.cn/star.png')"
+            /></p>
           </div>
         </div>
         <div class="container-right">
@@ -245,11 +246,9 @@ export default {
 </script>
 
 <style scoped>
-/* 核心修复：给外层容器设置高度，作为滚动根容器 */
 .body-wrap {
-  background-color: #f7f8fa;
+  background-color: var(--background);
   height: 100vh;
-  /* 占满视口高度 */
   overflow: hidden;
 }
 
@@ -274,11 +273,18 @@ export default {
 .item {
   min-width: 180px;
   text-align: center;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.07);
+  box-shadow: var(--box-shadow);
   border-radius: 8px;
   overflow: hidden;
-  border: 2px solid #fff;
+  border: 2px solid var(--card-background);
   cursor: pointer;
+  background-color: var(--card-background);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
 
   .bg {
     height: 70px;
@@ -292,13 +298,13 @@ export default {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: #f5f5f5;
+    background: var(--tag-background);
     margin: auto;
     margin-top: -50px;
     position: relative;
     z-index: 2;
     overflow: hidden;
-    border: 2px solid #fff;
+    border: 2px solid var(--card-background);
 
     .el-image {
       width: 100%;
@@ -311,7 +317,6 @@ export default {
     }
 
     .el-image img:hover {
-      /* 旋转 360 度 (Z 轴是平面旋转，Y 轴是翻转效果) */
       transform: rotateZ(360deg);
     }
   }
@@ -320,12 +325,13 @@ export default {
     font-size: 14px;
     font-weight: bold;
     line-height: 36px;
+    color: var(--text-color);
   }
 
   .personal-signature {
     font-size: 12px;
     margin-bottom: 10px;
-    color: #a2a2a2;
+    color: var(--text-color3);
   }
 }
 
@@ -335,6 +341,7 @@ export default {
   font-weight: bold;
   margin: 20px 10px;
   display: block;
+  color: var(--text-color);
 }
 
 .link-title::after {
@@ -354,7 +361,7 @@ export default {
   min-width: 180px;
   min-width: 0;
   text-align: center;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.07);
+  box-shadow: var(--box-shadow);
   border-radius: 8px;
   overflow: hidden;
   display: flex;
@@ -362,14 +369,20 @@ export default {
   padding: 14px;
   gap: 16px;
   cursor: pointer;
-  background-color: white;
+  background-color: var(--card-background);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
 
   img {
     flex-shrink: 0;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 2px solid #fff;
+    border: 2px solid var(--card-background);
     transition: transform 0.8s ease-in-out;
     transform-style: preserve-3d;
 
@@ -388,7 +401,7 @@ export default {
     .description {
       width: 100%;
       font-size: 12px;
-      color: rgb(111, 111, 111);
+      color: var(--text-color3);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -405,31 +418,28 @@ export default {
 
 .apply-link {
   cursor: pointer;
-  color: #2791ff;
+  color: var(--text-hover);
 }
 
-/* 申请地址样式 - 修复伪元素拦截问题 */
 .apply-link-container {
   position: relative;
   max-width: 1440px;
   margin: 0 auto;
   margin-top: 20px;
   border-radius: 12px;
-  background-color: white;
-  box-shadow: 0 8px 16px -4px rgba(44, 45, 48, 0.0470588235);
-  border: 1px solid #e3e8f7;
+  background-color: var(--card-background);
+  box-shadow: var(--box-shadow);
+  border: var(--style-border);
   display: flex;
   width: 100%;
   min-height: 80px;
-  padding: 0 20px;
-  box-sizing: border-box;
   padding: 18px;
   gap: 20px;
+  box-sizing: border-box;
 
-  /* 修复：给伪元素添加pointer-events: none，避免拦截滚动事件 */
   &::before {
     content: "";
-    border-left: 1px dashed #ccc;
+    border-left: 1px dashed var(--text-color3);
     height: calc(100% - 40px);
     top: 10px;
     position: absolute;
@@ -437,12 +447,12 @@ export default {
     transform: translateX(-50%);
     padding: 10px 0;
     pointer-events: none;
-    /* 关键：让事件穿透伪元素 */
   }
 
   span {
     margin-bottom: 4px;
     display: block;
+    color: var(--text-color);
   }
 
   .container-left {
@@ -452,14 +462,14 @@ export default {
     &>p {
       font-size: 12px;
       line-height: 2;
-      color: rgb(125, 125, 125);
+      color: var(--text-color2);
     }
 
     .copy-link {
       margin-top: 20px;
 
       p {
-        color: rgb(125, 125, 125);
+        color: var(--text-color2);
         font-size: 14px;
         display: flex;
         align-items: center;
@@ -467,7 +477,7 @@ export default {
       }
 
       i {
-        color: #78aff9;
+        color: var(--text-hover);
         cursor: pointer;
         margin-left: 8px;
       }
@@ -479,7 +489,6 @@ export default {
 
     .el-form-item {
       margin-bottom: 10px;
-      /* 修复：增加表单项间距，避免挤在一起 */
     }
   }
 }

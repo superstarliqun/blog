@@ -3,11 +3,11 @@
     <el-form ref="piecemealForm" :model="piecemealForm" :rules="piecemealRules" label-width="90px">
       <div v-for="(item, index) in piecemealData" :key="index" class="whole_box">
         <el-form-item :label="'名称'+(index+1)" :prop="item.name">
-          <el-input v-model="item.name"></el-input>
+          <el-input v-model="item.name" />
         </el-form-item>
         <el-form-item label="文件上传：" :prop="item.file">
           <el-upload class="upload" action="#" :file-list="item.fileList" :show-file-list="false" :on-change="handleChange(index)" :on-remove="handleRemove">
-            <el-input v-model="item.fileName"></el-input>
+            <el-input v-model="item.fileName" />
           </el-upload>
         </el-form-item>
         <el-button v-if="piecemealData.length != index+1" size="mini" class="update-btn" @click="handleData(index,1)">-</el-button>

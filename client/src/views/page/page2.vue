@@ -1,6 +1,6 @@
 <template>
   <div>
-    <common :index="'2'"></common>
+    <common :index="'2'" />
     2
   </div>
 </template>

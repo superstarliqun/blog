@@ -10,9 +10,10 @@
       </el-form>
       <el-divider />
       <el-upload class="upload-demo" drag :action="uploadUrl" :headers="uploadHeaders" :data="uploadExtraData"
-        :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove" :on-success="handleSuccess"
-        :on-error="handleError" :on-progress="handleProgress" :file-list="fileList" multiple :limit="fileLimit"
-        :on-exceed="handleExceed">
+                 :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove" :on-success="handleSuccess"
+                 :on-error="handleError" :on-progress="handleProgress" :file-list="fileList" multiple :limit="fileLimit"
+                 :on-exceed="handleExceed"
+      >
         <i class="el-icon-upload" />
         <div class="el-upload__text">
           将文件拖到此处，或<em>点击上传</em>
@@ -29,9 +30,11 @@
 
       <div class="control-panel">
         <el-date-picker v-model="param.uploadDate" type="date" placeholder="选择文件日期" size="mini"
-          value-format="yyyy-MM-dd" />
+                        value-format="yyyy-MM-dd"
+        />
         <el-input v-model="firstValue" placeholder="输入文件编号 (纯数字)" size="mini" style="width: 200px; margin-right: 10px;"
-          @input="firstValue = firstValue.toString().replace(/^(0+)|[^\d]+/g, '')" />
+                  @input="firstValue = firstValue.toString().replace(/^(0+)|[^\d]+/g, '')"
+        />
         <el-button type="primary" size="mini" plain @click="submitFiles">
           <i class="el-icon-upload2" /> 确认上传
         </el-button>

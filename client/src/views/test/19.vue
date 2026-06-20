@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <div v-model="onlyFile" @change="uploadChange"></div>
-        <div v-model="multFIle" @change="uploadChange"></div>
-    </div>
+  <div>
+    <input v-model="onlyFile" @change="uploadChange">
+    <input v-model="multFIle" @change="uploadChange">
+  </div>
 </template>
 
 <script>

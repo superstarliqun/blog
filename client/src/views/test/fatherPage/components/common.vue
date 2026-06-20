@@ -2,11 +2,11 @@
   <div>
     <span>子组件</span>
     <el-checkbox-group v-model="selectiveList" @change="handleGetData()">
-      <el-checkbox label="复选框 A"></el-checkbox>
-      <el-checkbox label="复选框 B"></el-checkbox>
-      <el-checkbox label="复选框 C"></el-checkbox>
-      <el-checkbox label="禁用"></el-checkbox>
-      <el-checkbox label="选中且禁用"></el-checkbox>
+      <el-checkbox label="复选框 A" />
+      <el-checkbox label="复选框 B" />
+      <el-checkbox label="复选框 C" />
+      <el-checkbox label="禁用" />
+      <el-checkbox label="选中且禁用" />
     </el-checkbox-group>
   </div>
 </template>

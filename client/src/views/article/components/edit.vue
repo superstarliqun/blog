@@ -2,11 +2,11 @@
   <div class="markdown-warp">
     <div class="markdown-warp-edit">
       <span style="width: 100px;line-height: 40px;">博客标题：</span>
-      <el-input v-model="form.title" placeholder="「 无标题 」" style="margin:0 10px"></el-input>
+      <el-input v-model="form.title" placeholder="「 无标题 」" style="margin:0 10px" />
       <el-button type="primary" @click="release">发布博客</el-button>
     </div>
-    <releaseDialog v-if="releaseShow" :row="form" @close="releaseShow = false"></releaseDialog>
-    <betymd :key="timer" v-model="form.content" display="edit"></betymd>
+    <releaseDialog v-if="releaseShow" :row="form" @close="releaseShow = false" />
+    <betymd :key="timer" v-model="form.content" display="edit" />
   </div>
 </template>
 

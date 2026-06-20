@@ -8,7 +8,8 @@
             <div class="banner-text">
               <a href="#">用腾讯CoDesign打造专属SVG图标库</a>
               <span
-                class="desc jianjie">腾讯CoDesign支持用户上传自定义SVG图标文件，帮助设计团队建立专属图标库。通过简单的拖拽操作即可批量上传SVG文件，支持保留或去除颜色，实现图标资源的统一管理和高效调用。</span>
+                class="desc jianjie"
+              >腾讯CoDesign支持用户上传自定义SVG图标文件，帮助设计团队建立专属图标库。通过简单的拖拽操作即可批量上传SVG文件，支持保留或去除颜色，实现图标资源的统一管理和高效调用。</span>
               <p class="banner-list-footer">
                 <span># 2026-01-14 </span>
                 <span>Java</span>

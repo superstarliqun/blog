@@ -12,11 +12,13 @@
         <div class="form flex align-center justify-center">
           <el-form v-if="show === 1" ref="ruleForm" :model="loginFrom">
             <el-input v-model="loginFrom.username" class="mt20" prefix-icon="el-icon-user" type="text"
-              :placeholder="lang.user" />
+                      :placeholder="lang.user"
+            />
             <el-input v-model="loginFrom.password" class="mt20" prefix-icon="el-icon-lock" type="password"
-              :placeholder="lang.pwd" />
+                      :placeholder="lang.pwd"
+            />
             <el-button class="mt20 w_100" type="primary" :loading="loading" @click="submitForm()">{{ lang.btn
-              }}</el-button>
+            }}</el-button>
             <el-divider><span class="other-line">其他方式登录</span></el-divider>
             <div class="other">
               <div class="other-item" @click="toWx()">微信</div>
@@ -29,7 +31,8 @@
             <div class="wxhead">微信扫码</div>
             <el-image :src="url" />
             <div class="wxbottom"><span>输入验证码 <span class="captcha">{{ number }}</span><i v-if="number != null"
-                  class="el-icon-refresh refresh" @click="refreshCode" /></span></div>
+                                                                                          class="el-icon-refresh refresh" @click="refreshCode"
+            /></span></div>
           </div>
         </div>
 

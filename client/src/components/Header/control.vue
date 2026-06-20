@@ -333,7 +333,7 @@ export default {
             }
 
             &:hover {
-              background-color: #f5f5f5;
+              background-color: var(--text-hover);
 
               .rss-title>.rss-icon::after {
                 font-family: 'iconfont';

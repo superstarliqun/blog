@@ -33,7 +33,7 @@
     <div class="bottom-footer">
       <span class="foot">©2022-2026</span>
       <span class="beian"><img src="/beian-icon.png"> <a href="https://beian.miit.gov.cn/">
-          辽ICP备2021011784号-1</a></span>
+        辽ICP备2021011784号-1</a></span>
       <span class="time">
         <div class="status-light" />博客运行正常
       </span>

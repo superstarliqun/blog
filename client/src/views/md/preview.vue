@@ -1,29 +1,30 @@
 <template>
   <super-container>
-    <super-post-header>
-      <div class="header-content">
-        <div class="post-first-info">
-          <span>原创</span>
-          <span v-if="formData.categoryName" class="cat"># {{ formData.categoryName }}</span>
-          <span v-for="tag in formData.tagsList" :key="tag" class="tag"><i class="iconfont icon-icon-biaoqian" />{{ tag
-            }}</span>
-        </div>
-        <h1 class="post-title">{{ formData.title }}</h1>
-        <div class="post-mate">
-          <span><i class="iconfont icon-zishu" />{{ countWords() }}</span>
-          <span><i class="iconfont icon-time" />{{ formData.createTime | formatDate }}</span>
-          <span @click="fixedScroll('comment_box')"><i class="iconfont icon-comment1" />{{ comment }}</span>
-          <span v-if="showEdit" class="edit-button" @click="toEdit(formData.id)"><i class="iconfont icon-edit" /></span>
-        </div>
+    <!-- 滚动时固定在顶部的标题栏 -->
+    <transition name="slide-down">
+      <div v-show="stickyShow" class="sticky-title-bar" :class="{ 'is-shown': stickyShow }">
+        <span class="sticky-title">{{ formData.title }}</span>
       </div>
-    </super-post-header>
-    <div class="post-radius-bottom" />
+    </transition>
     <super-main>
       <super-content>
         <super-sidebar-left>
-
-          <v-md-preview ref="preview" :text="formData.content" class="poster-content" preview-class="poster-content"
-            @image-click="imgClick" @copy-code-success="handleCopyCodeSuccess" />
+          <super-post-header>
+            <div class="header-container">
+              <h1 class="page-title">{{ formData.title }}</h1>
+              <div class="meta-info-item">
+                <span class="meta-info">作者：{{ formData.createBy }}</span>
+                <span class="meta-info">发布：{{ formData.createTime | formatDate }}</span>
+                <span class="meta-info">{{ countWords() }} 字</span>
+                <span class="meta-info">分类：{{ formData.categoryName }}</span>
+                <span class="meta-info">标签：{{ formData.tagsList }}</span>
+                <span class="meta-info" style="cursor: pointer;" @click="fixedScroll('comment_box')">{{ comment }} 条评论</span>
+                <span v-if="showEdit" class="meta-info" style="cursor: pointer;" @click="toEdit(formData.id)">编辑</span>
+              </div>
+            </div>
+          </super-post-header>
+          <super-divider />
+          <v-md-preview ref="preview" :text="formData.content" class="poster-content" @image-click="imgClick" @copy-code-success="handleCopyCodeSuccess" />
           <Copyright />
           <div class="jianzi" />
           <CommentBox id="comment_box" @call-back="handleCommentNumber" />
@@ -37,10 +38,11 @@
             </div>
             <div class="toc-list">
               <div v-for="(link, index) in tocList" :key="link.id" class="toc-list-container"
-                :class="link.line == mdLine ? 'active' : ''" :style="{
-                  'margin-left': link.level * 20 + 'px',
-                  color: index === highlight ? '#409eff' : ''
-                }" @click="goDirectory(link)" v-html="link.text" />
+                   :class="link.line == mdLine ? 'active' : ''" :style="{
+                     'margin-left': link.level * 20 + 'px',
+                     color: index === highlight ? '#409eff' : ''
+                   }" @click="goDirectory(link)" v-html="link.text"
+              />
             </div>
           </div>
         </super-sidebar-right>
@@ -78,6 +80,7 @@ import createAlignPlugin from '@kangc/v-md-editor/lib/plugins/align'
 import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index'
 import '@kangc/v-md-editor/lib/plugins/todo-list/todo-list.css'
 import CommentBox from '@/components/comment/index.vue'
+// import CommentDialog from './component/comment.vue'
 import Copyright from './component/copyright'
 import dayjs from 'dayjs'
 
@@ -117,10 +120,8 @@ export default {
   },
   filters: {
     formatDate(value) {
-      console.log(value)
-
       if (!value) return ''
-      return dayjs(value).format('YYYY年MM月DD日 HH:mm')
+      return dayjs(value).format('YYYY年MM月DD日')
     }
   },
   components: { CommentBox, Copyright },
@@ -146,7 +147,9 @@ export default {
       scrollPercent: 0,
       observer: null,
       mdLine: '', // 当前高亮的目录 ID
-      isReady: false
+      isReady: false,
+      stickyShow: false,
+      headerHeight: 0
     }
   },
   watch: {
@@ -158,40 +161,34 @@ export default {
   },
   mounted() {
     this.initData(this.$route.params.id)
-    // 页面所有组件加载完毕
-    window.addEventListener('load', this.onPageLoaded)
+    this.isReady = true
+    window.addEventListener('scroll', this.handleScroll)
   },
   beforeDestroy() {
     // 组件销毁前必须移除监听，否则会导致性能问题
     window.removeEventListener('scroll', this.handleScroll)
-    window.removeEventListener('load', this.onPageLoaded)
     if (this.observer) {
       this.observer.disconnect()
     }
   },
   methods: {
-    onPageLoaded() {
-      this.isReady = true
-    },
+    // onPageLoaded disabled - no longer needed
+    onPageLoaded() { },
     scrollActiveTocIntoView() {
       this.$nextTick(() => {
         const activeEl = this.$el.querySelector('.toc-list-container.active')
-        if (activeEl) {
-          // 自动滚动，避免改变整体布局
-          activeEl.scrollIntoView({
-            block: 'nearest', // 保持在可视区域，最小滚动
-            inline: 'nearest'
-          })
-        }
+        const tocList = this.$el.querySelector('.toc-list')
+        if (!activeEl || !tocList) return
+        // Only scroll the toc-list container, never the main page
+        const itemTop = activeEl.offsetTop - tocList.offsetTop
+        const targetTop = itemTop - tocList.clientHeight / 2 + activeEl.clientHeight / 2
+        tocList.scrollTop = Math.max(0, targetTop)
       })
     },
     initData(id) {
       this.getDetails()
       this.$nextTick(() => {
-        window.addEventListener('scroll', this.handleScroll)
-        if (this.isReady) {
-          this.restoreScroll()
-        }
+        // Scroll handling moved to handleScroll
       })
     },
     // 获取详情信息
@@ -215,6 +212,11 @@ export default {
         })
       this.$nextTick(() => {
         this.handleReady()
+        // 记录 super-post-header 高度，用于判断滚动阈值
+        const header = this.$el.querySelector('super-post-header')
+        if (header) {
+          this.headerHeight = header.getBoundingClientRect().height
+        }
       })
     },
     // 监听子组件传递的数量
@@ -236,7 +238,6 @@ export default {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               this.mdLine = entry.target.getAttribute('data-v-md-line')
-              // 保证选中目录可见
               this.scrollActiveTocIntoView()
             } else if (entry.boundingClientRect.top > 130) {
               this.activatePreviousHeading(entry.target)
@@ -372,98 +373,14 @@ export default {
     },
     // 监听滚动
     handleScroll() {
-      if (this.isReady) {
-        const CACHE_KEY = 'scroll_snapshots_cache'
-        let cacheData = {}
-        try {
-          const localData = localStorage.getItem(CACHE_KEY)
-          cacheData = localData ? JSON.parse(localData) : {}
-        } catch (e) {
-          console.error('解析缓存失败', e)
-          cacheData = {}
-        }
-
-        // 计算滚动百分比（此时已修复返回数字类型）
-        this.scrollPercent = this.screenHeightFunction()
-        const articleId = this.$route.params.id
-
-        // 只更新当前文章的缓存，不覆盖整个缓存对象（关键修复）
-        cacheData[articleId] = {
-          percent: this.scrollPercent,
-          updateTime: new Date().getTime(),
-          title: this.formData.title
-        }
-
-        // 整体序列化存储缓存对象（唯一正确的存储方式）
-        localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData))
-      }
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      this.stickyShow = scrollTop > this.headerHeight
     },
     // 回复文章滚动距离
+    // 注释掉 restoreScroll 避免滚动回跳
     restoreScroll() {
-      const CACHE_KEY = 'scroll_snapshots_cache'
-      const articleId = this.$route.params.id
-      const localData = localStorage.getItem(CACHE_KEY)
-      if (!localData) return
-
-      let cacheData = {}
-      try {
-        cacheData = JSON.parse(localData)
-      } catch (e) {
-        console.error('解析滚动缓存失败', e)
-        return
-      }
-      const responseResult = cacheData[articleId]
-      if (
-        !responseResult ||
-        responseResult.percent <= 0 ||
-        responseResult.percent > 100
-      ) {
-        return
-      }
-
-      // 轮询配置：检测间隔、超时时间（避免无限轮询）
-      const checkInterval = 100 // 每100ms检测一次（可调整）
-      const timeout = 5000 // 5秒后超时停止（避免异常情况）
-      let lastScrollHeight = 0 // 上一次的页面总高度
-      let checkTimer = null // 轮询定时器
-      let timeoutTimer = null // 超时定时器
-
-      // 核心：检测页面高度是否稳定
-      const checkScrollHeightStable = () => {
-        const currentScrollHeight = document.documentElement.scrollHeight
-        // 判断条件：当前高度 > 0 且 和上一次高度一致（说明高度稳定，内容加载完成）
-        if (
-          currentScrollHeight > 0 &&
-          currentScrollHeight === lastScrollHeight
-        ) {
-          // 执行滚动恢复
-          const clientHeight = document.documentElement.clientHeight
-          const scrollTop =
-            (currentScrollHeight - clientHeight) *
-            (responseResult.percent / 100)
-          window.scrollTo({ top: scrollTop, behavior: 'auto' })
-          // 清除定时器，停止轮询
-          clearInterval(checkTimer)
-          clearTimeout(timeoutTimer)
-        } else {
-          // 高度不稳定，更新lastScrollHeight，继续轮询
-          lastScrollHeight = currentScrollHeight
-        }
-      }
-
-      // 初始化轮询
-      lastScrollHeight = document.documentElement.scrollHeight
-      checkTimer = setInterval(checkScrollHeightStable, checkInterval)
-      // 设置超时保护
-      timeoutTimer = setTimeout(() => {
-        clearInterval(checkTimer)
-        // 超时后仍尝试执行一次滚动恢复（兜底）
-        const scrollHeight = document.documentElement.scrollHeight
-        const clientHeight = document.documentElement.clientHeight
-        const scrollTop =
-          (scrollHeight - clientHeight) * (responseResult.percent / 100)
-        window.scrollTo({ top: scrollTop, behavior: 'auto' })
-      }, timeout)
+      // 已禁用 - 自动滚动恢复导致页面滚动异常
+      return
     },
     screenHeightFunction(scrollTop) {
       if (scrollTop == null) {
@@ -486,3 +403,417 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+super-post-header {
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+  .page-title {
+    margin: 20px 0;
+  }
+
+  .meta-info-item {
+    display: flex;
+    gap: 8px;
+    .meta-info {
+      font-size: 10px;
+      border: var(--style-border);
+      padding: 2px 8px;
+      border-radius: 12px;
+      background-color: var(--card-hover);
+    }
+  }
+}
+super-divider{
+  display: block;
+  width: 100%;
+  height: 0;
+  border-top: var(--style-border);
+  margin: 32px 0;
+}
+
+// 固定在顶部的标题栏
+.sticky-title-bar {
+  position: fixed;
+  top: 4px;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+
+  &.is-shown {
+    transform: translateY(0);
+  }
+
+  .sticky-title {
+    font-size: .9rem;
+    text-align: center;
+    cursor: pointer;
+    border: var(--style-border);
+    padding: 2px 12px;
+    border-radius: 18px;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%); /* Safari / iOS 必须加 */
+
+    /* 2. 半透底色，区分深浅模式 */
+    background: rgba(255, 255, 255, 0.12);
+
+    /* 3. 模拟玻璃菲涅尔边缘高光（液态关键） */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow:
+      inset 0 0 12px rgba(255,255,255,0.08), /* 内发光模拟曲面反光 */
+      0 8px 32px rgba(0, 0, 0, 0.15);       /* 悬浮软阴影 */
+    }
+}
+
+// 过渡动画
+.slide-down-enter-active,
+.slide-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.slide-down-enter,
+.slide-leave-to {
+  opacity: 0;
+}
+
+// ---- Global layout ----
+super-container {
+  display: block;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+// ---- Main layout: flex row ----
+super-main {
+  display: block;
+  background: var(--background);
+  min-height: 60vh;
+}
+
+super-content {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 24px;
+  padding: 20px 20px 60px;
+  align-items: flex-start;
+}
+
+// ---- Left: article content ----
+super-sidebar-left {
+  flex: 1;
+
+  .poster-content {
+    // background: var(--card-background);
+    // border-radius: 12px;
+    // padding: 10px 48px;
+    // border: var(--style-border);
+    // box-shadow: var(--box-shadow);
+    // overflow-anchor: auto;
+  }
+}
+
+// ---- Right: TOC sidebar ----
+super-sidebar-right {
+  width: 300px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  position: sticky;
+  top: 24px;
+  z-index: 10;
+
+  .card-shadow {
+    background: var(--card-background);
+    border: var(--style-border);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    padding: 8px 0;
+
+    .toc-title-container {
+      padding: 0 20px 6px;
+      border-bottom: var(--style-border);
+
+      .decoration-bar {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .icon-mulu {
+          color: var(--text-hover);
+          font-size: 16px;
+        }
+      }
+    }
+
+    .toc-list {
+      max-height: 60vh;
+      overflow-y: auto;
+      padding: 8px 0;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--text-color3);
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .toc-list-container {
+        padding: 8px 20px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--text-color3);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        border-left: 3px solid transparent;
+        word-break: break-word;
+
+        &:hover {
+          color: var(--text-color);
+          background: var(--tag-background);
+          border-left-color: var(--text-hover);
+        }
+
+        &.active {
+          color: var(--text-hover);
+          font-weight: 600;
+          border-left-color: var(--text-hover);
+          background: var(--tag-background);
+        }
+      }
+    }
+  }
+}
+
+// ---- Article content typography overrides ----
+::v-deep .v-md-editor-preview {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text-color);
+
+  .markdown-body {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 1.8em 0 0.6em;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text-color);
+    }
+
+    h1 {
+      font-size: 1.85em;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      border-bottom: 1px solid var(--article-border-bottom);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.25em;
+    }
+
+    h4 {
+      font-size: 1.1em;
+    }
+
+    p {
+      margin: 1em 0;
+      line-height: 1.75;
+      color: var(--text-color);
+    }
+
+    ul,
+    ol {
+      margin: 0.8em 0;
+      padding-left: 1.8em;
+    }
+
+    li {
+      margin: 0.3em 0;
+      line-height: 1.7;
+    }
+
+    blockquote {
+      margin: 1.2em 0;
+      padding: 10px 22px;
+      border-left: 4px solid var(--text-hover);
+      background: var(--tag-background);
+      border-radius: 0 8px 8px 0;
+      color: var(--text-color2);
+
+      p {
+        color: var(--text-color2);
+        margin: 0.5em 0;
+      }
+    }
+
+    code {
+      font-size: 0.88em;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      background: var(--tag-background);
+      border: 1px solid var(--tag-border);
+      color: var(--text-color);
+      font-family: "Fira Code", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+    }
+
+    pre {
+      background: var(--code-background) !important;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 1.2em 0;
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+
+      code {
+        background: none !important;
+        border: none !important;
+        padding: 0;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #ccc;
+      }
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+      font-size: 14px;
+
+      th,
+      td {
+        padding: 8px 12px;
+        border: 1px solid var(--style-border);
+      }
+
+      th {
+        background: var(--tag-background);
+        font-weight: 600;
+        color: var(--text-color);
+      }
+
+      td {
+        color: var(--text-color2);
+      }
+
+      tr:nth-child(even) td {
+        background: var(--tag-background);
+      }
+    }
+
+    a {
+      color: var(--text-hover);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    hr {
+      margin: 2em 0;
+      border: none;
+      border-top: var(--style-border);
+    }
+  }
+}
+
+// ---- Decorative divider ----
+.jianzi {
+  border: var(--style-border) !important;
+  border-style: dashed !important;
+  position: relative;
+  margin: 40px auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.jianzi::before {
+  position: absolute;
+  top: -10px;
+  left: 5%;
+  z-index: 1;
+  color: var(--text-color3);
+  font-family: "iconfont";
+  content: "\\e6ba";
+  font-size: 20px;
+  line-height: 1;
+}
+
+// ---- Image modal ----
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 11111;
+  cursor: pointer;
+
+  .modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+  }
+}
+
+// ---- Mobile ----
+@media only screen and (max-width: 768px) {
+
+  super-content {
+    flex-direction: column;
+    padding: 16px 0 40px;
+    gap: 12px;
+  }
+
+  super-sidebar-left {
+    .poster-content {
+      padding: 20px;
+      border-radius: 0;
+    }
+  }
+
+  super-sidebar-right {
+    width: 100%;
+    padding: 0 12px;
+    position: static;
+  }
+}
+
+// ========================================
+// 移动端适配
+// ========================================
+@media only screen and (max-width: 768px) {
+
+}
+</style>

@@ -11,8 +11,8 @@
               <el-table-column v-for="column in item.title" :key="column.name" align="center" :prop="column.name" :label="column.value.toString()" width="100">
                 <template slot-scope="scope">
                   <div v-if="scope.row[column.name] === false">
-                    <el-checkbox v-if="column.name ==='titleFirst'" :key="timer" v-model="scope.row.checked1" @change="handleChecked"></el-checkbox>
-                    <el-checkbox v-if="column.name ==='titleLast'" :key="timer" v-model="scope.row.checked2" @change="handleChecked"></el-checkbox>
+                    <el-checkbox v-if="column.name ==='titleFirst'" :key="timer" v-model="scope.row.checked1" @change="handleChecked" />
+                    <el-checkbox v-if="column.name ==='titleLast'" :key="timer" v-model="scope.row.checked2" @change="handleChecked" />
                   </div>
                   <div v-else-if="scope.row[column.name] === true">
                     <el-button size="mini" class="add-btn other-btn" @click="handleDisassociation(column.value,scope.row)">解除关联</el-button>

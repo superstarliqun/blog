@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
 
 import static com.china.soft.commons.utils.response.CommonResponse.success;
@@ -17,16 +18,21 @@ import static com.china.soft.commons.utils.response.CommonResponse.success;
 @RequestMapping("/panel")
 public class PanelController {
 
-    @Autowired
-    DynamicScheduledTask dynamicScheduledTask;
+    @Resource
+    private DynamicScheduledTask dynamicScheduledTask;
+    @Resource
+    private PanelService panelService;
 
-    @Autowired
-    PanelService panelService;
 
+    @GetMapping("/getText")
+    @PermitAll
+    public CommonResponse<String> getText() {
+        String s = panelService.frpToken();
+        return success(s);
+    }
 
     /**
      * 更新动态任务
-     * @return
      */
     @GetMapping("/updateCorn")
     @PermitAll
@@ -36,11 +42,13 @@ public class PanelController {
     }
 
     @GetMapping("/execute")
+    @PermitAll
     public CommonResponse<String> executeTask(){
         return success(panelService.executeTask());
     }
 
-    @GetMapping("/getUrl")
+    @GetMapping("/url")
+    @PermitAll
     public CommonResponse<String> getUrl(){
         return success(panelService.getUrl());
     }

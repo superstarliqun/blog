@@ -16,9 +16,7 @@
         <el-button type="primary" size="small" plain @click="validateJson">{{
           !isAnalyze ? '解析/格式化' : '返回'
         }}</el-button>
-        <el-button type="primary" size="small" plain @click="submit"
-          >保存</el-button
-        >
+        <el-button type="primary" size="small" plain @click="submit">保存</el-button>
         <el-button type="primary" size="small" plain>查询</el-button>
         <el-button type="primary" size="small" plain>历史</el-button>
       </div>
@@ -29,9 +27,8 @@
       placeholder="请输入JSON格式的数据..."
       rows="10"
       style="width: 100%"
-    >
-    </textarea>
-    <pre v-else v-html="parsedData"></pre>
+    />
+    <pre v-else v-html="parsedData" />
   </super-container>
 </template>
 

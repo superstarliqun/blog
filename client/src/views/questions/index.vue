@@ -6,7 +6,8 @@
         {{ item }}
         <el-input v-if="index !== formData.questionList.length - 1" v-model="answers[index]" size="medium" :style="{
           width: (formData.answer.split('、')[index].length + 1) * 30 + 'px'
-        }" />
+        }"
+        />
       </span>
       <el-button type="primary" plain @click="handleNext()">下一题</el-button>
       <el-button type="primary" plain @click="submit()">提交</el-button>

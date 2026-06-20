@@ -1,6 +1,5 @@
-v
 <template>
-  d
+  <div />
 </template>
 
 <script>

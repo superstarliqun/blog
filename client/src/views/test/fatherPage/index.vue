@@ -1,7 +1,7 @@
 <template>
   <div>
     <span>父组件</span>
-    <common v-model="children"></common>
+    <common v-model="children" />
     <el-button type="primary" plain @click="handleGetData()">主要按钮</el-button>
   </div>
 </template>

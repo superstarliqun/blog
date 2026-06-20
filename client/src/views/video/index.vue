@@ -3,7 +3,7 @@
     <header class="topbar">
       <h1 class="title">炫酷视频广场</h1>
       <div class="controls">
-        <input v-model="query" placeholder="搜索视频、作者..." class="search" />
+        <input v-model="query" placeholder="搜索视频、作者..." class="search">
       </div>
     </header>
 
@@ -13,26 +13,13 @@
       </div>
 
       <div class="grid">
-        <div
-          v-for="video in filtered"
-          :key="video.id"
-          class="card"
-          @click="open(video)"
-          @mouseover="hoverId = video.id"
-          @mouseleave="hoverId = null"
+        <div v-for="video in filtered" :key="video.id" class="card" @click="open(video)" @mouseover="hoverId = video.id"
+             @mouseleave="hoverId = null"
         >
           <div class="thumbWrap">
-            <img :src="video.thumb" class="thumb" :alt="video.title" />
+            <img :src="video.thumb" class="thumb" :alt="video.title">
             <!-- hover preview video (muted autoplay) -->
-            <video
-              v-if="hoverId === video.id"
-              :src="video.src"
-              muted
-              playsinline
-              autoplay
-              loop
-              class="preview"
-            ></video>
+            <video v-if="hoverId === video.id" :src="video.src" muted playsinline autoplay loop class="preview" />
 
             <div class="badge">
               <svg viewBox="0 0 24 24">
@@ -61,13 +48,7 @@
             <h2>{{ player.title }}</h2>
             <button class="closeBtn" @click="close">×</button>
           </div>
-          <video
-            ref="videoEl"
-            :src="player.src"
-            controls
-            autoplay
-            class="bigVideo"
-          ></video>
+          <video ref="videoEl" :src="player.src" controls autoplay class="bigVideo" />
           <div class="playerInfo">
             <div>{{ player.author }}</div>
             <div class="tags">
@@ -198,16 +179,12 @@ onMounted(() => {
 /* Page background */
 .page {
   min-height: 100vh;
-  background: radial-gradient(
-      1200px 600px at 10% 10%,
+  background: radial-gradient(1200px 600px at 10% 10%,
       rgba(58, 123, 213, 0.12),
-      transparent
-    ),
-    radial-gradient(
-      1000px 400px at 90% 90%,
+      transparent),
+    radial-gradient(1000px 400px at 90% 90%,
       rgba(131, 58, 180, 0.12),
-      transparent
-    ),
+      transparent),
     linear-gradient(180deg, #0f0f17 0%, #060610 100%);
   color: #e6eef8;
   padding: 28px;
@@ -264,11 +241,9 @@ onMounted(() => {
 
 /* Card */
 .card {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02),
-    rgba(255, 255, 255, 0.01)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.01));
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 14px;
   overflow: hidden;
@@ -289,11 +264,9 @@ onMounted(() => {
   position: relative;
   height: 150px;
   overflow: hidden;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.02),
-    rgba(0, 0, 0, 0.08)
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(0, 0, 0, 0.08));
 }
 
 .thumb {
@@ -326,11 +299,9 @@ onMounted(() => {
   top: 12px;
   width: 36px;
   height: 36px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.02)
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02));
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -398,22 +369,18 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(
-    180deg,
-    rgba(3, 5, 12, 0.6),
-    rgba(3, 5, 12, 0.85)
-  );
+  background: linear-gradient(180deg,
+      rgba(3, 5, 12, 0.6),
+      rgba(3, 5, 12, 0.85));
   z-index: 1200;
 }
 
 .playerCard {
   width: min(1100px, 94%);
   max-height: 92vh;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02),
-    rgba(0, 0, 0, 0.06)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(0, 0, 0, 0.06));
   border-radius: 14px;
   padding: 14px;
   box-shadow: 0 30px 80px rgba(2, 6, 23, 0.6);

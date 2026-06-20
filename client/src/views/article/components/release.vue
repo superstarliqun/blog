@@ -3,14 +3,17 @@
     <el-form ref="formData" :model="formData" label-width="80px">
       <el-form-item label="文章标签">
         <el-tag v-for="tag in dynamicTags" :key="tag" closable :disable-transitions="false"
-          @close="handleCloseTag(tag)">
+                @close="handleCloseTag(tag)"
+        >
           {{ tag }}
         </el-tag>
         <el-input v-if="inputVisible" ref="saveTagInput" v-model="inputValue" class="input-new-tag"
-          :class="dynamicTags.length > 0 ? 'marginleft10' : ''" size="small" @keyup.enter.native="handleInputConfirm"
-          @blur="handleInputConfirm" />
+                  :class="dynamicTags.length > 0 ? 'marginleft10' : ''" size="small" @keyup.enter.native="handleInputConfirm"
+                  @blur="handleInputConfirm"
+        />
         <el-button v-else class="button-new-tag" :class="dynamicTags.length > 0 ? 'marginleft10' : ''" size="small"
-          @click="showInput">+ 添加标签</el-button>
+                   @click="showInput"
+        >+ 添加标签</el-button>
       </el-form-item>
       <el-form-item label="摘要">
         <el-input v-model="formData.summary" type="textarea" :rows="6" placeholder="请输入摘要" />

@@ -5,7 +5,8 @@
     <!-- 在 <template> 里放一个绝对定位的提示框 -->
     <div ref="tooltip" style="position:absolute;pointer-events:none;display:none;
             background:#333;color:#fff;padding:4px 6px;border-radius:3px;
-            font-size:12px;white-space:pre-line" />
+            font-size:12px;white-space:pre-line"
+    />
   </div>
 </template>
 

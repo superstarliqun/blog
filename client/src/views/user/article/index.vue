@@ -13,7 +13,8 @@
       </el-table-column>
     </el-table>
     <el-pagination :page.sync="page" :limit.sync="limit" pager-count="3" background layout="next, pager, prev, total"
-      :total="total" @current-change="handleChange" />
+                   :total="total" @current-change="handleChange"
+    />
   </div>
 
 </template>
