@@ -524,7 +524,7 @@ super-sidebar-right {
   align-self: flex-start;
   position: sticky;
   top: 24px;
-  z-index: 10;
+  z-index: 1;
 
   .card-shadow {
     background: var(--card-background);
